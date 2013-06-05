@@ -1,0 +1,31 @@
+/*
+ * XMEM LCD Library for the Arduino
+ * Copyright (c) 2012 Andy Brown. All rights reserved.
+ * This is open source software. Please see website for terms and conditions:
+ *
+ * http://andybrown.me.uk
+ *
+ * This notice may not be removed or altered from any source distribution.
+ */
+
+
+#pragma once
+
+
+namespace lcd {
+
+
+	/**
+	 * Traits class for the ILI9327 that declares a "short" panel
+	 * of 400x240, less than the driver maximum of 432x240
+	 */
+
+	class ILI9327400x240PanelTraits {
+
+		public:
+			enum {
+				LONG_SIDE = 400,
+				SHORT_SIDE = 240
+			};
+	};
+}

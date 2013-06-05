@@ -1,0 +1,146 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>xmemtft library changelog</title>
+</head>
+
+<body>
+
+	<h1>Version 2.5.0, 25th May 2013</h1>
+<p>Added support for the Nokia E73 2.4&quot; panel via an implementation of the MC2PA8201 controller. See the write-up at my website for details. Following the pattern established by the other panels you just need to include the correctly named driver include file: #include &quot;NokiaE73.h&quot; and use the similarly named driver, for example: <em>NokiaE73_Portrait_262K</em>.</p>
+<p>Integrated the source code for a driver for the ILI9325 (Adafruit shield) developed by Colin Irwin (http://aethersdr.org). Documentation and examples to follow.</p>
+    <h1>Version 2.4.0, 26th January 2013</h1>
+	<p>Added support for the Nokia N93 2.4&quot; panel via an implementation of the MC2PA8201 controller. See the write-up at my website for details. Following the pattern established by the other panels you just need to include the correctly named driver include file: #include &quot;NokiaN93.h&quot; and use the similarly named driver, for example: <em>NokiaN93_Portrait_262K</em>.</p>
+	<p>At the time of writing, hardware scrolling is not supported by the N93 driver. Drivers are provided for 64K, 262K and 16M colour modes however the actual modes supported can depend on the manufacturer of the panel that you have. &quot;Original Nokia&quot; panels tend to support all modes. Clone panels may only support a subset of modes.</p>
+	<p>The source code to the bm2rgbi, FontConv and LzgFontConv utilities is now included in the distribution.</p>
+    <h1>Version 2.3.1, 2nd December 2012</h1>
+    <p> Added support for &quot;Type B&quot; Nokia N95 screens. Type B screens differ from Type A screens in their co-ordinate mapping system in portrait mode. Columns and row addressing are inverted. See the write-up on my blog for a brief summary and example driver declaration.</p>
+    <h1>Version 2.3.0, 3rd November 2012</h1>
+	
+	<p>
+		Now supporting the Nokia N95 8Gb 2.8" panel via an implementation of the LDS285 controller. See the write-up at <a href="http://www.andybrown.me.uk">my website</a>
+		for details.
+</p>
+	<p>Support TrueType fonts exported from the PC as LZG compressed bitmaps. A forthcoming blog article will explore the details of this new feature but if you want to get ahead of the game then see the TrueType example and the LzgFontConv utility program included in the zip file.</p>
+	<p>
+		Made the default backlight for GPIO builds on a non-mega device use pin #10 for PWM output. This makes sense because pins 0..9 are used for IO.
+	</p>
+	
+	<p>
+		Modified the font converter (FontConv.exe) to write out a .cpp and .h file instead of everything in a .h file. This allows for a multi-file project that
+		references fonts from more than one .cpp file to work without getting duplicate symbol issues.
+	</p>
+
+	<h1>Version 2.2.0, 23rd September 2012</h1>
+	
+	<p>
+	Major internal refactoring to change the implementation style from template methods to template classes. This was necessary to make it possible to support
+	even more screens (yes, more are to come...) and also to add support for another type of 6300 and N82 screen found out there in the wild. This will be known
+	as the "Type C" screen. The API differences due to this refactoring are minimal:
+	<ul>
+		<li>Only one #include is needed to get all driver functionality. So #include "Nokia6300.h" or #include "NokiaN82.h" is all you need.
+		<li>Type C screens are fully supported with a _TypeC suffix to the driver name. e.g. <em>Nokia6300_Portrait_262K_TypeC</em>.
+		<li>The <em>drawBitmap&lt;T&gt;()</em> class method is replaced by <em>drawUncompressedBitmap()</em> and <em>drawCompressedBitmap()</em>.
+		<li>
+		Changed colour transfer order from BGR to RGB. This is to support the N82 and 6300 panels that I've found that don't support BGR mode but they all support
+		RGB mode. <strong>Any bitmap graphics will need to be re-converted with the bm2rgbi utility from this release.</strong> JPEGs are not affected.
+	</li>
+	</ul
+	>
+	<h1>Version 2.1.0, 19th August 2012</h1>
+	
+	<p>
+	Support for the Nokia N82 2.4" QVGA display. The N82 is the same pinout and command set as the 6300. See <a href="http://www.andybrown.me.uk">my website</a>
+	for a full write-up and schematics for a development board.
+	</p>
+	
+	<p>
+	I'm pleased to announce support for decoding and displaying JPEG images. JPEG images may stored in flash or streamed over the serial port.
+	The <a href="http://andybrown.me.uk/wk/2012/06/04/nokia-qvga-tft-lcd-for-the-arduino-mega-graphics-library-part-2-of-2/">documentation</a> has been
+	updated with sample code and demonstration videos.
+	</p>
+
+	<h1>Version 2.0.0, 28th July 2012</h1>
+	
+	<p>
+	Support for a GPIO interface for using the Nokia 6300 on the 32Kb 'standard' Arduino boards. See <a href="http://www.andybrown.me.uk">my website</a>
+	for full details.
+	</p>
+	
+	<p>
+	Speed improvements to the XMEM interface that result from inlining much of the core TFT access code.
+	</p>
+
+	<h1>Version 1.1.0, 7th July 2012</h1>
+  
+	<p>
+	Extensive internal changes to support Nokia 6300 panels that have slightly different behaviour. This is achieved through the use of a
+	<em>traits</em> support class that abstracts the differences away from the core implementation. This is largely invisible to the user
+	but see below.
+	</p>
+  
+	<p>
+	Changed the default colour mode from 16M to 262K in the examples to maximize compatibility across all the panels that I've seen so far.
+	</p>
+  
+	<h2>API Changes</h2>
+  
+	<p>
+	<em>setScrollArea</em> and <em>setScrollPosition</em> no longer have a template parameter. The arguments are the same as before, e.g:
+  
+	<pre>
+// old style: tft->setScrollPosition&lt;PORTRAIT&gt;(10);
+tft->setScrollPosition(10);   // new style does not have a template parameter
+	</pre>
+	</p>
+
+	<h2>Notes for Type B screens</h2>
+	<p>
+   'Type B' screens differ from the type A screens only in the hardware scrolling implementation. A scroll position of 1 on a type B screen will
+   scroll up by one line, whereas on a type A screen it will scroll down one line. Anyone who has obtained a development board from me will
+   be informed if they have a type B screen.
+	</p>
+  
+	<p>If you have a type B screen and want to use the hardware scrolling APIs then I recommend that you use the classes that have a <em>_TypeB</em>
+   postfix. e.g.
+	</p>
+   
+	<pre>
+Nokia6300_Landscape_262K_TypeB
+Nokia6300_Landscape_64K_TypeB
+	</pre>
+   
+   and similarly for the terminal classes in portrait mode where it is more important because the terminal needs to know how to scroll up
+   one line using the hardware accelerated API.
+  
+	<pre>
+typedef Nokia6300_Terminal_Portrait_262K_TypeB TerminalAccess;
+	</pre>
+   </p>
+
+	 <h1>Version 1.0.1, 23rd June 2012</h1>
+  
+	<p>
+  	Some internal optimisations are added to increase the speed of graphics library functions that need to repeatedly call
+    writePixel(). The primary beneficiary is text output where, on average, there is a 25% performance increase.
+	</p>
+
+	<p>
+  	Fix bug in graphics library big demo. Font was not selected for the stream operators to use in the part of the text demo
+    that displays PI.
+	</p>
+
+	<h2>API Changes</h2>
+  
+	<p>
+	<em>gradientFillRectangle</em> has changed and now takes start and end colours as parameters (previously it would use foreground and background colours).
+	Apologies for the breaking change but the internal optimisations made it necessary. The new method signature is:
+  
+	<pre>
+void gradientFillRectangle(const Rectangle& rc,Direction dir,COLOUR first,COLOUR last) const;
+    </pre>
+	</p>
+    
+</body>
+</html>
