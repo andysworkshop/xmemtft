@@ -29,19 +29,19 @@ void _asmStub() {
     ".global LogoPixelsSize    \n\t"
  
     "CloudPixels:              \n\t"
-    ".incbin \"libraries/xmemtft/examples/GraphicsLibraryDemo/cloud100x100.bin\" \n\t"
+    ".incbin \"libraries/xmemtft/examples/NokiaQVGA/GraphicsLibraryDemo/cloud100x100.bin\" \n\t"
     "CloudPixelsSize=.-CloudPixels  \n\t"
     
     ".balign 2 \n\t"
 
     "LogoPixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/TrueType/logo.lzg\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/NokiaQVGA/TrueType/logo.lzg\"\n\t"
     "LogoPixelsSize=.-LogoPixels\n\t"
 
     ".balign 2 \n\t"
 
     "GlobePixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/GraphicsLibraryDemo/globe.lzg\" \n\t"
+    ".incbin \"libraries/xmemtft/examples/NokiaQVGA/GraphicsLibraryDemo/globe.lzg\" \n\t"
     "GlobePixelsSize=.-GlobePixels \n\t"
  );
 }

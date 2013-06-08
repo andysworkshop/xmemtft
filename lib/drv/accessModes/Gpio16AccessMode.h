@@ -236,7 +236,10 @@ namespace lcd {
 
 
 	/**
-	 * Write a batch of the same data values to the XMEM interface using GPIO.
+	 * Write a batch of the same data values to the XMEM interface using GPIO. The values are written out in a
+	 * highly optimised loop in bursts of 40 at a time. This value seems a good trade off between flash usage
+	 * and speed. The turnaround time between batches has been measured at around 1 microsecond. Note the use
+	 * of %= labels so that inlining doesn't produce duplicate names.
 	 * @param howMuch The number of 16-bit values to write
 	 * @param lo8 The low 8 bits of the value to write
 	 * @param hi8 The high 8 bits of the value to write. Many parameter values are 8-bits so this parameters defaults to zero.
@@ -253,10 +256,10 @@ namespace lcd {
 		    "    out  %1, %4       \n\t"			// PORTA = hi8
 
 				"    clr  r20          \n\t"			// r20 = global interrupt status
-				"    brid intdis       \n\t"			// branch if global interrupts are off
+				"    brid intdis%=     \n\t"			// branch if global interrupts are off
 				"    cli               \n\t"			// disable global interrupts (because we cannot let PORTG get modified by an IRQ)
 				"    inc  r20          \n\t"			// r20 (global interrupts disabled) = 1
-				"intdis:               \n\t"
+				"intdis%=:             \n\t"
 				"    in   r18, %0      \n\t"			// get PORT_WR to r18 and r19
 				"    mov  r19, r18     \n\t"
 				"    cbr  r18, %6		   \n\t"			// clear WR in r18
@@ -264,9 +267,9 @@ namespace lcd {
 				"    cpi  %A5, 40      \n\t"			// if howMuch<40 then jump to lastlot
 				"    cpc  %B5, r1      \n\t"
 				"    cpc  %C5, r1      \n\t"
-				"    brsh batchloop    \n\t"
-				"    rjmp lastlot      \n\t"
-				"batchloop:            \n\t"
+				"    brsh batchloop%=  \n\t"
+				"    rjmp lastlot%=    \n\t"
+				"batchloop%=:          \n\t"
 				"    out  %0,  r18     \n\t"			// toggle /WR 40 times
 				"    out  %0,  r19     \n\t"
 				"    out  %0,  r18     \n\t"
@@ -353,11 +356,11 @@ namespace lcd {
 				"    cpi  %A5, 40      \n\t"				// if howMuch >= 40 then go back for another batch
 				"    cpc  %B5, r1      \n\t"
 				"    cpc  %C5, r1      \n\t"
-				"    brlo lastlot      \n\t"
-				"    rjmp batchloop    \n\t"
-				"lastlot:              \n\t"				// load index Z with the address of the end
-				"    ldi  r31, pm_hi8(finished)   \n\t"
-				"    ldi  r30, pm_lo8(finished)   \n\t"
+				"    brlo lastlot%=    \n\t"
+				"    rjmp batchloop%=  \n\t"
+				"lastlot%=:            \n\t"				// load index Z with the address of the end
+				"    ldi  r31, pm_hi8(finished%=)   \n\t"
+				"    ldi  r30, pm_lo8(finished%=)   \n\t"
 				"    lsl  %A5          \n\t"				// multiply remaining by 2
 				"    sub  r30, %A5     \n\t"				// subtract remaining*4 from Z
 				"    sbci r31, 0       \n\t"
@@ -440,11 +443,11 @@ namespace lcd {
 				"    out  %0,  r19     \n\t"
 				"    out  %0,  r18     \n\t"
 				"    out  %0,  r19     \n\t"
-				"finished:             \n\t"
+				"finished%=:           \n\t"
 				"    cpi  r20, 0       \n\t"					// if global interrupts were enabled when we came in, restore them now
-				"    breq skipinten    \n\t"
+				"    breq skipinten%=  \n\t"
 				"    sei               \n\t"
-				"skipinten:            \n\t"
+				"skipinten%=:          \n\t"
 
 				:: "I" (TPinMappings::PORT_WR),			// %0
 				   "I" (TPinMappings::PORT_DATA),		// %1

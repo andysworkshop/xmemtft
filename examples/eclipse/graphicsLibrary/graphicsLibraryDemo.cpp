@@ -161,7 +161,7 @@ void doGradientFills(bool horizontal) {
     rc.Y=rc.Height;
     tft->gradientFillRectangle(rc,horizontal ? HORIZONTAL : VERTICAL,colours[i],ColourNames::BLACK);
 
-    delay(2000);
+    delay(1000);
   }
 }
 
@@ -276,6 +276,7 @@ void textTest() {
   const char *str="The quick brown fox";
   Size size;
   Point p;
+  uint32_t start;
 
   prompt("Stream operators test");
 
@@ -290,7 +291,7 @@ void textTest() {
 
   size=tft->measureString(*font,str);
 
-  for(i=0;i<3000;i++) {
+  for(start=millis();millis()-start<5000;) {
 
     p.X=rand() % (tft->getXmax()-size.Width);
     p.Y=rand() % (tft->getYmax()-size.Height);
@@ -337,10 +338,11 @@ void rectTest() {
 
   int i;
   Rectangle rc;
+  uint32_t start;
 
   prompt("Rectangle test");
 
-  for(i=0;i<1000;i++) {
+  for(i=0,start=millis();millis()-start<5000;i++) {
 
     if(i % 500 ==0)
       tft->clearScreen();
@@ -358,7 +360,7 @@ void rectTest() {
 
   tft->clearScreen();
 
-  for(i=0;i<1500;i++) {
+  for(i=0,start=millis();millis()-start<5000;i++) {
 
     rc.X=(rand() % tft->getXmax()/2);
     rc.Y=(rand() % tft->getXmax()/2);
@@ -382,10 +384,11 @@ void lineTest() {
 
   Point p1,p2;
   int i;
+  uint32_t start;
 
   prompt("Line test");
 
-  for(i=0;i<5000;i++) {
+  for(i=0,start=millis();millis()-start<5000;i++) {
 
     if(i % 1000==0)
       tft->clearScreen();
@@ -409,11 +412,12 @@ void ellipseTest() {
 
   int16_t i;
   Point p;
+  uint32_t start;
   Size s;
 
   prompt("Ellipse test");
 
-  for(i=0;i<1500;i++) {
+  for(i=0,start=millis();millis()-start<5000;i++) {
 
     p.X=tft->getXmax()/4+(rand() % (tft->getXmax()/2));
     p.Y=tft->getYmax()/4+(rand() % (tft->getYmax()/2));

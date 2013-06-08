@@ -17,7 +17,7 @@ void _asmStub() {
     ".global GlobePixelsSize\n\t"
   
     "GlobePixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/SimpleBitmap/globe64x64.bin\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/NokiaQVGA/SimpleBitmap/globe64x64.bin\"\n\t"
     "GlobePixelsSize=.-GlobePixels\n\t"
 
     ".balign 2 \n\t"

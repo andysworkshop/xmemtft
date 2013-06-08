@@ -19,11 +19,11 @@ void _asmStub() {
     ".global screenStripSize               \n\t"
   
     "mediaPlayerOrigin:                    \n\t"
-    ".incbin \"libraries/xmemtft/examples/MediaPlayer/MediaPlayer.bin\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/NokiaQVGA/MediaPlayer/MediaPlayer.bin\"\n\t"
     "mediaPlayerSize=.-mediaPlayerOrigin   \n\t"
   
     "screenStripOrigin:                    \n\t"
-    ".incbin \"libraries/xmemtft/examples/MediaPlayer/ScreenStrip.bin\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/NokiaQVGA/MediaPlayer/ScreenStrip.bin\"\n\t"
     "screenStripSize=.-screenStripOrigin   \n\t"
     
     ".balign 2 \n\t"

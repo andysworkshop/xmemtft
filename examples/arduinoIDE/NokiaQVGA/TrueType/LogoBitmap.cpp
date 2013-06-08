@@ -12,7 +12,7 @@ void _asmStub() {
     ".global LogoPixelsSize\n\t"
   
     "LogoPixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/TrueType/logo.lzg\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/NokiaQVGA/TrueType/logo.lzg\"\n\t"
     "LogoPixelsSize=.-LogoPixels\n\t"
 
     ".balign 2 \n\t"

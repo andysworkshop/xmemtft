@@ -47,7 +47,10 @@ sub copyMiscFiles {
 sub copyLibrary {
 
     print("Copying library files...\n");
-    dircopy("tftlib","/tmp/xmemtft") or die("Failed to copy library files: $!");
+    dircopy("lib","/tmp/xmemtft") or die("Failed to copy library files: $!");
+		foreach my $dir (glob("/tmp/xmemtft/Release_* /tmp/xmemtft/Debug_*")) {
+				rmtree($dir);
+		}
 
     # remove the font xml files
 
@@ -64,8 +67,7 @@ sub copyExamples {
     print "Copying examples...\n";
     mkdir("/tmp/xmemtft/examples");
                 
-    dircopy("examples","/tmp/xmemtft/examples") or die("Failed to copy examples: $!");
-    fcopy("globe64x64.bin","/tmp/xmemtft") or die("Failed to copy globe64x64.bin: $!");
+    dircopy("examples/arduinoIDE","/tmp/xmemtft/examples") or die("Failed to copy examples: $!");
 }
 
 
@@ -77,28 +79,23 @@ sub copyUtilities {
 
     print("Copying utility files...\n");
 
-    mkpath("/tmp/xmemtft/utility/bm2rgbi") or die("Failed to copy: $!");
-    mkpath("/tmp/xmemtft/utility/fontconv") or die("Failed to copy: $!");
-    mkpath("/tmp/xmemtft/utility/lzgfontconv") or die("Failed to copy: $!");
-    mkpath("/tmp/xmemtft/utility/sendjpeg") or die("Failed to copy: $!");
+    mkpath("/tmp/xmemtft/utility") or die("Failed to copy: $!");
 
-    copysrc("../stm32plus/utils/bm2rgbi","/tmp/xmemtft/utility/bm2rgbi","bm2rgbi");
-    copysrc("../stm32plus/utils/fonts","/tmp/xmemtft/utility/fontconv","FontConv");
-    copysrc("../stm32plus/utils/fonts","/tmp/xmemtft/utility/lzgfontconv","LzgFontConv");
+    copysrc(".","/tmp/xmemtft/utility","utility");
 
-    fcopy("../stm32plus/utils/fonts/FontConv/bin/Release/FontConv.exe","/tmp/xmemtft/utility/fontconv")
+    fcopy("utility/fonts/FontConv/bin/Release/FontConv.exe","/tmp/xmemtft/utility")
 	or die("Failed to copy: $!");
     
-    fcopy("../stm32plus/utils/fonts/LzgFontConv/bin/Release/LzgFontConv.exe","/tmp/xmemtft/utility/lzgfontconv")
+    fcopy("utility/fonts/LzgFontConv/bin/Release/LzgFontConv.exe","/tmp/xmemtft/utility")
 	or die("Failed to copy: $!");
     
-    fcopy("../stm32plus/utils/bm2rgbi/bm2rgbi/bin/Release/bm2rgbi.exe","/tmp/xmemtft/utility/bm2rgbi")
+    fcopy("utility/bm2rgbi/bm2rgbi/bin/Release/bm2rgbi.exe","/tmp/xmemtft/utility")
 	or die("Failed to copy: $!");
     
-    fcopy("../stm32plus/utils/bm2rgbi/bm2rgbi/bin/Release/lzg.exe","/tmp/xmemtft/utility/bm2rgbi")
+    fcopy("utility/bm2rgbi/bm2rgbi/bin/Release/lzg.exe","/tmp/xmemtft/utility")
 	or die("Failed to copy: $!");
     
-    fcopy("examples/JpegSerial/SendJpeg/bin/Release/SendJpeg.exe","/tmp/xmemtft/utility/sendjpeg")
+    fcopy("examples/ArduinoIDE/AllPanels/JpegSerial/SendJpeg/bin/Release/SendJpeg.exe","/tmp/xmemtft/utility")
 	or die("Failed to copy: $!");
 
 }
@@ -120,14 +117,14 @@ sub copysrc {
             my $file = $_;
 
             if( -d $file && ($file =~ /^bin$/ || $file =~ /^obj$/)) {
-		push(@removals,$File::Find::name);
-	    }
-	}, "${destroot}/src");
+								push(@removals,$File::Find::name);
+						}
+				}, "${destroot}/src");
 
 
     foreach my $dir (@removals) {
-	print "Removing ${dir}\n";
-	rmtree($dir) or die("Cannot remove $dir");
+				print "Removing ${dir}\n";
+				rmtree($dir) or die("Cannot remove $dir");
     }
 }
 
