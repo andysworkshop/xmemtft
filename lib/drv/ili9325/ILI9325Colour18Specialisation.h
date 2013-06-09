@@ -32,7 +32,7 @@ namespace lcd {
 			typedef uint32_t TColour;
 
 			struct UnpackedColour {
-					uint8_t first,second,third;
+				uint8_t first,second,third;
 			};
 
 		public:
@@ -76,6 +76,7 @@ namespace lcd {
 		dest.third&=0xfc;
 	}
 
+
 	/**
 	 * Unpack the colour from components to the internal format
 	 * @param red
@@ -91,6 +92,7 @@ namespace lcd {
 		dest.third=(blue & 0xfc);
 	}
 
+
 	/**
 	 * Write a single pixel to the current output position.
 	 * Assumes that the caller has already issued the beginWriting() command.
@@ -104,6 +106,7 @@ namespace lcd {
 		TAccessMode::writeData(cr.third);
 	}
 
+
 	/**
 	 * Fill a block of pixels with the same colour. This operation will issue the
 	 * beginWriting() command for you.
@@ -113,7 +116,7 @@ namespace lcd {
 
 	template<class TAccessMode>
 	inline void ILI9325Colour<COLOURS_18BIT,TAccessMode>::fillPixels(uint32_t numPixels,const UnpackedColour& cr) const {
-		TAccessMode::writeCommand(ILI932X_RW_GRAM);
+		TAccessMode::writeCommand(ili9325::ILI932X_RW_GRAM);
 
 		uint8_t first=cr.first;
 		uint8_t second=cr.second;
@@ -125,6 +128,7 @@ namespace lcd {
 			TAccessMode::writeData(third);
 		}
 	}
+
 
 	/**
 	 * Allocate a buffer for pixel data. You supply the number of pixels and this allocates the buffer as a uint8_t[].
@@ -140,6 +144,7 @@ namespace lcd {
 		buffer=(uint8_t *)malloc(numPixels * 3);
 		bytesPerPixel=3;
 	}
+
 
 	/**
 	 * Get the number of bytes per pixel

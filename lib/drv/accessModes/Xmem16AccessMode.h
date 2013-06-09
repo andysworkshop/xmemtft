@@ -180,7 +180,7 @@ namespace lcd {
 
 		// set up the xmem registers
 
-		XMCRB=_BV(XMM1) | _BV(XMM2);    // free PC2..PC7 for user GPIO. enable the bus keeper
+		XMCRB=_BV(XMM1) | _BV(XMM2);    // free PC3..PC7 for user GPIO
 		XMCRA=_BV(SRE);    	 						// enable xmem, no wait states
 	}
 

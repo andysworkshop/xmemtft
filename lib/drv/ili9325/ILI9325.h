@@ -58,6 +58,7 @@ namespace lcd {
 		initialise();
 	}
 
+
 	/**
 	 * Initialise the LCD. Do the reset sequence.
 	 */
@@ -75,66 +76,66 @@ namespace lcd {
 
 		// post reset commands to set up the LCD
 
-		TAccessMode::writeCommandData(ILI932X_START_OSC,0x0001);
+		TAccessMode::writeCommandData(ili9325::ILI932X_START_OSC,0x01,0x00);
 
 		delay(50);
 
-		TAccessMode::writeCommandData(ILI932X_DRIV_OUT_CTRL,0x0100);
-		TAccessMode::writeCommandData(ILI932X_DRIV_WAV_CTRL,0x0700);
-		TAccessMode::writeCommandData(ILI932X_RESIZE_CTRL,0x0000);
-		TAccessMode::writeCommandData(ILI932X_DISP_CTRL2,0x0202);
-		TAccessMode::writeCommandData(ILI932X_DISP_CTRL3,0x0000);
-		TAccessMode::writeCommandData(ILI932X_DISP_CTRL4,0x0000);
-		TAccessMode::writeCommandData(ILI932X_RGB_DISP_IF_CTRL1,0x0);
-		TAccessMode::writeCommandData(ILI932X_FRM_MARKER_POS,0x0);
-		TAccessMode::writeCommandData(ILI932X_RGB_DISP_IF_CTRL2,0x0);
-		TAccessMode::writeCommandData(ILI932X_POW_CTRL1,0x0000);
-		TAccessMode::writeCommandData(ILI932X_POW_CTRL2,0x0007);
-		TAccessMode::writeCommandData(ILI932X_POW_CTRL3,0x0000);
-		TAccessMode::writeCommandData(ILI932X_POW_CTRL4,0x0000);
+		TAccessMode::writeCommandData(ili9325::ILI932X_DRIV_OUT_CTRL,0x00,0x01);
+		TAccessMode::writeCommandData(ili9325::ILI932X_DRIV_WAV_CTRL,0x00,0x07);
+		TAccessMode::writeCommandData(ili9325::ILI932X_RESIZE_CTRL,0x00,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_DISP_CTRL2,0x02,0x02);
+		TAccessMode::writeCommandData(ili9325::ILI932X_DISP_CTRL3,0x00,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_DISP_CTRL4,0x00,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_RGB_DISP_IF_CTRL1,0x00,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_FRM_MARKER_POS,0x00,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_RGB_DISP_IF_CTRL2,0x00,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_POW_CTRL1,0x00,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_POW_CTRL2,0x07,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_POW_CTRL3,0x00,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_POW_CTRL4,0x00,0x00);
 
 		delay(200);
 
-		TAccessMode::writeCommandData(ILI932X_POW_CTRL1,0x1690);
-		TAccessMode::writeCommandData(ILI932X_POW_CTRL2,0x0227);
+		TAccessMode::writeCommandData(ili9325::ILI932X_POW_CTRL1,0x90,0x16);
+		TAccessMode::writeCommandData(ili9325::ILI932X_POW_CTRL2,0x27,0x02);
 
 		delay(50);
 
-		TAccessMode::writeCommandData(ILI932X_POW_CTRL3,0x001A);
+		TAccessMode::writeCommandData(ili9325::ILI932X_POW_CTRL3,0x1A,0x00);
 
 		delay(50);
 
-		TAccessMode::writeCommandData(ILI932X_POW_CTRL4,0x1800);
-		TAccessMode::writeCommandData(ILI932X_POW_CTRL7,0x002A);
+		TAccessMode::writeCommandData(ili9325::ILI932X_POW_CTRL4,0x00,0x18);
+		TAccessMode::writeCommandData(ili9325::ILI932X_POW_CTRL7,0x2A,0x00);
 
 		delay(50);
 
-		TAccessMode::writeCommandData(ILI932X_GAMMA_CTRL1,0x0000);
-		TAccessMode::writeCommandData(ILI932X_GAMMA_CTRL2,0x0000);
-		TAccessMode::writeCommandData(ILI932X_GAMMA_CTRL3,0x0000);
-		TAccessMode::writeCommandData(ILI932X_GAMMA_CTRL4,0x0206);
-		TAccessMode::writeCommandData(ILI932X_GAMMA_CTRL5,0x0808);
-		TAccessMode::writeCommandData(ILI932X_GAMMA_CTRL6,0x0007);
-		TAccessMode::writeCommandData(ILI932X_GAMMA_CTRL7,0x0201);
-		TAccessMode::writeCommandData(ILI932X_GAMMA_CTRL8,0x0000);
-		TAccessMode::writeCommandData(ILI932X_GAMMA_CTRL9,0x0000);
-		TAccessMode::writeCommandData(ILI932X_GAMMA_CTRL10,0x0000);
-		TAccessMode::writeCommandData(ILI932X_GRAM_HOR_AD,0x0000);
-		TAccessMode::writeCommandData(ILI932X_GRAM_VER_AD,0x0000);
-		TAccessMode::writeCommandData(ILI932X_HOR_START_AD,0x0000);
-		TAccessMode::writeCommandData(ILI932X_HOR_END_AD,0x00EF);
-		TAccessMode::writeCommandData(ILI932X_VER_START_AD,0X0000);
-		TAccessMode::writeCommandData(ILI932X_VER_END_AD,0x013F);
-		TAccessMode::writeCommandData(ILI932X_GATE_SCAN_CTRL1,0xA700);
-		TAccessMode::writeCommandData(ILI932X_GATE_SCAN_CTRL2,0x0003);
-		TAccessMode::writeCommandData(ILI932X_GATE_SCAN_CTRL3,0x0000);
-		TAccessMode::writeCommandData(ILI932X_PANEL_IF_CTRL1,0X0010);
-		TAccessMode::writeCommandData(ILI932X_PANEL_IF_CTRL2,0X0000);
-		TAccessMode::writeCommandData(ILI932X_PANEL_IF_CTRL3,0X0003);
-		TAccessMode::writeCommandData(ILI932X_PANEL_IF_CTRL4,0X1100);
-		TAccessMode::writeCommandData(ILI932X_PANEL_IF_CTRL5,0X0000);
-		TAccessMode::writeCommandData(ILI932X_PANEL_IF_CTRL6,0X0000);
-		TAccessMode::writeCommandData(ILI932X_DISP_CTRL1,0x0133);
+		TAccessMode::writeCommandData(ili9325::ILI932X_GAMMA_CTRL1,0x00,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_GAMMA_CTRL2,0x00,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_GAMMA_CTRL3,0x00,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_GAMMA_CTRL4,0x06,0x02);
+		TAccessMode::writeCommandData(ili9325::ILI932X_GAMMA_CTRL5,0x08,0x08);
+		TAccessMode::writeCommandData(ili9325::ILI932X_GAMMA_CTRL6,0x07,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_GAMMA_CTRL7,0x01,0x02);
+		TAccessMode::writeCommandData(ili9325::ILI932X_GAMMA_CTRL8,0x00,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_GAMMA_CTRL9,0x00,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_GAMMA_CTRL10,0x00,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_GRAM_HOR_AD,0x00,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_GRAM_VER_AD,0x00,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_HOR_START_AD,0x00,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_HOR_END_AD,0xEF,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_VER_START_AD,0x00,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_VER_END_AD,0x3F,0x01);
+		TAccessMode::writeCommandData(ili9325::ILI932X_GATE_SCAN_CTRL1,0x00,0xA7);
+		TAccessMode::writeCommandData(ili9325::ILI932X_GATE_SCAN_CTRL2,0x03,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_GATE_SCAN_CTRL3,0x00,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_PANEL_IF_CTRL1,0x10,0X00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_PANEL_IF_CTRL2,0x00,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_PANEL_IF_CTRL3,0x03,0X00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_PANEL_IF_CTRL4,0x00,0X11);
+		TAccessMode::writeCommandData(ili9325::ILI932X_PANEL_IF_CTRL5,0x00,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_PANEL_IF_CTRL6,0x00,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_DISP_CTRL1,0x33,0x01);
 
 		// The following needs to be reviewed/changed potentially to deal
 		// with a different orientation.
@@ -144,8 +145,10 @@ namespace lcd {
 		//      case 2 : 0x1000
 		//      case 3 : 0x1018)
 
-		TAccessMode::writeCommandData(ILI932X_ENTRY_MOD,this->getInterfacePixelFormat() | 0x1000 | this->getMemoryAccessControl());
+		uint16_t entryMode=this->getInterfacePixelFormat() | 0x1000 | this->getMemoryAccessControl();
+		TAccessMode::writeCommandData(ili9325::ILI932X_ENTRY_MOD,entryMode & 0xff,entryMode >> 8);
 	}
+
 
 	/**
 	 * Send the panel to sleep
@@ -153,9 +156,10 @@ namespace lcd {
 
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
 	inline void ILI9325<TOrientation,TColourDepth,TAccessMode>::sleep() const {
-		TAccessMode::writeCommandData(ILI932X_DISP_CTRL1,0x0000);
-		TAccessMode::writeCommandData(ILI932X_POW_CTRL1,0x0001);
+		TAccessMode::writeCommandData(ili9325::ILI932X_DISP_CTRL1,0x00,0x00);
+		TAccessMode::writeCommandData(ili9325::ILI932X_POW_CTRL1,0x01,0x00);
 	}
+
 
 	/**
 	 * Wake the panel up
@@ -163,9 +167,10 @@ namespace lcd {
 
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
 	inline void ILI9325<TOrientation,TColourDepth,TAccessMode>::wake() const {
-		TAccessMode::writeCommandData(ILI932X_POW_CTRL1,0x1690);
-		TAccessMode::writeCommandData(ILI932X_DISP_CTRL1,0x0133);
+		TAccessMode::writeCommandData(ili9325::ILI932X_POW_CTRL1,0x90,0x16);
+		TAccessMode::writeCommandData(ili9325::ILI932X_DISP_CTRL1,0x33,0x01);
 	}
+
 
 	/**
 	 * Issue the command that allows graphics ram writing to commence
@@ -173,8 +178,9 @@ namespace lcd {
 
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
 	inline void ILI9325<TOrientation,TColourDepth,TAccessMode>::beginWriting() const {
-		TAccessMode::writeCommand(ILI932X_RW_GRAM);
+		TAccessMode::writeCommand(ili9325::ILI932X_RW_GRAM);
 	}
+
 
 	/**
 	 * Set the scroll area to a full-width rectangle region
@@ -184,20 +190,9 @@ namespace lcd {
 
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
 	inline void ILI9325<TOrientation,TColourDepth,TAccessMode>::setScrollArea(uint16_t y,uint16_t height) const {
-		/*
-		 uint16_t bfa;
-
-		 bfa=320-height-y;
-
-		 //        TAccessMode::writeCommand(ili9325::VERTICAL_SCROLLING_DEFINITION);
-		 TAccessMode::writeData(y >> 8);
-		 TAccessMode::writeData(y & 0xff);
-		 TAccessMode::writeData(height >> 8);
-		 TAccessMode::writeData(height & 0xff);
-		 TAccessMode::writeData(bfa >> 8);
-		 TAccessMode::writeData(bfa & 0xff);
-		 */
+		// not supported
 	}
+
 
 	/**
 	 * Transfer data bytes, en-masse
@@ -205,9 +200,27 @@ namespace lcd {
 
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
 	inline void ILI9325<TOrientation,TColourDepth,TAccessMode>::rawFlashTransfer(uint32_t data,uint32_t numBytes) const {
-		while(numBytes--)
-			TAccessMode::writeData(pgm_read_byte_near(data++));
+
+		uint32_t numPixels;
+
+		numPixels=numBytes/2;
+
+		// handle data in the lower and upper segments with possible overlap
+		// a single 16-bit pixel should not overlap the segments
+
+		while(data<65536 && numPixels>0) {
+			TAccessMode::writeData(pgm_read_byte_near(data),pgm_read_byte_near(data+1));
+			data+=2;
+			numPixels--;
+		}
+
+		while(numPixels>0) {
+			TAccessMode::writeData(pgm_read_byte_far(data),pgm_read_byte_far(data+1));
+			data+=2;
+			numPixels--;
+		}
 	}
+
 
 	/**
 	 * Write raw bytes from SRAM
@@ -217,7 +230,14 @@ namespace lcd {
 
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
 	inline void ILI9325<TOrientation,TColourDepth,TAccessMode>::rawSramTransfer(uint8_t *data,uint32_t numBytes) const {
-		while(numBytes--)
-			TAccessMode::writeData(*data++);
+
+		uint32_t numPixels;
+
+		numPixels=numBytes/2;
+
+		while(numPixels--) {
+			TAccessMode::writeData(data[0],data[1]);
+			data+=2;
+		}
 	}
 }

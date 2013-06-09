@@ -37,6 +37,7 @@ namespace lcd {
 			void setScrollPosition(int16_t scrollPosition);
 	};
 
+
 	/**
 	 * Get the register setting for memory access control
 	 * @return The entry mode register setting for portrait
@@ -46,6 +47,7 @@ namespace lcd {
 	inline uint16_t ILI9325Orientation<PORTRAIT,TAccessMode>::getMemoryAccessControl() const {
 		return 0x0030;
 	}
+
 
 	/**
 	 * Get the width in pixels
@@ -57,6 +59,7 @@ namespace lcd {
 		return 240;
 	}
 
+
 	/**
 	 * Get the height in pixels
 	 * @return 320px
@@ -67,6 +70,7 @@ namespace lcd {
 		return 320;
 	}
 
+
 	/**
 	 * Move the display output rectangle
 	 * @param rc The display output rectangle
@@ -74,14 +78,21 @@ namespace lcd {
 
 	template<class TAccessMode>
 	inline void ILI9325Orientation<PORTRAIT,TAccessMode>::moveTo(const Rectangle& rc) const {
-		TAccessMode::writeCommandData(ILI932X_HOR_START_AD,rc.X);
-		TAccessMode::writeCommandData(ILI932X_HOR_END_AD,(rc.X + rc.Width - 1));
 
-		TAccessMode::writeCommandData(ILI932X_VER_START_AD,rc.Y);
-		TAccessMode::writeCommandData(ILI932X_VER_END_AD,(rc.Y + rc.Height - 1));
+		uint16_t end;
 
-		TAccessMode::writeCommandData(ILI932X_GRAM_HOR_AD,rc.X);
-		TAccessMode::writeCommandData(ILI932X_GRAM_VER_AD,rc.Y);
+		TAccessMode::writeCommandData(ili9325::ILI932X_HOR_START_AD,rc.X,rc.X >> 8);
+
+		end=rc.X+rc.Width-1;
+		TAccessMode::writeCommandData(ili9325::ILI932X_HOR_END_AD,end,end >> 8);
+
+		TAccessMode::writeCommandData(ili9325::ILI932X_VER_START_AD,rc.Y,rc.Y >> 8);
+
+		end=rc.Y+rc.Height-1;
+		TAccessMode::writeCommandData(ili9325::ILI932X_VER_END_AD,end,end >> 8);
+
+		TAccessMode::writeCommandData(ili9325::ILI932X_GRAM_HOR_AD,rc.X,rc.X >> 8);
+		TAccessMode::writeCommandData(ili9325::ILI932X_GRAM_VER_AD,rc.Y,rc.Y >> 8);
 	}
 
 	/**
@@ -91,13 +102,13 @@ namespace lcd {
 
 	template<class TAccessMode>
 	inline void ILI9325Orientation<PORTRAIT,TAccessMode>::setScrollPosition(int16_t scrollPosition) {
-		if(scrollPosition < 0) {
-			scrollPosition+=320;
-		} else if(scrollPosition > 319) {
-			scrollPosition-=320;
-		}
 
-		TAccessMode::writeCommandData(ILI932X_GATE_SCAN_CTRL3,scrollPosition);
+		if(scrollPosition<0)
+			scrollPosition+=320;
+		else if(scrollPosition>319)
+			scrollPosition-=320;
+
+		TAccessMode::writeCommandData(ili9325::ILI932X_GATE_SCAN_CTRL3,scrollPosition,scrollPosition >> 8);
 	}
 }
 

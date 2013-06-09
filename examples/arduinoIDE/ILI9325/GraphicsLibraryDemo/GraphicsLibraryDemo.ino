@@ -1,6 +1,6 @@
 /*
  * XMEM LCD Library for the Arduino
- * Copyright (c) 2012,2013 Andy Brown. All rights reserved.
+ * Copyright (c) 2012 Andy Brown. All rights reserved.
  * This is open source software. Please see website for terms and conditions:
  *
  * http://andybrown.me.uk
@@ -8,60 +8,18 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
-#include "Arduino.h"
 #include "Generic16BitILI9325.h"
 #include "Font_volter_goldfish_9.h"
+#include "Lzg_font_happysans.h"
+#include "Lzg_font_applegaramond.h"
 
 using namespace lcd;
-
-extern "C" void __cxa_pure_virtual() { for(;;); }
-
-
-void *operator new(size_t size_,void *ptr_) {
-	return ptr_;
-}
-void *operator new(size_t size_) {
-	return malloc(size_);
-}
-void operator delete(void *ptr_) {
-	free(ptr_);
-}
-
-
-extern void rectTest();
-extern void lineTest();
-
-void clearTest();
-void gradientTest();
-void sleepTest();
-void clearTest();
-void ellipseTest();
-void textTest();
-void scrollTest();
-void bmTest();
-void lzgTest();
-void drawCompressedBitmap(uint32_t pixels,uint32_t size,uint16_t width,uint16_t height);
-void prompt(const char *prompt);
-void doGradientFills(bool horizontal);
-
-uint32_t randomColour();
 
 extern const uint32_t CloudPixels;
 extern const uint32_t CloudPixelsSize;
 extern const uint32_t GlobePixelsSize,GlobePixels;
-
-
-int main(void) {
-
-	init();
-  setup();
-
-  for(;;)
-    loop();
-
-  return 0; // not reached
-}
-
+extern const uint32_t LogoPixels;
+extern const uint32_t LogoPixelsSize;
 
 /*
  * The orientation and colour depth that we will use
@@ -71,11 +29,14 @@ typedef ILI9325_Landscape_64K_Gpio TftPanel;
 TftPanel *tft;
 
 /*
- * Globals for the backlight and the font
+ * Globals for the backlight, the bitmap font and the two
+ * TrueType LZG compressed fonts
  */
 
 DefaultBacklight *backlight;
 Font *font;
+LzgFont *happyFont;
+LzgFont *garamondFont;
 
 
 void setup() {
@@ -92,6 +53,11 @@ void setup() {
   tft=new TftPanel;
   font=new Font_VOLTER__28GOLDFISH_299;
 
+  // create the two TrueType fonts
+
+  happyFont=new Font_HAPPY_SANS_32;
+  garamondFont=new Font_APPLE_GARAMOND_28;
+
   // clear to black
 
   tft->setBackground(ColourNames::BLACK);
@@ -101,31 +67,29 @@ void setup() {
   // now that we are in a known good state
 
   backlight->fadeTo(100,4);
-
+  
   // select the font for the stream ops
-
+  
   *tft << *font;
 }
 
 
 void loop() {
 
-	tft->setForeground(ColourNames::WHITE);
+  // looping demo of the graphics library
 
-	// looping demo of the graphics library
-
-	lzgTest();
-	bmTest();
-	lineTest();
-	rectTest();
-	scrollTest();
-	gradientTest();
-	clearTest();
-	textTest();
-	sleepTest();
-	ellipseTest();
+  bmTest();
+  lzgTest();
+  trueTypeTest();
+  gradientTest();
+  rectTest();
+  textTest();
+  sleepTest();
+  scrollTest();
+  lineTest();
+  ellipseTest();
+  clearTest();
 }
-
 
 void gradientTest() {
 
@@ -161,7 +125,7 @@ void doGradientFills(bool horizontal) {
     rc.Y=rc.Height;
     tft->gradientFillRectangle(rc,horizontal ? HORIZONTAL : VERTICAL,colours[i],ColourNames::BLACK);
 
-    delay(1000);
+    delay(2000);
   }
 }
 
@@ -209,6 +173,7 @@ void bmTest() {
   }
 }
 
+
 /*
  * Display a selection of compressed bitmaps
  */
@@ -216,7 +181,6 @@ void bmTest() {
 void lzgTest() {
 
 	prompt("LZG bitmap test");
-
 	drawCompressedBitmap(GET_FAR_ADDRESS(GlobePixels),GET_FAR_ADDRESS(GlobePixelsSize),193,219);
 }
 
@@ -301,6 +265,57 @@ void textTest() {
   }
 }
 
+/*
+ * Test the TrueType (LZG compressed) fonts
+ */
+ 
+void trueTypeTest() {
+
+  Bitmap bm;
+  int fontHeight;
+
+  prompt("TrueType (LZG) font test");
+ 
+  // set up a bitmap data structure
+
+  bm.DataSize=GET_FAR_ADDRESS(LogoPixelsSize);
+  bm.Pixels=GET_FAR_ADDRESS(LogoPixels);
+  bm.Dimensions.Width=200;
+  bm.Dimensions.Height=56;
+
+  // draw the intro bitmap on screen
+  
+  tft->drawCompressedBitmap(Point((tft->getWidth()-bm.Dimensions.Width)/2,(tft->getHeight()-bm.Dimensions.Height)/3),bm);
+  delay(2000);
+
+  // write a TrueType font string below the logo
+  
+  tft->writeString(Point(160,145),*happyFont,"presents...");
+  delay(3000);
+
+  fontHeight=garamondFont->getHeight();
+
+  tft->clearScreen();
+
+  tft->writeString(Point(2,0),*garamondFont,"TrueType fonts on the Arduino!");
+  delay(3000);
+
+  tft->writeString(Point(20,10+fontHeight),*garamondFont,"Great for headings");
+  delay(1000);
+
+  tft->writeString(Point(20,10+fontHeight*2),*garamondFont,"Ideal for alerts");
+  delay(1000);
+
+  tft->writeString(Point(20,10+fontHeight*3),*garamondFont,"Perfect for impact");
+  delay(2000);
+
+  tft->writeString(Point(2,20+fontHeight*4),*garamondFont,"Most fonts are supported");
+  delay(1000);
+
+  tft->writeString(Point(2,20+fontHeight*5),*happyFont,"even fancy comic script!");
+  delay(3000);
+}
+
 
 /*
  * Clear down the screen to some fixed colours
@@ -339,7 +354,7 @@ void rectTest() {
   int i;
   Rectangle rc;
   uint32_t start;
-
+  
   prompt("Rectangle test");
 
   for(i=0,start=millis();millis()-start<5000;i++) {
@@ -352,10 +367,8 @@ void rectTest() {
     rc.Width=rand() % (tft->getXmax()-rc.X);
     rc.Height=rand() % (tft->getYmax()-rc.Y);
 
-    if(rc.Height && rc.Width) {
-    	tft->setForeground(randomColour());
-    	tft->fillRectangle(rc);
-    }
+    tft->setForeground(randomColour());
+    tft->fillRectangle(rc);
   }
 
   tft->clearScreen();
@@ -412,8 +425,8 @@ void ellipseTest() {
 
   int16_t i;
   Point p;
-  uint32_t start;
   Size s;
+  uint32_t start;
 
   prompt("Ellipse test");
 
@@ -443,7 +456,7 @@ void ellipseTest() {
 
   tft->clearScreen();
 
-  for(i=0;i<1000;i++) {
+  for(i=0,start=millis();millis()-start<5000;i++) {
 
     p.X=tft->getXmax()/4+(rand() % (tft->getXmax()/2));
     p.Y=tft->getYmax()/4+(rand() % (tft->getYmax()/2));
@@ -498,9 +511,9 @@ void scrollTest() {
       delay(5);
     }
   }
-
+  
   // reset for the next demo
-
+  
   tft->setScrollPosition(0);
 }
 
@@ -523,7 +536,7 @@ void prompt(const char *prompt) {
 
   Size s;
   Point p;
-
+  
   tft->setBackground(ColourNames::BLACK);
   tft->clearScreen();
 
@@ -537,3 +550,4 @@ void prompt(const char *prompt) {
   delay(3000);
   tft->clearScreen();
 }
+

@@ -71,7 +71,7 @@ namespace lcd {
 			static void hardReset();
 			static void writeCommand(uint8_t command) __attribute((always_inline));
 			static void writeData(uint8_t data) __attribute((always_inline));
-			static void writeCommandData(uint8_t command,uint16_t data) __attribute((always_inline));
+			static void writeCommandData(uint8_t command,uint8_t lo8,uint8_t hi8) __attribute((always_inline));
 	};
 
 	/**
@@ -133,7 +133,7 @@ namespace lcd {
 	 * Write a command to the XMEM interface
 	 */
 
-	inline void AdafruitAccessMode::writeCommandData(uint8_t command,uint16_t data) {
+	inline void AdafruitAccessMode::writeCommandData(uint8_t command,uint8_t lo8,uint8_t hi8) {
 
 		// set the RS line
 
@@ -161,8 +161,8 @@ namespace lcd {
 		PORTF&=~(1 << WR_PIN);
 		PORTF|=(1 << WR_PIN);
 
-		const uint8_t DATA_LOW=static_cast<uint8_t>(data);
-		const uint8_t DATA_HIGH=static_cast<uint8_t>(data >> 8);
+		const uint8_t DATA_LOW=static_cast<uint8_t>(lo8);
+		const uint8_t DATA_HIGH=static_cast<uint8_t>(hi8);
 
 		// reset the RS line
 

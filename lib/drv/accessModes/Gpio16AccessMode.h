@@ -94,7 +94,7 @@ namespace lcd {
 			static void hardReset();
 
 			static void writeCommand(uint8_t lo8,uint8_t hi8=0);
-			static void writeCommandData(uint8_t cmd,uint8_t data);
+			static void writeCommandData(uint8_t cmd,uint8_t lo8,uint8_t hi8=0);
 			static void writeData(uint8_t lo8,uint8_t hi8=0);
 			static void writeMultiData(uint32_t howMuch,uint8_t lo8,uint8_t hi8=0);
 			static void writeStreamedData(uint8_t data);
@@ -110,18 +110,18 @@ namespace lcd {
 
 
 	/**
-	 * Shortcut to write an 8-bit command and an 8-bit data parameter. This is a common scenario
+	 * Shortcut to write an 8-bit command and a data parameter. This is a common scenario
 	 * in programming the registers
-	 * @param cmd The 8-bit command
-	 * @param data The 8-bit data value
+	 * @param lo8 The low 8 bits of the command to write
+	 * @param hi8 The high 8 bits of the command to write. Many commands are 8-bits so this parameters defaults to zero.
 	 */
 
 	template<class TPinMappings>
 	__attribute__((always_inline))
-	inline void Gpio16AccessMode<TPinMappings>::writeCommandData(uint8_t cmd,uint8_t data) {
+	inline void Gpio16AccessMode<TPinMappings>::writeCommandData(uint8_t cmd,uint8_t lo8,uint8_t hi8) {
 
 		writeCommand(cmd,0);
-		writeData(data,0);
+		writeData(lo8,hi8);
 	}
 
 
@@ -362,7 +362,7 @@ namespace lcd {
 				"    ldi  r31, pm_hi8(finished%=)   \n\t"
 				"    ldi  r30, pm_lo8(finished%=)   \n\t"
 				"    lsl  %A5          \n\t"				// multiply remaining by 2
-				"    sub  r30, %A5     \n\t"				// subtract remaining*4 from Z
+				"    sub  r30, %A5     \n\t"				// subtract remaining*2 from Z
 				"    sbci r31, 0       \n\t"
 				"    ijmp              \n\t"				// jump to Z to finish off the writing
 				"    out  %0,  r18     \n\t"
