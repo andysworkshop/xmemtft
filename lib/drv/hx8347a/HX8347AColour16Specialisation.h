@@ -118,9 +118,7 @@ namespace lcd {
 		second=cr.hi8;
 
 		TAccessMode::writeCommand(hx8347a::MEMORY_WRITE);
-
-		while(numPixels--)
-			TAccessMode::writeData(first,second);
+		TAccessMode::writeMultiData(numPixels,first,second);
 	}
 
 

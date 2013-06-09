@@ -36,12 +36,12 @@ namespace lcd {
 
 	/**
 	 * Get the register setting for memory access control
-	 * @return The entry mode register setting for portrait
+	 * @return The entry mode register setting for landscape
 	 */
 
 	template<class TAccessMode>
 	inline uint16_t HX8347AOrientation<LANDSCAPE,TAccessMode>::getOrientationMemoryAccessCtrl() const {
-		return 1 << 5;
+		return (1 << 5);
 	}
 
 

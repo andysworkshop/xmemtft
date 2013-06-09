@@ -20,6 +20,7 @@
 #include "gl/DoublePrecision.h"
 #include "gl/ColourNames.h"
 #include "drv/accessModes/Xmem16AccessMode.h"
+#include "drv/accessModes/Gpio16AccessMode.h"
 #include "drv/hx8347a/HX8347A.h"
 #include "GetFarAddress.h"
 #include "Font.h"
@@ -36,7 +37,7 @@ namespace lcd {
 #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
 
 	/*
-	 * Generic HX8347A interface: 64K colours, portrait and landscape
+	 * Generic HX8347A XMEM16 interface: 64K colours, portrait and landscape
 	 */
 
 	typedef GraphicsLibrary<HX8347A<PORTRAIT,COLOURS_16BIT,Xmem16AccessMode>,Xmem16AccessMode> HX8347A_Portrait_64K;
@@ -44,6 +45,16 @@ namespace lcd {
 
 	typedef TerminalPortraitImpl<HX8347A_Portrait_64K> HX8347A_Terminal_Portrait_64K;
 	typedef TerminalLandscapeImpl<HX8347A_Landscape_64K>HX8347A_Terminal_Landscape_64K;
+
+	/*
+	 * Generic HX8347A GPIO16 interface: 64K colours, portrait and landscape
+	 */
+
+	typedef GraphicsLibrary<HX8347A<PORTRAIT,COLOURS_16BIT,DefaultMegaGpio16AccessMode>,DefaultMegaGpio16AccessMode> HX8347A_Portrait_64K_Gpio;
+	typedef GraphicsLibrary<HX8347A<LANDSCAPE,COLOURS_16BIT,DefaultMegaGpio16AccessMode>,DefaultMegaGpio16AccessMode> HX8347A_Landscape_64K_Gpio;
+
+	typedef TerminalPortraitImpl<HX8347A_Portrait_64K_Gpio> HX8347A_Terminal_Portrait_64K_Gpio;
+	typedef TerminalLandscapeImpl<HX8347A_Landscape_64K_Gpio>HX8347A_Terminal_Landscape_64K_Gpio;
 
 	/*
 	 * The default for most people is a PWM output on pin #2
