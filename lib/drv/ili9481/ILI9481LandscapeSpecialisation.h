@@ -41,7 +41,7 @@ namespace lcd {
 
 	template<class TAccessMode>
 	inline uint16_t ILI9481Orientation<LANDSCAPE,TAccessMode>::getAddressMode() const {
-		return 1 << 5;			// PAGECOL_SELECTION
+		return ili9481::PAGECOL_SELECTION;
 	}
 
 
@@ -103,7 +103,7 @@ namespace lcd {
     // write to the register
 
 		TAccessMode::writeCommand(ili9481::SET_SCROLL_START);
-		TAccessMode::writeData(scrollPosition >> 8) & 1);
+		TAccessMode::writeData((scrollPosition >> 8) & 1);
 		TAccessMode::writeData(scrollPosition & 0xff);
 	}
 }

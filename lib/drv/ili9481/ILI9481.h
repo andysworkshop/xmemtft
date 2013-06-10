@@ -277,7 +277,7 @@ namespace lcd {
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
 	inline void ILI9481<TOrientation,TColourDepth,TAccessMode>::applyGamma(const ILI9481Gamma& gamma) const {
 
-		TAccessMode::writeCommand(ili9481::GammaSettingCmd::Opcode);
+		TAccessMode::writeCommand(ili9481::GAMMA_SETTING);
 
 		TAccessMode::writeData(gamma[0]);
 		TAccessMode::writeData(gamma[1]);

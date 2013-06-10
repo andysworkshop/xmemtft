@@ -9,7 +9,7 @@
  */
 
 #include "Arduino.h"
-#include "Generic16BitILI9325.h"
+#include "Generic16BitILI9481.h"
 #include "Font_volter_goldfish_9.h"
 
 using namespace lcd;
@@ -67,7 +67,7 @@ int main(void) {
  * The orientation and colour depth that we will use
  */
 
-typedef ILI9325_Landscape_64K_Gpio TftPanel;
+typedef ILI9481_Landscape_64K_Gpio TftPanel;
 TftPanel *tft;
 
 /*

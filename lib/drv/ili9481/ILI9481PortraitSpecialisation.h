@@ -41,7 +41,7 @@ namespace lcd {
 
 	template<class TAccessMode>
 	inline uint16_t ILI9481Orientation<PORTRAIT,TAccessMode>::getAddressMode() const {
-		return 1;			// VERTICAL_FLIP
+		return ili9481::VERTICAL_FLIP;
 	}
 
 
@@ -103,7 +103,7 @@ namespace lcd {
     // write to the register
 
 		TAccessMode::writeCommand(ili9481::SET_SCROLL_START);
-		TAccessMode::writeData(scrollPosition >> 8) & 1);
+		TAccessMode::writeData((scrollPosition >> 8) & 1);
 		TAccessMode::writeData(scrollPosition & 0xff);
 	}
 }
