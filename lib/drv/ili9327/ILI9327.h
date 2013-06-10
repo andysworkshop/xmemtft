@@ -28,8 +28,8 @@ namespace lcd {
 
 		public:
 			enum {
-				SHORT_SIDE = 240,
-				LONG_SIDE = 400
+				SHORT_SIDE = TPanelTraits::SHORT_SIDE,
+				LONG_SIDE = TPanelTraits::LONG_SIDE
 			};
 
 		public:
