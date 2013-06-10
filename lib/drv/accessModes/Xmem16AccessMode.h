@@ -72,7 +72,7 @@ namespace lcd {
 			static void hardReset();
 
 			static void writeCommand(uint8_t lo8,uint8_t hi8=0);
-			static void writeCommandData(uint8_t cmd,uint8_t data);
+			static void writeCommandData(uint8_t cmd,uint8_t lo8,uint8_t hi8=0);
 			static void writeData(uint8_t lo8,uint8_t hi8=0);
 			static void writeMultiData(uint32_t howMuch,uint8_t lo8,uint8_t hi8=0);
 			static void writeStreamedData(uint8_t data);
@@ -82,14 +82,14 @@ namespace lcd {
 	/**
 	 * Shortcut to write an 8-bit command and an 8-bit data parameter. This is a common scenario
 	 * in programming the registers
-	 * @param cmd The 8-bit command
-	 * @param data The 8-bit data value
+	 * @param lo8 The low 8 bits of the command to write
+	 * @param hi8 The high 8 bits of the command to write. Many commands are 8-bits so this parameters defaults to zero.
 	 */
 
-	inline void Xmem16AccessMode::writeCommandData(uint8_t cmd,uint8_t data) {
+	inline void Xmem16AccessMode::writeCommandData(uint8_t cmd,uint8_t lo8,uint8_t hi8) {
 
 		writeCommand(cmd,0);
-		writeData(data,0);
+		writeData(lo8,hi8);
 	}
 
 
