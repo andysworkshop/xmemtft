@@ -96,6 +96,7 @@ namespace lcd {
 			static void writeCommand(uint8_t lo8,uint8_t hi8=0);
 			static void writeCommandData(uint8_t cmd,uint8_t lo8,uint8_t hi8=0);
 			static void writeData(uint8_t lo8,uint8_t hi8=0);
+			static void writeDataAgain(uint8_t lo8,uint8_t hi8=0);
 			static void writeMultiData(uint32_t howMuch,uint8_t lo8,uint8_t hi8=0);
 			static void writeStreamedData(uint8_t data);
 	};
@@ -140,8 +141,8 @@ namespace lcd {
 				"  cbi %2, %6   \n\t"			// RS    = LOW
 				"  cbi %1, %5   \n\t"			// ALE   = LOW
 				"  out %3, %8   \n\t"  		// PORTA = hi8
-				"  cbi %0, %6   \n\t"			// /WR   = LOW
-				"  sbi %0, %6   \n\t"			// /WR   = HIGH
+				"  cbi %0, %4   \n\t"			// /WR   = LOW
+				"  sbi %0, %4   \n\t"			// /WR   = HIGH
 
 				:: "I" (TPinMappings::PORT_WR),			// %0
 				   "I" (TPinMappings::PORT_ALE),		// %1
@@ -219,8 +220,8 @@ namespace lcd {
 				"  sbi %2, %6   \n\t"			// RS    = HIGH
 				"  cbi %1, %5   \n\t"			// ALE   = LOW
 				"  out %3, %8   \n\t"  		// PORTA = hi8
-				"  cbi %0, %6   \n\t"			// /WR   = LOW
-				"  sbi %0, %6   \n\t"			// /WR   = HIGH
+				"  cbi %0, %4   \n\t"			// /WR   = LOW
+				"  sbi %0, %4   \n\t"			// /WR   = HIGH
 
 				:: "I" (TPinMappings::PORT_WR),			// %0
 				   "I" (TPinMappings::PORT_ALE),		// %1
@@ -232,6 +233,28 @@ namespace lcd {
 				   "r" (lo8),												// %7
 				   "r" (hi8)												// %8
 				  );
+	}
+
+
+	/**
+	 * Write the same data as the previous call to a writeData() command. This allows a sequence of the
+	 * same data values to be output with some calculations performed between. e.g. the optimised
+	 * bresenham line drawing algorithm. The parameters are present for access modes that cannot do this
+	 * optimisation and must fall back to writeData().
+	 * @param lo8 The low 8 bits of the value to write
+	 * @param hi8 The high 8 bits of the value to write. Many parameter values are 8-bits so this parameters defaults to zero.
+	 */
+
+	template<class TPinMappings>
+	inline void Gpio16AccessMode<TPinMappings>::writeDataAgain(uint8_t /* lo8 */,uint8_t /* hi8 */) {
+
+		__asm volatile(
+				"  cbi %0, %1   \n\t"			// /WR   = LOW
+				"  sbi %0, %1   \n\t"			// /WR   = HIGH
+
+				:: "I" (TPinMappings::PORT_WR),			// %0
+				   "I" (TPinMappings::PIN_WR)				// %1
+		);
 	}
 
 

@@ -74,6 +74,7 @@ namespace lcd {
 			static void writeCommand(uint8_t lo8,uint8_t hi8=0);
 			static void writeCommandData(uint8_t cmd,uint8_t lo8,uint8_t hi8=0);
 			static void writeData(uint8_t lo8,uint8_t hi8=0);
+			static void writeDataAgain(uint8_t lo8,uint8_t hi8=0);
 			static void writeMultiData(uint32_t howMuch,uint8_t lo8,uint8_t hi8=0);
 			static void writeStreamedData(uint8_t data);
 	};
@@ -148,6 +149,20 @@ namespace lcd {
                    "  st  X,%1      \n\t"
                    :: "r" (lo8), "r" (hi8)
 									 : "r26", "r27");
+	}
+
+
+	/**
+	 * Write the same data as the previous call to a writeData() command. This allows a sequence of the
+	 * same data values to be output with some calculations performed between. e.g. the optimised
+	 * bresenham line drawing algorithm. The parameters are present for access modes that cannot do this
+	 * optimisation and must fall back to writeData().
+	 * @param lo8 The low 8 bits of the value to write
+	 * @param hi8 The high 8 bits of the value to write. Many parameter values are 8-bits so this parameters defaults to zero.
+	 */
+
+	inline void Xmem16AccessMode::writeDataAgain(uint8_t lo8,uint8_t hi8) {
+		writeData(lo8,hi8);
 	}
 
 

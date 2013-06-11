@@ -67,7 +67,7 @@ int main(void) {
  * The orientation and colour depth that we will use
  */
 
-typedef ILI9325_Portrait_64K TftPanel;
+typedef ILI9325_Portrait_64K_Gpio TftPanel;
 TftPanel *tft;
 
 /*
