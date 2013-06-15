@@ -21,6 +21,12 @@ namespace lcd {
 
 			int16_t X,Y;
 
+			/**
+			 * Return a (0,0) point.
+			 */
+
+			static const Point Origin;
+
 			/*
 			 * Default constructor
 			 */

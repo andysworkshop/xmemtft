@@ -29,6 +29,9 @@ namespace lcd {
 			int16_t getWidth() const;
 			int16_t getHeight() const;
 			void moveTo(const Rectangle& rc) const;
+			void moveTo(int16_t xstart,int16_t ystart,int16_t xend,int16_t yend) const;
+			void moveX(int16_t xstart,int16_t xend) const;
+			void moveY(int16_t ystart,int16_t yend) const;
 
 			void setScrollPosition(int16_t scrollPosition) const;
 	};
@@ -74,16 +77,61 @@ namespace lcd {
 
 	template<class TAccessMode>
 	inline void ILI9481Orientation<LANDSCAPE,TAccessMode>::moveTo(const Rectangle& rc) const {
+		moveTo(rc.X,rc.Y,rc.X+rc.Width-1,rc.Y+rc.Height-1);
+	}
 
-		TAccessMode::writeCommand(ili9481::SET_COLUMN_ADDRESS,rc.X >> 8);
-		TAccessMode::writeData(rc.X & 0xff);
-		TAccessMode::writeData((rc.X+rc.Width-1) >> 8);
-		TAccessMode::writeData((rc.X+rc.Width-1) & 0xff);
 
-		TAccessMode::writeCommand(ili9481::SET_PAGE_ADDRESS,rc.Y >> 8);
-		TAccessMode::writeData(rc.Y & 0xff);
-		TAccessMode::writeData((rc.Y+rc.Height-1) >> 8);
-		TAccessMode::writeData((rc.Y+rc.Height-1) & 0xff);
+	/**
+	 * Move the display output rectangle
+	 * @param rc The display output rectangle
+	 */
+
+	template<class TAccessMode>
+	inline void ILI9481Orientation<LANDSCAPE,TAccessMode>::moveTo(int16_t xstart,int16_t ystart,int16_t xend,int16_t yend) const {
+
+		TAccessMode::writeCommand(ili9481::SET_COLUMN_ADDRESS);
+		TAccessMode::writeData(xstart >> 8);
+		TAccessMode::writeData(xstart & 0xff);
+		TAccessMode::writeData(xend >> 8);
+		TAccessMode::writeData(xend & 0xff);
+
+		TAccessMode::writeCommand(ili9481::SET_PAGE_ADDRESS);
+		TAccessMode::writeData(ystart >> 8);
+		TAccessMode::writeData(ystart & 0xff);
+		TAccessMode::writeData(yend >> 8);
+		TAccessMode::writeData(yend & 0xff);
+	}
+
+
+	/**
+	 * Move the X position
+	 * @param xstart The new X position
+	 */
+
+	template<class TAccessMode>
+	inline void ILI9481Orientation<LANDSCAPE,TAccessMode>::moveX(int16_t xstart,int16_t xend) const {
+
+		TAccessMode::writeCommand(ili9481::SET_COLUMN_ADDRESS);
+		TAccessMode::writeData(xstart >> 8);
+		TAccessMode::writeData(xstart & 0xff);
+		TAccessMode::writeData(xend >> 8);
+		TAccessMode::writeData(xend & 0xff);
+	}
+
+
+	/**
+	 * Move the Y start position
+	 * @param ystart The new Y start position
+	 */
+
+	template<class TAccessMode>
+	inline void ILI9481Orientation<LANDSCAPE,TAccessMode>::moveY(int16_t ystart,int16_t yend) const {
+
+		TAccessMode::writeCommand(ili9481::SET_PAGE_ADDRESS);
+		TAccessMode::writeData(ystart >> 8);
+		TAccessMode::writeData(ystart & 0xff);
+		TAccessMode::writeData(yend >> 8);
+		TAccessMode::writeData(yend & 0xff);
 	}
 
 

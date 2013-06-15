@@ -29,6 +29,9 @@ namespace lcd {
 			int16_t getWidth() const;
 			int16_t getHeight() const;
 			void moveTo(const Rectangle& rc) const;
+			void moveTo(int16_t xstart,int16_t ystart,int16_t xend,int16_t yend) const;
+			void moveX(int16_t xstart,int16_t xend) const;
+			void moveY(int16_t ystart,int16_t yend) const;
 
 			void setScrollPosition(int16_t scrollPosition);
 	};
@@ -74,20 +77,65 @@ namespace lcd {
 
 	template<class TAccessMode,class TPanelTraits>
 	inline void LDS285Orientation<LANDSCAPE,TAccessMode,TPanelTraits>::moveTo(const Rectangle& rc) const {
+		moveTo(rc.X,rc.Y,rc.X+rc.Width-1,rc.Y+rc.Height-1);
+	}
+
+
+	/**
+	 * Move the display output rectangle
+	 * @param rc The display output rectangle
+	 */
+
+	template<class TAccessMode,class TPanelTraits>
+	inline void LDS285Orientation<LANDSCAPE,TAccessMode,TPanelTraits>::moveTo(int16_t xstart,int16_t ystart,int16_t xend,int16_t yend) const {
 
 		TAccessMode::writeCommand(lds285::COLUMN_ADDRESS_SET);
 
-		TAccessMode::writeData(rc.X >> 8);					// x=0..319
-		TAccessMode::writeData(rc.X & 0xff);
-		TAccessMode::writeData((rc.X+rc.Width-1)>>8);
-		TAccessMode::writeData((rc.X+rc.Width-1) & 0xff);
+		TAccessMode::writeData(xstart >> 8);					// x=0..319
+		TAccessMode::writeData(xstart & 0xff);
+		TAccessMode::writeData(xend >> 8);
+		TAccessMode::writeData(xend & 0xff);
 
 		TAccessMode::writeCommand(lds285::ROW_ADDRESS_SET);
 
-		TAccessMode::writeData(0);								// y=0..239
-		TAccessMode::writeData(rc.Y);
+		TAccessMode::writeData(0);										// y=0..239
+		TAccessMode::writeData(ystart);
 		TAccessMode::writeData(0);
-		TAccessMode::writeData(rc.Y+rc.Height-1);
+		TAccessMode::writeData(yend);
+	}
+
+
+	/**
+	 * Move the X position
+	 * @param xstart The new X position
+	 */
+
+	template<class TAccessMode,class TPanelTraits>
+	inline void LDS285Orientation<LANDSCAPE,TAccessMode,TPanelTraits>::moveX(int16_t xstart,int16_t xend) const {
+
+		TAccessMode::writeCommand(lds285::COLUMN_ADDRESS_SET);
+
+		TAccessMode::writeData(xstart >> 8);					// x=0..319
+		TAccessMode::writeData(xstart & 0xff);
+		TAccessMode::writeData(xend >> 8);
+		TAccessMode::writeData(xend & 0xff);
+	}
+
+
+	/**
+	 * Move the Y start position
+	 * @param ystart The new Y start position
+	 */
+
+	template<class TAccessMode,class TPanelTraits>
+	inline void LDS285Orientation<LANDSCAPE,TAccessMode,TPanelTraits>::moveY(int16_t ystart,int16_t yend) const {
+
+		TAccessMode::writeCommand(lds285::ROW_ADDRESS_SET);
+
+		TAccessMode::writeData(0);										// y=0..239
+		TAccessMode::writeData(ystart);
+		TAccessMode::writeData(0);
+		TAccessMode::writeData(yend);
 	}
 
 

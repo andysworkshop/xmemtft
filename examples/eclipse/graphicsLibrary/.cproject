@@ -27,7 +27,7 @@
 							<builder buildPath="${workspace_loc:/xmemtft-examples-graphics_library/Release}" id="de.innot.avreclipse.target.builder.winavr.app.release.663321436" keepEnvironmentInBuildfile="false" managedBuildOn="true" name="AVR GNU Make Builder" superClass="de.innot.avreclipse.target.builder.winavr.app.release"/>
 							<tool id="de.innot.avreclipse.tool.assembler.winavr.app.release.1837857029" name="AVR Assembler" superClass="de.innot.avreclipse.tool.assembler.winavr.app.release">
 								<option id="de.innot.avreclipse.assembler.option.debug.level.1944461798" name="Generate Debugging Info" superClass="de.innot.avreclipse.assembler.option.debug.level" value="de.innot.avreclipse.assembler.option.debug.level.none" valueType="enumerated"/>
-								<option id="de.innot.avreclipse.asm.option.include.gaspaths.1272225913" superClass="de.innot.avreclipse.asm.option.include.gaspaths" valueType="includePath">
+								<option id="de.innot.avreclipse.asm.option.include.gaspaths.1272225913" name=".include paths for assembler(-Wa,-I)" superClass="de.innot.avreclipse.asm.option.include.gaspaths" valueType="includePath">
 									<listOptionValue builtIn="false" value="&quot;${workspace_loc:/${ProjName}}&quot;"/>
 								</option>
 								<inputType id="de.innot.avreclipse.tool.assembler.input.468613721" superClass="de.innot.avreclipse.tool.assembler.input"/>
@@ -81,6 +81,9 @@
 							<tool id="de.innot.avreclipse.tool.avrdude.app.release.350152380" name="AVRDude" superClass="de.innot.avreclipse.tool.avrdude.app.release"/>
 						</toolChain>
 					</folderInfo>
+					<sourceEntries>
+						<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name=""/>
+					</sourceEntries>
 				</configuration>
 			</storageModule>
 			<storageModule moduleId="org.eclipse.cdt.core.externalSettings"/>

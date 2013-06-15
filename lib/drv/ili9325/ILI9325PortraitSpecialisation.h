@@ -34,6 +34,9 @@ namespace lcd {
 			int16_t getWidth() const;
 			int16_t getHeight() const;
 			void moveTo(const Rectangle& rc) const;
+			void moveTo(int16_t xstart,int16_t ystart,int16_t xend,int16_t yend) const;
+			void moveX(int16_t xstart,int16_t xend) const;
+			void moveY(int16_t ystart,int16_t yend) const;
 			void setScrollPosition(int16_t scrollPosition);
 	};
 
@@ -78,22 +81,57 @@ namespace lcd {
 
 	template<class TAccessMode>
 	inline void ILI9325Orientation<PORTRAIT,TAccessMode>::moveTo(const Rectangle& rc) const {
-
-		uint16_t end;
-
-		TAccessMode::writeCommandData(ili9325::ILI932X_HOR_START_AD,rc.X,rc.X >> 8);
-
-		end=rc.X+rc.Width-1;
-		TAccessMode::writeCommandData(ili9325::ILI932X_HOR_END_AD,end,end >> 8);
-
-		TAccessMode::writeCommandData(ili9325::ILI932X_VER_START_AD,rc.Y,rc.Y >> 8);
-
-		end=rc.Y+rc.Height-1;
-		TAccessMode::writeCommandData(ili9325::ILI932X_VER_END_AD,end,end >> 8);
-
-		TAccessMode::writeCommandData(ili9325::ILI932X_GRAM_HOR_AD,rc.X,rc.X >> 8);
-		TAccessMode::writeCommandData(ili9325::ILI932X_GRAM_VER_AD,rc.Y,rc.Y >> 8);
+		moveTo(rc.X,rc.Y,rc.X+rc.Width-1,rc.Y+rc.Height-1);
 	}
+
+
+	/**
+	 * Move the display rectangle to the rectangle described by the co-ordinates
+	 * @param xstart starting X position
+	 * @param ystart starting Y position
+	 * @param xend ending X position
+	 * @param yend ending Y position
+	 */
+
+	template<class TAccessMode>
+	inline void ILI9325Orientation<PORTRAIT,TAccessMode>::moveTo(int16_t xstart,int16_t ystart,int16_t xend,int16_t yend) const {
+
+		TAccessMode::writeCommandData(ili9325::ILI932X_HOR_START_AD,xstart,xstart >> 8);
+		TAccessMode::writeCommandData(ili9325::ILI932X_HOR_END_AD,xend,xend >> 8);
+
+		TAccessMode::writeCommandData(ili9325::ILI932X_VER_START_AD,ystart,ystart >> 8);
+		TAccessMode::writeCommandData(ili9325::ILI932X_VER_END_AD,yend,yend >> 8);
+
+		TAccessMode::writeCommandData(ili9325::ILI932X_GRAM_HOR_AD,xstart,xstart >> 8);
+		TAccessMode::writeCommandData(ili9325::ILI932X_GRAM_VER_AD,ystart,ystart >> 8);
+	}
+
+
+	/**
+	 * Move the X start position
+	 * @param xstart The new X start position
+	 */
+
+	template<class TAccessMode>
+	inline void ILI9325Orientation<PORTRAIT,TAccessMode>::moveX(int16_t xstart,int16_t xend) const {
+		TAccessMode::writeCommandData(ili9325::ILI932X_HOR_START_AD,xstart,xstart >> 8);
+		TAccessMode::writeCommandData(ili9325::ILI932X_GRAM_HOR_AD,xstart,xstart >> 8);
+		TAccessMode::writeCommandData(ili9325::ILI932X_HOR_END_AD,xend,xend >> 8);
+	}
+
+
+	/**
+	 * Move the Y start position
+	 * @param ystart The new Y start position
+	 */
+
+	template<class TAccessMode>
+	inline void ILI9325Orientation<PORTRAIT,TAccessMode>::moveY(int16_t ystart,int16_t yend) const {
+		TAccessMode::writeCommandData(ili9325::ILI932X_VER_START_AD,ystart,ystart >> 8);
+		TAccessMode::writeCommandData(ili9325::ILI932X_GRAM_VER_AD,ystart,ystart >> 8);
+		TAccessMode::writeCommandData(ili9325::ILI932X_VER_END_AD,yend,yend >> 8);
+	}
+
 
 	/**
 	 * Set a vertical scroll position

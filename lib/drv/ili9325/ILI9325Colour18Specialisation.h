@@ -39,6 +39,7 @@ namespace lcd {
 			void unpackColour(TColour src,UnpackedColour& dest) const;
 			void unpackColour(uint8_t red,uint8_t green,uint8_t blue,UnpackedColour& dest) const;
 			void writePixel(const UnpackedColour& cr) const;
+			void writePixelAgain(const UnpackedColour& cr) const;
 			void fillPixels(uint32_t numPixels,const UnpackedColour& cr) const;
 			void allocatePixelBuffer(uint32_t numPixels,uint8_t*& buffer,uint32_t& bytesPerPixel) const;
 			uint8_t getBytesPerPixel() const;
@@ -101,6 +102,21 @@ namespace lcd {
 
 	template<class TAccessMode>
 	inline void ILI9325Colour<COLOURS_18BIT,TAccessMode>::writePixel(const UnpackedColour& cr) const {
+		TAccessMode::writeData(cr.first);
+		TAccessMode::writeData(cr.second);
+		TAccessMode::writeData(cr.third);
+	}
+
+
+	/**
+	 * Write the same colour pixel that we last wrote. This gives the access mode a chance to
+	 * optimise sequential pixel writes. The colour is provided for drivers that cannot optimise
+	 * and must fall back to a full write.
+	 * @param cr The pixel to write
+	 */
+
+	template<class TAccessMode>
+	inline void ILI9325Colour<COLOURS_18BIT,TAccessMode>::writePixelAgain(const UnpackedColour& cr) const {
 		TAccessMode::writeData(cr.first);
 		TAccessMode::writeData(cr.second);
 		TAccessMode::writeData(cr.third);

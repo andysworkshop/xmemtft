@@ -29,6 +29,9 @@ namespace lcd {
 			int16_t getWidth() const;
 			int16_t getHeight() const;
 			void moveTo(const Rectangle& rc) const;
+			void moveTo(int16_t xstart,int16_t ystart,int16_t xend,int16_t yend) const;
+			void moveX(int16_t xstart,int16_t xend) const;
+			void moveY(int16_t ystart,int16_t yend) const;
 
 			void setScrollPosition(int16_t scrollPosition) const;
 	};
@@ -74,6 +77,17 @@ namespace lcd {
 
 	template<class TAccessMode,class TPanelTraits>
 	inline void ILI9327Orientation<PORTRAIT,TAccessMode,TPanelTraits>::moveTo(const Rectangle& rc) const {
+		moveTo(rc.X,rc.Y,rc.X+rc.Width-1,rc.Y+rc.Height-1);
+	}
+
+
+	/**
+	 * Move the display output rectangle
+	 * @param rc The display output rectangle
+	 */
+
+	template<class TAccessMode,class TPanelTraits>
+	inline void ILI9327Orientation<PORTRAIT,TAccessMode,TPanelTraits>::moveTo(int16_t xstart,int16_t ystart,int16_t xend,int16_t yend) const {
 
 		uint16_t yoffset;
 
@@ -82,16 +96,16 @@ namespace lcd {
 		yoffset=432-TPanelTraits::LONG_SIDE;
 
 		TAccessMode::writeCommand(ili9327::SET_COLUMN_ADDRESS);
-		TAccessMode::writeData(rc.X >> 8);
-		TAccessMode::writeData(rc.X & 0xff);
-		TAccessMode::writeData((rc.X+rc.Width-1) >>8);
-		TAccessMode::writeData((rc.X+rc.Width-1) & 0xff);
+		TAccessMode::writeData(xstart >> 8);
+		TAccessMode::writeData(xstart & 0xff);
+		TAccessMode::writeData(xend >>8);
+		TAccessMode::writeData(xend & 0xff);
 
 		TAccessMode::writeCommand(ili9327::SET_PAGE_ADDRESS);
-		TAccessMode::writeData((rc.Y+yoffset) >> 8);
-		TAccessMode::writeData((rc.Y+yoffset) & 0xff);
-		TAccessMode::writeData((rc.Y+yoffset+rc.Height-1) >>8);
-		TAccessMode::writeData((rc.Y+yoffset+rc.Height-1) & 0xff);
+		TAccessMode::writeData((ystart+yoffset) >> 8);
+		TAccessMode::writeData((ystart+yoffset) & 0xff);
+		TAccessMode::writeData((yend+yoffset) >>8);
+		TAccessMode::writeData((yend+yoffset) & 0xff);
 	}
 
 

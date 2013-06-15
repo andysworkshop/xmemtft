@@ -9,7 +9,7 @@
  */
 
 #include "Arduino.h"
-#include "Generic16BitILI9325.h"
+#include "Generic16BitILI481.h"
 #include "Font_volter_goldfish_9.h"
 
 using namespace lcd;
@@ -67,7 +67,7 @@ int main(void) {
  * The orientation and colour depth that we will use
  */
 
-typedef ILI9325_Portrait_64K_Gpio TftPanel;
+typedef ILI9481_Portrait_64K_Gpio TftPanel;
 TftPanel *tft;
 
 /*
@@ -113,17 +113,32 @@ void loop() {
 	tft->setForeground(ColourNames::WHITE);
 
 	// looping demo of the graphics library
+#if 1
+	Point c(120,160);
 
+	tft->drawLine(c,Point(0,0));
+	tft->drawLine(c,Point(tft->getWidth()/2,0));
+	tft->drawLine(c,Point(tft->getXmax(),0));
+	tft->drawLine(c,Point(tft->getXmax(),tft->getHeight()/2));
+	tft->drawLine(c,Point(tft->getXmax(),tft->getYmax()));
+	tft->drawLine(c,Point(tft->getWidth()/2,tft->getYmax()));
+	tft->drawLine(c,Point(0,tft->getYmax()));
+	for(;;);
+
+#endif
+
+
+	//lineTest();
 	lzgTest();
-	bmTest();
-	lineTest();
-	rectTest();
-	scrollTest();
-	gradientTest();
-	clearTest();
-	textTest();
-	sleepTest();
-	ellipseTest();
+	for(;;);
+//	bmTest();
+//	rectTest();
+//	scrollTest();
+//	gradientTest();
+//	clearTest();
+//	textTest();
+//	sleepTest();
+//	ellipseTest();
 }
 
 
@@ -388,10 +403,8 @@ void lineTest() {
 
   prompt("Line test");
 
+  srand(0);
   for(i=0,start=millis();millis()-start<5000;i++) {
-
-    if(i % 1000==0)
-      tft->clearScreen();
 
     p1.X=rand() % tft->getXmax();
     p1.Y=rand() % tft->getYmax();
@@ -401,6 +414,11 @@ void lineTest() {
     tft->setForeground(randomColour());
     tft->drawLine(p1,p2);
   }
+
+  tft->setForeground(ColourNames::WHITE);
+  tft->clearScreen();
+  *tft << Point::Origin << i << " lines in 5 seconds";
+  delay(3000);
 }
 
 

@@ -34,6 +34,9 @@ namespace lcd {
 			int16_t getWidth() const;
 			int16_t getHeight() const;
 			void moveTo(const Rectangle& rc) const;
+			void moveTo(int16_t xstart,int16_t ystart,int16_t xend,int16_t yend) const;
+			void moveX(int16_t xstart,int16_t xend) const;
+			void moveY(int16_t ystart,int16_t yend) const;
 			void setScrollPosition(int16_t scrollPosition);
 	};
 
@@ -78,24 +81,68 @@ namespace lcd {
 
 	template<class TAccessMode>
 	inline void ILI9325Orientation<LANDSCAPE,TAccessMode>::moveTo(const Rectangle& rc) const {
+		moveTo(rc.X,rc.Y,rc.X+rc.Width-1,rc.Y+rc.Height-1);
+	}
 
-		uint16_t end,start;
 
-		TAccessMode::writeCommandData(ili9325::ILI932X_HOR_START_AD,rc.Y,rc.Y >> 8);
+	/**
+	 * Move the display rectangle to the rectangle described by the co-ordinates
+	 * @param xstart starting X position
+	 * @param ystart starting Y position
+	 * @param xend ending X position
+	 * @param yend ending Y position
+	 */
 
-		end=rc.Y+rc.Height-1;
-		TAccessMode::writeCommandData(ili9325::ILI932X_HOR_END_AD,end,end >> 8);
+	template<class TAccessMode>
+	inline void ILI9325Orientation<LANDSCAPE,TAccessMode>::moveTo(int16_t xstart,int16_t ystart,int16_t xend,int16_t yend) const {
 
-		start=319-(rc.X+rc.Width-1);
+		int16_t start,end;
+
+		TAccessMode::writeCommandData(ili9325::ILI932X_HOR_START_AD,ystart,ystart >> 8);
+		TAccessMode::writeCommandData(ili9325::ILI932X_HOR_END_AD,yend,yend >> 8);
+
+		start=319-xend;
 		TAccessMode::writeCommandData(ili9325::ILI932X_VER_START_AD,start,start >> 8);
 
-		end=319-rc.X;
+		end=319-xstart;
 		TAccessMode::writeCommandData(ili9325::ILI932X_VER_END_AD,end,end >> 8);
-
-		TAccessMode::writeCommandData(ili9325::ILI932X_GRAM_HOR_AD,rc.Y,rc.Y >> 8);
-
-		end=319-rc.X;
 		TAccessMode::writeCommandData(ili9325::ILI932X_GRAM_VER_AD,end,end >> 8);
+
+		TAccessMode::writeCommandData(ili9325::ILI932X_GRAM_HOR_AD,ystart,ystart >> 8);
+	}
+
+
+	/**
+	 * Move the X position
+	 * @param xstart The new X position
+	 */
+
+	template<class TAccessMode>
+	inline void ILI9325Orientation<LANDSCAPE,TAccessMode>::moveX(int16_t xstart,int16_t xend) const {
+
+		int16_t start,end;
+
+		start=319-xend;
+		end=319-xstart;
+
+		TAccessMode::writeCommandData(ili9325::ILI932X_VER_START_AD,start,start >> 8);
+
+		TAccessMode::writeCommandData(ili9325::ILI932X_VER_END_AD,end,end >> 8);
+		TAccessMode::writeCommandData(ili9325::ILI932X_GRAM_VER_AD,end,end >> 8);
+	}
+
+
+	/**
+	 * Move the Y start position
+	 * @param ystart The new Y start position
+	 */
+
+	template<class TAccessMode>
+	inline void ILI9325Orientation<LANDSCAPE,TAccessMode>::moveY(int16_t ystart,int16_t yend) const {
+
+		TAccessMode::writeCommandData(ili9325::ILI932X_HOR_START_AD,ystart,ystart >> 8);
+		TAccessMode::writeCommandData(ili9325::ILI932X_GRAM_HOR_AD,ystart,ystart >> 8);
+		TAccessMode::writeCommandData(ili9325::ILI932X_HOR_END_AD,yend,yend >> 8);
 	}
 
 

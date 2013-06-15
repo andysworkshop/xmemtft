@@ -46,61 +46,96 @@ namespace lcd {
 	template<class TDevice,class TAccessMode>
 	inline void GraphicsLibrary<TDevice,TAccessMode>::drawLine(const Point& p1,const Point& p2) const {
 
-		int16_t x0,x1,y0,y1,err,e2;
-		int8_t sx,sy;
-
-		x0=p1.X;
-		x1=p2.X;
-		y0=p1.Y;
-		y1=p2.Y;
-
 		// optimisation for straight lines. filling rectangles is much more efficient than plotting points
 
-		if(x0==x1)
-			fillRectangle(Rectangle(x0,Min(y0,y1),1,Abs(y1-y0)+1));
-		else if(y0==y1)
-			fillRectangle(Rectangle(Min(x0,x1),y0,Abs(x1-x0)+1,1));
+		if(p1.X==p2.X)
+			fillRectangle(Rectangle(p1.X,Min(p1.Y,p2.Y),1,Abs(p2.Y-p1.Y)+1));
+		else if(p1.Y==p2.Y)
+			fillRectangle(Rectangle(Min(p1.X,p2.X),p1.Y,Abs(p2.X-p1.X)+1,1));
 		else {
 
-			// can't optimise, use the algorithm
+			int16_t x0,x1,y0,y1;
 
-			int16_t dx=Abs(x0-x1);
-			int16_t dy=Abs(y0-y1);
+			x0=p1.X;
+			y0=p1.Y;
+			x1=p2.X;
+			y1=p2.Y;
 
-			if(x0<x1)
-				sx=1;
-			else
-				sx=-1;
+			if(x0>x1) {
+				x0^=x1;
+				x1^=x0;
+				x0^=x1;
 
-			if(y0<y1)
-				sy=1;
-			else
-				sy=-1;
+				y0^=y1;
+				y1^=y0;
+				y0^=y1;
+			}
 
-			err=dx-dy;
+			// calculate constants up-front
 
-			for(;;) {
+			int16_t dx=x1-x0;
+			int16_t dy=Abs(y1-y0);
+			int16_t sy=y0<y1 ? 1 : -1;
+			int16_t mdy=-dy;
+			int16_t err=dx-dy;
+			bool xinc;
 
-				plotPoint(x0,y0);
+			// set the drawing rectangle that we need and plot the first point
 
-				if(x0==x1 && y0==y1)
-					return;
+			this->moveTo(x0,y0,this->getXmax(),this->getYmax());
+			this->beginWriting();
+			this->writePixel(_foreground);
 
-				e2=2*err;
+			while(x0!=x1 || y0!=y1) {
 
-				if(e2>-dy) {
+				int16_t e2=2*err;
+
+				if(e2>mdy) {
+
 					err-=dy;
-					x0+=sx;
+					x0++;
+
+					// make a note that X has incremented
+
+					xinc=true;
 				}
+				else
+					xinc=false;				// nothing happened to X
 
 				if(x0==x1 && y0==y1) {
-					plotPoint(x0,y0);
-					return;
+
+					if(xinc) {
+
+						// plot the pending X increment before returning
+
+						this->writePixelAgain(_foreground);
+						break;
+					}
 				}
 
 				if(e2<dx) {
 					err+=dx;
 					y0+=sy;
+
+					// Y has changed. We're going to have to do a complete
+					// pixel write after we've moved the bare minimum of
+					// window pointers
+
+					if(xinc)
+						this->moveX(x0,this->getXmax());
+
+					this->moveY(y0,this->getYmax());
+
+					this->beginWriting();
+					this->writePixel(_foreground);
+				}
+				else {
+
+					// Y has not changed, if X has changed then all we need
+					// to do is push out another pixel
+
+					if(xinc)
+						this->writePixelAgain(_foreground);
 				}
 			}
 		}
