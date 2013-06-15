@@ -27,14 +27,14 @@ namespace lcd {
 		protected:
 
 			DisplayDeviceGamma(int count) {
-				_gamma=new uint16_t[count];
+				_gamma=reinterpret_cast<uint16_t *>(malloc(count*sizeof(uint16_t)));
 				_count=count;
 			}
 
 		public:
 
 			~DisplayDeviceGamma() {
-				delete [] _gamma;
+				free(_gamma);
 			}
 
 			/**

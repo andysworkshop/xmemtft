@@ -151,8 +151,8 @@ namespace lcd {
 				   "I" (TPinMappings::PIN_WR),			// %4
 				   "I" (TPinMappings::PIN_ALE),			// %5
 				   "I" (TPinMappings::PIN_RS),		  // %6
-				   "r" (lo8),												// %7
-				   "r" (hi8)												// %8
+				   "d" (lo8),												// %7
+				   "d" (hi8)												// %8
 				  );
 	}
 
@@ -180,7 +180,7 @@ namespace lcd {
 				   "I" (TPinMappings::PORT_DATA),		// %2
 				   "I" (TPinMappings::PIN_ALE),			// %3
 				   "I" (TPinMappings::PIN_RS),		  // %4
-				   "r" (data)												// %5
+				   "d" (data)												// %5
 				  );
 		}
 		else {
@@ -195,7 +195,7 @@ namespace lcd {
 				   "I" (TPinMappings::PORT_DATA),		// %2
 				   "I" (TPinMappings::PIN_WR),			// %3
 				   "I" (TPinMappings::PIN_ALE),			// %4
-				   "r" (data)												// %5
+				   "d" (data)												// %5
 				  );
 		}
 
@@ -230,8 +230,8 @@ namespace lcd {
 				   "I" (TPinMappings::PIN_WR),			// %4
 				   "I" (TPinMappings::PIN_ALE),			// %5
 				   "I" (TPinMappings::PIN_RS),		  // %6
-				   "r" (lo8),												// %7
-				   "r" (hi8)												// %8
+				   "d" (lo8),												// %7
+				   "d" (hi8)												// %8
 				  );
 	}
 
@@ -474,10 +474,10 @@ namespace lcd {
 
 				:: "I" (TPinMappings::PORT_WR),			// %0
 				   "I" (TPinMappings::PORT_DATA),		// %1
-				   "r" (lo8),												// %2
+				   "d" (lo8),												// %2
 				   "I" (TPinMappings::PORT_RS),			// %3
-				   "r" (hi8),												// %4
-				   "r" (howMuch),										// %C5,%B5,%A5
+				   "d" (hi8),												// %4
+				   "d" (howMuch),										// %C5,%B5,%A5
 				   "I" (_BV(TPinMappings::PIN_WR)),	// %6
 				   "I" (TPinMappings::PIN_ALE),			// %7
 				   "I" (TPinMappings::PIN_RS),		  // %8

@@ -10,7 +10,7 @@
 //#include "NokiaN82.h"
 //#include "NokiaE73.h"
 //#include "Generic16BitHX8347A.h"
-#include "Generic16BitILI9327.h"
+#include "Generic16BitILI9481.h"
 #include "Font_apple.h"
 #include "drv/accessModes/Xmem16AccessMode.h"
 
@@ -54,8 +54,8 @@ int main(void) {
 //typedef NokiaN82_Terminal_Portrait_262K TerminalAccess;
 //typedef NokiaE73_Landscape_16M LcdAccess;
 //typedef NokiaE73_Terminal_Landscape_16M TerminalAccess;
-typedef ILI9327_400x240_Portrait_64K_Gpio LcdAccess;
-typedef ILI9327_400x240_Terminal_Portrait_64K_Gpio TerminalAccess;
+typedef ILI9481_Portrait_64K_Gpio LcdAccess;
+typedef ILI9481_Terminal_Portrait_64K_Gpio TerminalAccess;
 
 DefaultBacklight *backlight;
 LcdAccess *tft;
@@ -103,89 +103,6 @@ void setup() {
 
   terminal->clearScreen();
   backlight->fadeTo(100,4);
-/*
-  // fade up the backlight to 100% in 4ms steps (400ms total)
-
-  backlight->fadeTo(100,4);
-
-  uint32_t testColours[]= {
-    ColourNames::BLUE,
-    ColourNames::GREEN,
-    ColourNames::RED,
-    ColourNames::BLACK,
-    ColourNames::WHITE,
-    ColourNames::MAGENTA,
-    ColourNames::CYAN,
-    ColourNames::YELLOW
-  };
-
-  *tft << *font;
-
-  for(;;) {
-
-		for(uint16_t i=0;i<sizeof(testColours)/sizeof(testColours[0]);i++) {
-
-			LcdAccess::UnpackedColour cr;
-
-			tft->unpackColour(testColours[i],cr);
-			tft->moveTo(
-				Rectangle(
-						0,
-						0,
-						tft->getWidth(),
-						tft->getHeight()
-				)
-			);
-
-			tft->fillPixels(40,cr);
-
-#if 0
-			tft->setBackground(testColours[i]);
-
-			uint32_t now=millis();
-			tft->clearScreen();
-			uint32_t total=millis()-now;
-
-			*tft << Point(0,0) << (int32_t)total << "ms.";
-#endif
-
-			delay(1000);
-		}
-  }
-
-
-*/
-
-//  *tft << Point(0,24) << *font << "Lorem ipsum dolor sit amet";
-//  *tft << *font << Point(120,0) << "o";
-/*
-  Xmem16AccessMode::writeCommand(ili9327::SET_COLUMN_ADDRESS);
-	Xmem16AccessMode::writeData(0);
-	Xmem16AccessMode::writeData(0);
-	Xmem16AccessMode::writeData(0);
-	Xmem16AccessMode::writeData(7);
-
-	Xmem16AccessMode::writeCommand(ili9327::SET_PAGE_ADDRESS);
-	Xmem16AccessMode::writeData(0);
-	Xmem16AccessMode::writeData(0);
-	Xmem16AccessMode::writeData(0);
-	Xmem16AccessMode::writeData(7);
-
-	Xmem16AccessMode::writeCommand(ili9327::WRITE_MEMORY_START);
-
-	for(int i=0;i<64;i++) {
-		Xmem16AccessMode::writeData(0xff,0xff);
-	}
-*/
-
-  pinMode(13,OUTPUT);
-  digitalWrite(13,HIGH);
-
-  delay(5000);
-  digitalWrite(13,LOW);
-  tft->fillRectangle(Rectangle(120,0,8,8));
-
- for(;;);
 }
 
 
