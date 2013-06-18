@@ -8,6 +8,11 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file XmemAccessMode.h
+ * The access mode for 8-bit XMEM access to an 8-bit panel.
+ */
+
 #pragma once
 
 #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
@@ -15,8 +20,10 @@
 
 namespace lcd {
 
-	/*
-	 * Base for an LCD that can be addressed over the XMEM interface. Here's the port mapping:
+	/**
+	 * @brief Access mode LCD that can be addressed over the XMEM interface.
+	 *
+	 * Here's the port mapping:
 	 *
 	 *  +---------+------+----------+
 	 *  | Arduino | Port | Function |
@@ -46,19 +53,22 @@ namespace lcd {
 	 *
 	 *  Note: From experience VIO/VDD do not need to be brought up in order. It has proved
 	 *  safe to wire them direct to 3.3V.
+	 *
+	 *  @ingroup AccessModes
 	 */
 
 	class XmemAccessMode {
 
 		public:
-			/*
+
+			/**
 			 * Define the non-XMEM pins that we'll need to use
 			 */
 
 			enum {
-				RESET_PIN = 38,
-				VIO_PIN = 34,						// not used in new designs
-				VDD_PIN = 35						// not used in new designs
+				RESET_PIN = 38,					///< RESET GPIO pin
+				VIO_PIN = 34,						///< not used in new designs
+				VDD_PIN = 35						///< not used in new designs
 			};
 
 		public:
@@ -73,6 +83,7 @@ namespace lcd {
 
 	/**
 	 * Write a command to the XMEM interface
+	 * @param command The 8-bit command to write
 	 */
 
 	inline void XmemAccessMode::writeCommand(uint8_t command) {
@@ -82,6 +93,7 @@ namespace lcd {
 
 	/**
 	 * Write a data value to the XMEM interface
+	 * @param data The 8-bit data value to write
 	 */
 
 	inline void XmemAccessMode::writeData(uint8_t data) {
@@ -92,6 +104,7 @@ namespace lcd {
 	/**
 	 * Streamed data is exactly the same as single data because this is an
 	 * 8-bit interface. Just write it out.
+	 * @param data The data value to write
 	 */
 
 	inline void XmemAccessMode::writeStreamedData(uint8_t data) {
@@ -101,8 +114,7 @@ namespace lcd {
 
 	/**
 	 * Enable the XMEM interface so we can talk to the panel through
-	 * direct memory addressing. This is easily the fastest way to transfer
-	 * data off the Arduino Mega.
+	 * direct memory addressing. data off the Arduino Mega.
 	 */
 
 	inline void XmemAccessMode::initialise() {
@@ -137,8 +149,8 @@ namespace lcd {
 	}
 
 
-	/*
-	 * Perform a hard reset
+	/**
+	 * Perform a hard reset. RESET is held low for 10 ms.
 	 */
 
 	inline void XmemAccessMode::hardReset() {

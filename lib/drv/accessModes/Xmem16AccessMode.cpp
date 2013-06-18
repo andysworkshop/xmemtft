@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file Xmem16AccessMode.cpp
+ * Initialise the static members in the class.
+ */
+
+
 #include "Arduino.h"
 #include "Xmem16AccessMode.h"
 

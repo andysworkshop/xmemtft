@@ -8,6 +8,11 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file Xmem16AccessMode.h
+ * The access mode for 8-bit XMEM access to a 16-bit panel using a latch.
+ */
+
 #pragma once
 
 #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
@@ -16,10 +21,11 @@
 namespace lcd {
 
 	/**
-	 * Base for a 16-bit LCD that can be addressed over the XMEM interface. A latch is used to multiplex
-	 * the 8 available AVR lines up to the 16 lines required by the LCD. LCD D0..7 are driven first from
-	 * the AVR A0..7 address bits. The latch is then locked and D8..15 are driven from the AVR D0..7
-	 * lines.
+	 * @brief Access mode for a 16-bit LCD that can be addressed over the XMEM interface using a latch.
+	 *
+	 * A latch is used to multiplex the 8 available AVR lines up to the 16 lines required by the LCD.
+	 * LCD D0..7 are driven first from the AVR A0..7 address bits. The latch is then locked and D8..15
+	 * are driven from the AVR D0..7 lines.
 	 *
 	 * The pin mappings below reflect that design and include the additional control lines and others
 	 * provided by my adaptor board (http://www.andybrown.me.uk)
@@ -49,6 +55,8 @@ namespace lcd {
 	 *  Performance is critical here so the important parts are written in assembly language and the
 	 *  compiler is given every encouragement to place the instructions inline and use the most
 	 *  efficient calling conventions.
+	 *
+	 *  @ingroup AccessModes
 	 */
 
 	class Xmem16AccessMode {
@@ -83,7 +91,8 @@ namespace lcd {
 	/**
 	 * Shortcut to write an 8-bit command and an 8-bit data parameter. This is a common scenario
 	 * in programming the registers
-	 * @param lo8 The low 8 bits of the command to write
+	 * @param cmd The 8-bit command to write.
+	 * @param lo8 The low 8 bits of the command to write.
 	 * @param hi8 The high 8 bits of the command to write. Many commands are 8-bits so this parameters defaults to zero.
 	 */
 
@@ -134,8 +143,8 @@ namespace lcd {
 
 
 	/**
-	 * Write a data value to the XMEM interface
-	 * @param lo8 The low 8 bits of the value to write
+	 * Write a data value to the XMEM interface.
+	 * @param lo8 The low 8 bits of the value to write.
 	 * @param hi8 The high 8 bits of the value to write. Many parameter values are 8-bits so this parameters defaults to zero.
 	 */
 
@@ -155,8 +164,8 @@ namespace lcd {
 	/**
 	 * Write the same data as the previous call to a writeData() command. This allows a sequence of the
 	 * same data values to be output with some calculations performed between. e.g. the optimised
-	 * bresenham line drawing algorithm. The parameters are present for access modes that cannot do this
-	 * optimisation and must fall back to writeData().
+	 * bresenham line drawing algorithm. This access mode cannot do the optimisation so it falls back
+	 * to writeData()
 	 * @param lo8 The low 8 bits of the value to write
 	 * @param hi8 The high 8 bits of the value to write. Many parameter values are 8-bits so this parameters defaults to zero.
 	 */
@@ -181,9 +190,9 @@ namespace lcd {
 
 
 	/**
-	 * Enable the XMEM interface so we can talk to the panel through
-	 * direct memory addressing. This is easily the fastest way to transfer
-	 * data off the Arduino Mega.
+	 * Enable the XMEM interface so we can talk to the panel through direct memory addressing.
+	 * Pins PC3..PC7 are freed up for GPIO. The XMEM interface is configured with zero wait
+	 * states.
 	 */
 
 	inline void Xmem16AccessMode::initialise() {
@@ -201,7 +210,7 @@ namespace lcd {
 
 
 	/**
-	 * Perform a hard reset
+	 * Perform a hard reset. RESET is held low for 10ms.
 	 */
 
 	inline void Xmem16AccessMode::hardReset() {

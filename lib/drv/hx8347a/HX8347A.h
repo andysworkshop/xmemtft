@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @defgroup HX8347A
+ * @file Core HX8347A support.
+ * Contains the initialisation sequence and other non-specific members.
+ */
+
 #pragma once
 
 #include "commands/Allcommands.h"
@@ -20,6 +26,10 @@ namespace lcd {
 	/**
 	 * Generic HX8347A template. The user can specialise based on the desired colour
 	 * depth, orientation and access mode.
+	 * @ingroup HX8347A
+	 * @tparam TOrientation The desired panel orientation, LANDSCAPE or PORTRAIT
+	 * @tparam TColourDepth The colour depth for your use, just 64K is supported for this panel.
+	 * @tparam TAccessMode The access mode that you want to talk to this panel with, e.g. Gpio16AccessMode.
 	 */
 
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
@@ -27,9 +37,14 @@ namespace lcd {
 									public HX8347AOrientation<TOrientation,TAccessMode> {
 
 		public:
+
+			/**
+			 * Panel dimensions
+			 */
+
 			enum {
-				SHORT_SIDE = 240,
-				LONG_SIDE = 320
+				SHORT_SIDE = 240,				///< Short side is 240px
+				LONG_SIDE = 320					///< Long side is 320px
 			};
 
 		public:
@@ -48,7 +63,7 @@ namespace lcd {
 
 
 	/**
-	 * Constructor
+	 * Constructor. Calls the initialise() member.
 	 */
 
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
@@ -58,7 +73,7 @@ namespace lcd {
 
 
 	/**
-	 * Initialise the LCD. Do the reset sequence.
+	 * Initialise the LCD. Do the reset sequence. Long and painful for this panel.
 	 */
 
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
@@ -183,7 +198,8 @@ namespace lcd {
 
 
 	/**
-	 * Send the panel to sleep
+	 * Send the panel to sleep. The backlight should be switched off as well to achieve
+	 * full power saving.
 	 */
 
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
@@ -215,7 +231,7 @@ namespace lcd {
 
 
 	/**
-	 * Wake the panel up
+	 * Wake the panel up. Don't forget to switch the backlight back on.
 	 */
 
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
@@ -283,6 +299,8 @@ namespace lcd {
 
 	/**
 	 * Transfer data bytes, en-masse
+	 * @param data The address in flash of where to transfer from.
+	 * @param numBytes The number of bytes to transfer.
 	 */
 
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>

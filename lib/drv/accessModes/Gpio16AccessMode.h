@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @defgroup AccessModes
+ * @file Gpio16AccessMode.h
+ * The access mode for 8-bit GPIO access to a 16-bit panel using a latch.
+ */
+
 #pragma once
 
 #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
@@ -17,6 +23,8 @@ namespace lcd {
 
 
 	/**
+	 * @brief Access mode for optimised 16-bit I/O through a latch.
+	 *
 	 * Pin and port mappings for using the Gpio16AccessMode against the same pins that
 	 * XMEM on the Arduino Mega would use. Here they are:
 	 *
@@ -36,6 +44,7 @@ namespace lcd {
 	 *  | 39      | PG2  | ALE      |
 	 *  | 41      | PG0  | /WR      |
 	 *  +---------+------+----------+
+	 *  @ingroup AccessModes
 	 */
 
 	struct Gpio16AccessModeXmemMapping {
@@ -43,18 +52,18 @@ namespace lcd {
 
 			// ports are the I/O index, not the physical address
 
-			PORT_DATA  = 0x02,		// PORTA
-			PORT_WR    = 0x14,		// PORTG
-			PORT_RS    = 0x08,		// PORTC
-			PORT_ALE   = 0x14,		// PORTG
-			PORT_RESET = 0x08,		// PORTC
+			PORT_DATA  = 0x02,		///< PORTA
+			PORT_WR    = 0x14,		///< PORTG
+			PORT_RS    = 0x08,		///< PORTC
+			PORT_ALE   = 0x14,		///< PORTG
+			PORT_RESET = 0x08,		///< PORTC
 
 			// pins are the 0..7 port index, not the arduino numbers
 
-			PIN_WR    = PIN0,
-			PIN_RS    = PIN0,
-			PIN_ALE   = PIN2,
-			PIN_RESET = PIN2
+			PIN_WR    = PIN0,			///< The write pin
+			PIN_RS    = PIN0,			///< The RS pin
+			PIN_ALE   = PIN2,			///< The ALE pin
+			PIN_RESET = PIN2			///< The RESET pin
 		};
 	};
 
@@ -80,6 +89,9 @@ namespace lcd {
 	 * while it's running. If you know this will never happen then you can remove that part of the
 	 * assembly language to increase concurrency at the expense of worse pixel throughput if an
 	 * IRQ goes off while it's running.
+	 *
+	 * @tparam TPinMappings A type that contains the constants that define the pins and ports,
+	 * usually in the form of an enum, that represents your physical setup.
 	 */
 
 	template<typename TPinMappings>
@@ -113,6 +125,7 @@ namespace lcd {
 	/**
 	 * Shortcut to write an 8-bit command and a data parameter. This is a common scenario
 	 * in programming the registers
+	 * @param cmd The command register number
 	 * @param lo8 The low 8 bits of the command to write
 	 * @param hi8 The high 8 bits of the command to write. Many commands are 8-bits so this parameters defaults to zero.
 	 */
@@ -127,7 +140,7 @@ namespace lcd {
 
 
 	/**
-	 * Write a command to the XMEM interface
+	 * Write a command to the GPIO interface. This is implemented in assembly language.
 	 * @param lo8 The low 8 bits of the command to write
 	 * @param hi8 The high 8 bits of the command to write. Many commands are 8-bits so this parameters defaults to zero.
 	 */
@@ -206,7 +219,7 @@ namespace lcd {
 
 
 	/**
-	 * Write a data value to the XMEM interface
+	 * Write a data value to the GPIO interface. This is implemented in AVR assembly language.
 	 * @param lo8 The low 8 bits of the value to write
 	 * @param hi8 The high 8 bits of the value to write. Many parameter values are 8-bits so this parameters defaults to zero.
 	 */
@@ -488,7 +501,9 @@ namespace lcd {
 
 
 	/**
-	 * Set up the pins for GPIO
+	 * Set up the pins for GPIO. RESET, RS, ALE and WR are set to output mode and
+	 * initialised to a HIGH state. The data port is initialised to output and we
+	 * don't care for its initial state.
 	 */
 
 	template<class TPinMappings>
@@ -531,7 +546,8 @@ namespace lcd {
 
 
 	/**
-	 * Perform a hard reset
+	 * Perform a hard reset. RESET is set low for 10ms. I've never seen a panel that needs reset
+	 * low for anywhere close to that long.
 	 */
 
 	template<class TPinMappings>

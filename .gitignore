@@ -1,4 +1,4 @@
-doc/
+doc/output/
 *~
 *.lock
 *.DS_Store

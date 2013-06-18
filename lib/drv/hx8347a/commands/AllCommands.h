@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file Commands for the HX8347A that we use
+ * Contains commands used by the HX8347A
+ * @ingroup HX8347A
+ */
+
 #pragma once
 
 
