@@ -83,7 +83,10 @@ namespace lcd {
 
 	/**
 	 * Move the display output rectangle
-	 * @param rc The display output rectangle
+	 * @param xstart left-most x co-ordinate
+	 * @param ystart top-most y co-ordinate
+	 * @param xend right-most x co-ordinate
+	 * @param yend bottom-most y co-ordinate
 	 */
 
 	template<class TAccessMode,class TPanelTraits>
@@ -111,7 +114,8 @@ namespace lcd {
 
 	/**
 	 * Move the X position
-	 * @param xstart The new X position
+	 * @param xstart The new X start position
+	 * @param xend The new X end position
 	 */
 
 	template<class TAccessMode,class TPanelTraits>

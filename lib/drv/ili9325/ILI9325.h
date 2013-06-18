@@ -12,7 +12,12 @@
  * Implementation for Adafruit TFT LCD copyright (c) 2013 Colin Irwin, see
  * http://aethersdr.org/ for details. Provided under original terms and
  * conditions.
- *
+ */
+
+/**
+ * @defgroup ILI9325
+ * @file ILI9325.h
+ * @brief Core ILI9325 support. Contains the initialisation sequence and other non-specific members.
  */
 
 #pragma once
@@ -25,8 +30,13 @@
 namespace lcd {
 
 	/**
-	 * Generic ILI9325 template. The user can specialise based on the desired colour
-	 * depth, orientation and access mode.
+	 * @brief Generic ILI9325 template.
+	 *
+	 * The user can specialise based on the desired colour depth, orientation and access mode.
+	 * @ingroup ILI9325
+	 * @tparam TOrientation The desired panel orientation, LANDSCAPE or PORTRAIT
+	 * @tparam TColourDepth The colour depth for your use, just 64K is supported for this panel.
+	 * @tparam TAccessMode The access mode that you want to talk to this panel with, e.g. Gpio16AccessMode.
 	 */
 
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>

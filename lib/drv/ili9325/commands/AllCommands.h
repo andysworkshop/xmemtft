@@ -15,6 +15,12 @@
  *
  */
 
+/**
+ * @file Commands for the ILI9325 that we use
+ * Contains commands used by the ILI9325
+ * @ingroup ILI9325
+ */
+
 #pragma once
 
 namespace lcd {

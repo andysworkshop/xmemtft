@@ -10,8 +10,8 @@
 
 /**
  * @defgroup HX8347A
- * @file Core HX8347A support.
- * Contains the initialisation sequence and other non-specific members.
+ * @file HX8347A.h
+ * @brief Core HX8347A support. Contains the initialisation sequence and other non-specific members.
  */
 
 #pragma once
@@ -24,8 +24,9 @@
 namespace lcd {
 
 	/**
-	 * Generic HX8347A template. The user can specialise based on the desired colour
-	 * depth, orientation and access mode.
+	 * @brief Generic HX8347A template.
+	 *
+	 * The user can specialise based on the desired colour depth, orientation and access mode.
 	 * @ingroup HX8347A
 	 * @tparam TOrientation The desired panel orientation, LANDSCAPE or PORTRAIT
 	 * @tparam TColourDepth The colour depth for your use, just 64K is supported for this panel.

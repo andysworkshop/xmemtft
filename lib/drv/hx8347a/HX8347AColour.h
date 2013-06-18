@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file HX8347AColour.h
+ * @brief Generic template definition.
+ */
+
+
 #pragma once
 
 
@@ -15,8 +21,12 @@ namespace lcd {
 
 
 	/**
+	 * @brief Forward declaration of the HX8347AColour template
+	 *
 	 * Empty generic class definition for HX8347A colour-dependent operations
 	 * Everything is provided in the specialisations.
+	 *
+	 * @ingroup HX8347A
 	 */
 
 	template<ColourDepth TColour,class TAccessMode>

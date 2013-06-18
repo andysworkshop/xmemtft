@@ -10,7 +10,7 @@
 
 /**
  * @file XmemAccessMode.h
- * The access mode for 8-bit XMEM access to an 8-bit panel.
+ * @brief The access mode for 8-bit XMEM access to an 8-bit panel.
  */
 
 #pragma once

@@ -11,7 +11,7 @@
 
 /**
  * @file GpioAccessMode.h
- * The access mode for 8-bit GPIO access to an 8-bit panel interface.
+ * @brief The access mode for 8-bit GPIO access to an 8-bit panel interface.
  */
 
 #pragma once

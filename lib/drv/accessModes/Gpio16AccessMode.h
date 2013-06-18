@@ -11,7 +11,7 @@
 /**
  * @defgroup AccessModes
  * @file Gpio16AccessMode.h
- * The access mode for 8-bit GPIO access to a 16-bit panel using a latch.
+ * @brief The access mode for 8-bit GPIO access to a 16-bit panel using a latch.
  */
 
 #pragma once

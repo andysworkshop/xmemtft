@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file HX8347AOrientation.h
+ * @brief Generic template definition.
+ */
+
+
 #pragma once
 
 
@@ -15,8 +21,12 @@ namespace lcd {
 
 
 	/**
+	 * @brief Forward declaration of the HX8347AOrientation template
+
 	 * Empty generic class definition for HX8347A orientation-dependent operations
 	 * Everything is provided in the specialisations.
+	 *
+	 * @ingroup HX8347A
 	 */
 
 	template<Orientation TOrientation,class TAccessMode>

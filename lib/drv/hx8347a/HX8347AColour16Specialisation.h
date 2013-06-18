@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file HX8347AColour16Specialisation.h
+ * @brief Specialisation of HX8347AColour for 16-bit colours.
+ */
+
+
 #pragma once
 
 
@@ -15,7 +21,9 @@ namespace lcd {
 
 
 	/**
-	 * Template class holding the specialisation of HX8347AColour for 16-bit colours
+	 * @brief Template specialisation of HX8347AColour for 16-bit colours
+	 * @tparam TAccessMode The access mode in use.
+	 * @ingroup HX8347A
 	 */
 
 	template<class TAccessMode>
@@ -23,6 +31,10 @@ namespace lcd {
 
 		protected:
 			typedef uint32_t TColour;
+
+			/**
+			 * Unpacked colour for the 16-bit mode. Consists of two sequential bytes.
+			 */
 
 			struct UnpackedColour {
 				uint8_t lo8,hi8;
@@ -45,10 +57,10 @@ namespace lcd {
 
 	/**
 	 * Unpack the colour from rrggbb to the internal 5-6-5 format
-
+   *
 	 * 00000000RRRRRRRRGGGGGGGGBBBBBBBB ->
 	 * RRRRRGGG,GGGBBBBB
-
+   *
 	 * @param src rrggbb
 	 * @param dest The unpacked colour structure
 	 */

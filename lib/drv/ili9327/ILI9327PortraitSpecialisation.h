@@ -83,7 +83,10 @@ namespace lcd {
 
 	/**
 	 * Move the display output rectangle
-	 * @param rc The display output rectangle
+	 * @param xstart left-most x co-ordinate
+	 * @param ystart top-most y co-ordinate
+	 * @param xend right-most x co-ordinate
+	 * @param yend bottom-most y co-ordinate
 	 */
 
 	template<class TAccessMode,class TPanelTraits>
@@ -100,6 +103,46 @@ namespace lcd {
 		TAccessMode::writeData(xstart & 0xff);
 		TAccessMode::writeData(xend >>8);
 		TAccessMode::writeData(xend & 0xff);
+
+		TAccessMode::writeCommand(ili9327::SET_PAGE_ADDRESS);
+		TAccessMode::writeData((ystart+yoffset) >> 8);
+		TAccessMode::writeData((ystart+yoffset) & 0xff);
+		TAccessMode::writeData((yend+yoffset) >>8);
+		TAccessMode::writeData((yend+yoffset) & 0xff);
+	}
+
+
+	/**
+	 * Move the X position
+	 * @param xstart The new X start position
+	 * @param xend The new X end position
+	 */
+
+	template<class TAccessMode,class TPanelTraits>
+	inline void ILI9327Orientation<PORTRAIT,TAccessMode,TPanelTraits>::moveX(int16_t xstart,int16_t xend) const {
+
+		TAccessMode::writeCommand(ili9327::SET_COLUMN_ADDRESS);
+		TAccessMode::writeData(xstart >> 8);
+		TAccessMode::writeData(xstart & 0xff);
+		TAccessMode::writeData(xend >>8);
+		TAccessMode::writeData(xend & 0xff);
+	}
+
+
+	/**
+	 * Move the Y start position
+	 * @param ystart The new Y start position
+	 * @param yend The new Y end position
+	 */
+
+	template<class TAccessMode,class TPanelTraits>
+	inline void ILI9327Orientation<PORTRAIT,TAccessMode,TPanelTraits>::moveY(int16_t ystart,int16_t yend) const {
+
+		uint16_t yoffset;
+
+		// bump past any hidden pixels
+
+		yoffset=432-TPanelTraits::LONG_SIDE;
 
 		TAccessMode::writeCommand(ili9327::SET_PAGE_ADDRESS);
 		TAccessMode::writeData((ystart+yoffset) >> 8);

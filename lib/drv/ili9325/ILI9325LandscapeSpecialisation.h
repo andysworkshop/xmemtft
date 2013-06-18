@@ -114,7 +114,8 @@ namespace lcd {
 
 	/**
 	 * Move the X position
-	 * @param xstart The new X position
+	 * @param xstart The new X start position
+	 * @param xend The new X end position
 	 */
 
 	template<class TAccessMode>

@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file HX8347ALandscapeSpecialisation.h
+ * @brief Specialisation of HX8347AOrientation for landscape mode.
+ */
+
+
 #pragma once
 
 
@@ -15,8 +21,9 @@ namespace lcd {
 
 
 	/**
-	 * Specialisation of HX8347AOrientation for the panel in LANDSCAPE mode.
+	 * @brief Specialisation of HX8347AOrientation for the panel in LANDSCAPE mode.
 	 * @tparam TAccessMode the access mode implementation, e.g. Xmem16AccessMode
+	 * @ingroup HX8347A
 	 */
 
 	template<class TAccessMode>
@@ -83,7 +90,10 @@ namespace lcd {
 
 	/**
 	 * Move the display output rectangle
-	 * @param rc The display output rectangle
+	 * @param xstart left-most x co-ordinate
+	 * @param ystart top-most y co-ordinate
+	 * @param xend right-most x co-ordinate
+	 * @param yend bottom-most y co-ordinate
 	 */
 
 	template<class TAccessMode>
@@ -100,9 +110,11 @@ namespace lcd {
 		TAccessMode::writeCommandData(hx8347a::ROW_ADDRESS_END_LOW,yend & 0xff);
 	}
 
+
 	/**
 	 * Move the X position
-	 * @param xstart The new X position
+	 * @param xstart The new X start position
+	 * @param xend The new X end position
 	 */
 
 	template<class TAccessMode>
@@ -117,6 +129,7 @@ namespace lcd {
 	/**
 	 * Move the Y start position
 	 * @param ystart The new Y start position
+	 * @param yend The new Y end position
 	 */
 
 	template<class TAccessMode>

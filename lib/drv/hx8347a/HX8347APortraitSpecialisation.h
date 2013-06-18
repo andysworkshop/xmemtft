@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file HX8347APortraitSpecialisation.h
+ * @brief Specialisation of HX8347AOrientation for portrait mode.
+ */
+
+
 #pragma once
 
 
@@ -15,8 +21,9 @@ namespace lcd {
 
 
 	/**
-	 * Specialisation of HX8347AOrientation for the panel in PORTRAIT mode.
+	 * @brief Specialisation of HX8347AOrientation for the panel in PORTRAIT mode.
 	 * @tparam TAccessMode the access mode implementation, eg Xmem16AccessMode
+	 * @ingroup HX8347A
 	 */
 
 	template<class TAccessMode>
@@ -83,7 +90,10 @@ namespace lcd {
 
 	/**
 	 * Move the display output rectangle
-	 * @param rc The display output rectangle
+	 * @param xstart left-most x co-ordinate
+	 * @param ystart top-most y co-ordinate
+	 * @param xend right-most x co-ordinate
+	 * @param yend bottom-most y co-ordinate
 	 */
 
 	template<class TAccessMode>
@@ -103,7 +113,8 @@ namespace lcd {
 
 	/**
 	 * Move the X position
-	 * @param xstart The new X position
+	 * @param xstart The new X start position
+	 * @param xend The new X end position
 	 */
 
 	template<class TAccessMode>

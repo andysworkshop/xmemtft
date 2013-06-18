@@ -10,8 +10,9 @@
 
 /**
  * @file Xmem16AccessMode.h
- * The access mode for 8-bit XMEM access to a 16-bit panel using a latch.
+ * @brief The access mode for 8-bit XMEM access to a 16-bit panel using a latch.
  */
+
 
 #pragma once
 
