@@ -199,7 +199,7 @@ div.groupText {
 }
 
 body {
-    background-color:  #EBE9FE;
+    background-color: #f0f0f0;
     color: black;
     margin: 0;
 }
@@ -816,10 +816,9 @@ div.header
  *  CSS3 Experiments! */
 div.headertitle
 {
-    background-color: #AA9FFF;
+    background-color: #f0f0f0;
     padding:          5px 0px 5px 0px;
     text-align:       center;
-    box-shadow:       0px 3px 5px #777;
     margin-bottom:    8px;
     opacity:          1;
 }
