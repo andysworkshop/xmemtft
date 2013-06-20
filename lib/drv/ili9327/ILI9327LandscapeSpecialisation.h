@@ -8,6 +8,11 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file ILI9327LandscapeSpecialisation.h
+ * @brief Specialisation of ILI9327Orientation for landscape mode.
+ */
+
 #pragma once
 
 
@@ -16,7 +21,8 @@ namespace lcd {
 
 	/**
 	 * Specialisation of ILI9327Orientation for the panel in LANDSCAPE mode.
-	 * @tparam TAccessMode the access mode implementation, e.g. Xmem16AccessMode
+	 * @tparam TAccessMode the access mode implementation, e.g. Gpio16AccessMode
+	 * @ingroup ILI9327
 	 */
 
 	template<class TAccessMode,class TPanelTraits>
@@ -49,7 +55,7 @@ namespace lcd {
 
 
 	/**
-	 * Get the width in pixels
+	 * Get the width in pixels from the panel traits.
 	 * @return The panel width (e.g. 240)
 	 */
 
@@ -60,7 +66,7 @@ namespace lcd {
 
 
 	/**
-	 * Get the height in pixels
+	 * Get the height in pixels from the panel traits.
 	 * @return The panel height (e.g. 400)
 	 */
 

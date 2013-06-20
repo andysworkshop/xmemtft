@@ -8,6 +8,11 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file ILI9327Colour16Specialisation.h
+ * @brief Specialisation of ILI9327Colour for 16-bit colours.
+ */
+
 #pragma once
 
 
@@ -15,7 +20,9 @@ namespace lcd {
 
 
 	/**
-	 * Template class holding the specialisation of ILI9327Colour for 16-bit colours
+	 * @brief Template specialisation of ILI9327Colour for 16-bit colours
+	 * @tparam TAccessMode The access mode in use.
+	 * @ingroup ILI9327
 	 */
 
 	template<class TAccessMode>
@@ -58,10 +65,10 @@ namespace lcd {
 
 	/**
 	 * Unpack the colour from rrggbb to the internal 5-6-5 format
-
+   *
 	 * 00000000RRRRRRRRGGGGGGGGBBBBBBBB ->
 	 * RRRRRGGG,GGGBBBBB
-
+   *
 	 * @param src rrggbb
 	 * @param dest The unpacked colour structure
 	 */

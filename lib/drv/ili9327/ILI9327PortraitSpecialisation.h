@@ -8,6 +8,11 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file ILI9327PortraitSpecialisation.h
+ * @brief Specialisation of ILI9327Orientation for portrait mode.
+ */
+
 #pragma once
 
 
@@ -15,8 +20,9 @@ namespace lcd {
 
 
 	/**
-	 * Specialisation of ILI9327Orientation for the panel in PORTRAIT mode.
-	 * @tparam TAccessMode the access mode implementation, eg Xmem16AccessMode
+	 * @brief Specialisation of ILI9327Orientation for the panel in PORTRAIT mode.
+	 * @tparam TAccessMode the access mode implementation, eg Gpio16AccessMode
+	 * @ingroup ILI9327
 	 */
 
 	template<class TAccessMode,class TPanelTraits>
@@ -49,7 +55,7 @@ namespace lcd {
 
 
 	/**
-	 * Get the width in pixels
+	 * Get the width in pixels from the panel traits
 	 * @return The panel width (e.g. 400)
 	 */
 
@@ -60,7 +66,7 @@ namespace lcd {
 
 
 	/**
-	 * Get the height in pixels
+	 * Get the height in pixels from the panel traits
 	 * @return The panel height (e.g. 240)
 	 */
 

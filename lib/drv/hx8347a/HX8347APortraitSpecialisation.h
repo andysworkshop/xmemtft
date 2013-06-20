@@ -22,7 +22,7 @@ namespace lcd {
 
 	/**
 	 * @brief Specialisation of HX8347AOrientation for the panel in PORTRAIT mode.
-	 * @tparam TAccessMode the access mode implementation, eg Xmem16AccessMode
+	 * @tparam TAccessMode the access mode implementation, eg Gpio16AccessMode
 	 * @ingroup HX8347A
 	 */
 

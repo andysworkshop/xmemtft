@@ -15,13 +15,22 @@
  *
  */
 
+/**
+ * @file ILI9325Colour.h
+ * @brief Generic template definition.
+ */
+
 #pragma once
 
 namespace lcd {
 
 	/**
+	 * @brief Forward declaration of the ILI9325Colour template
+	 *
 	 * Empty generic class definition for ILI9325 colour-dependent operations
 	 * Everything is provided in the specialisations.
+	 *
+	 * @ingroup ILI9325
 	 */
 
 	template<ColourDepth TColour,class TAccessMode>

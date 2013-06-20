@@ -205,7 +205,9 @@ namespace lcd {
 
 
 	/**
-	 * Transfer data bytes, en-masse
+	 * Transfer data bytes from flash (program) memory, en-masse
+	 * @param data The address of the bytes to transfer
+	 * @param numBytes The number of bytes to transfer
 	 */
 
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>

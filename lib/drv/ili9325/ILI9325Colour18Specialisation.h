@@ -12,15 +12,22 @@
  * Implementation for Adafruit TFT LCD copyright (c) 2013 Colin Irwin, see
  * http://aethersdr.org/ for details. Provided under original terms and
  * conditions.
- *
  */
+
+/**
+ * @file ILI9325Colour18Specialisation.h
+ * @brief Specialisation of ILI9325Colour for 16-bit colours.
+ */
+
 
 #pragma once
 
 namespace lcd {
 
 	/**
-	 * Template class holding the specialisation of ILI9325Colour for 18-bit colours
+	 * @brief Template specialisation of ILI9325Colour for 18-bit colours
+	 * @tparam TAccessMode The access mode in use (e.g. AdafruitAccessMode)
+	 * @ingroup ILI9325
 	 */
 
 	template<class TAccessMode>
@@ -55,12 +62,11 @@ namespace lcd {
 		return 0xc000;
 	}
 
+
 	/**
 	 * Unpack the colour from rrggbb to the internal 5-6-5 format
-
 	 * 00000000RRRRRRRRGGGGGGGGBBBBBBBB ->
 	 * 00000000RRRRRR00GGGGGG00BBBBBB00
-
 	 * @param src rrggbb
 	 * @param dest The unpacked colour structure
 	 */

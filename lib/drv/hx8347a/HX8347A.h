@@ -26,7 +26,9 @@ namespace lcd {
 	/**
 	 * @brief Generic HX8347A template.
 	 *
+	 * The HX8347A is a popular QVGA controller found in many of the shields and LCD breakout boards.
 	 * The user can specialise based on the desired colour depth, orientation and access mode.
+   *
 	 * @ingroup HX8347A
 	 * @tparam TOrientation The desired panel orientation, LANDSCAPE or PORTRAIT
 	 * @tparam TColourDepth The colour depth for your use, just 64K is supported for this panel.
@@ -299,9 +301,9 @@ namespace lcd {
 
 
 	/**
-	 * Transfer data bytes, en-masse
-	 * @param data The address in flash of where to transfer from.
-	 * @param numBytes The number of bytes to transfer.
+	 * Transfer data bytes from flash (program) memory, en-masse
+	 * @param data The address of the bytes to transfer
+	 * @param numBytes The number of bytes to transfer
 	 */
 
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>

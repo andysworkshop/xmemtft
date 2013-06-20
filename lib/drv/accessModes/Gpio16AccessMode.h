@@ -92,6 +92,7 @@ namespace lcd {
 	 *
 	 * @tparam TPinMappings A type that contains the constants that define the pins and ports,
 	 * usually in the form of an enum, that represents your physical setup.
+	 * @ingroup AccessModes
 	 */
 
 	template<typename TPinMappings>

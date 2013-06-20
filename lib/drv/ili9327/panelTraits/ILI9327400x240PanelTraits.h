@@ -24,8 +24,8 @@ namespace lcd {
 
 		public:
 			enum {
-				LONG_SIDE = 400,
-				SHORT_SIDE = 240
+				LONG_SIDE = 400,						///< this panel is 400 on the long side
+				SHORT_SIDE = 240						///< this panel is 240 on the short side
 			};
 	};
 }

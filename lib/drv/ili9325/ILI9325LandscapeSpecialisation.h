@@ -12,7 +12,11 @@
  * Implementation for Adafruit TFT LCD copyright (c) 2013 Colin Irwin, see
  * http://aethersdr.org/ for details. Provided under original terms and
  * conditions.
- *
+ */
+
+/**
+ * @file ILI9325LandscapeSpecialisation.h
+ * @brief Specialisation of ILI9325Orientation for landscape mode.
  */
 
 #pragma once
@@ -21,7 +25,8 @@ namespace lcd {
 
 	/**
 	 * Specialisation of ILI9325Orientation for the panel in LANDSCAPE mode.
-	 * @tparam TAccessMode the access mode implementation, eg XMEM
+	 * @tparam TAccessMode the access mode implementation, e.g. Gpio16AccessMode
+	 * @ingroup ILI9325
 	 */
 
 	template<class TAccessMode>

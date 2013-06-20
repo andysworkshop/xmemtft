@@ -53,7 +53,6 @@ namespace lcd {
 	 *
 	 *  Note: From experience VIO/VDD do not need to be brought up in order. It has proved
 	 *  safe to wire them direct to 3.3V.
-	 *
 	 *  @ingroup AccessModes
 	 */
 

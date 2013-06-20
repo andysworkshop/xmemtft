@@ -12,17 +12,22 @@
  * Implementation for Adafruit TFT LCD copyright (c) 2013 Colin Irwin, see
  * http://aethersdr.org/ for details. Provided under original terms and
  * conditions.
- *
+ */
+
+/**
+ * @file ILI9325PortraitSpecialisation.h
+ * @brief Specialisation of ILI9325Orientation for portrait mode.
  */
 
 #pragma once
 
 namespace lcd {
 
-	/**
-	 * Specialisation of ILI9325Orientation for the panel in PORTRAIT mode.
-	 * @tparam TAccessMode the access mode implementation, eg XMEM
-	 */
+/**
+ * @brief Specialisation of ILI9325Orientation for the panel in PORTRAIT mode.
+ * @tparam TAccessMode the access mode implementation, eg Gpio16AccessMode
+ * @ingroup ILI9325
+ */
 
 	template<class TAccessMode>
 	class ILI9325Orientation<PORTRAIT,TAccessMode> {

@@ -8,16 +8,24 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file ILI9327Orientation.h
+ * @brief Generic template definition.
+ */
+
+
 #pragma once
 
 
 namespace lcd {
 
 
-	/**
-	 * Empty generic class definition for ILI9327 orientation-dependent operations
-	 * Everything is provided in the specialisations.
-	 */
+/**
+ * @brief Forward declaration of the ILI9327Orientation template
+ * Empty generic class definition for ILI9327 orientation-dependent operations
+ * Everything is provided in the specialisations.
+ * @ingroup ILI9327
+ */
 
 	template<Orientation TOrientation,class TAccessMode,class TPanelTraits>
 	class ILI9327Orientation {

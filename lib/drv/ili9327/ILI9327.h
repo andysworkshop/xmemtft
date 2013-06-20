@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @defgroup ILI9327
+ * @file ILI9327.h
+ * @brief Core ILI9327 support. Contains the initialisation sequence and other non-specific members.
+ */
+
 #pragma once
 
 #include "commands/Allcommands.h"
@@ -20,6 +26,10 @@ namespace lcd {
 	/**
 	 * Generic ILI9327 template. The user can specialise based on the desired colour
 	 * depth, orientation and access mode.
+	 * @tparam TOrientation The desired panel orientation, LANDSCAPE or PORTRAIT
+	 * @tparam TColourDepth The colour depth for your use, just 64K is supported for this panel.
+	 * @tparam TAccessMode The access mode that you want to talk to this panel with, e.g. Gpio16AccessMode.
+	 * @tparam TPanelTraits Constants and functions specific to the actual panel.
 	 */
 
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
@@ -229,7 +239,9 @@ namespace lcd {
 
 
 	/**
-	 * Transfer data bytes, en-masse
+	 * Transfer data bytes from flash (program) memory, en-masse
+	 * @param data The address of the bytes to transfer
+	 * @param numBytes The number of bytes to transfer
 	 */
 
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
