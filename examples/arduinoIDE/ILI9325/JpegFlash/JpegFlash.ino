@@ -22,7 +22,7 @@ extern const uint32_t Test4Pixels,Test4PixelsSize;
 
 // We'll be working in portrait mode, 64K
 
-typedef ILI9325_Portrait_64K_Gpio LcdAccess;
+typedef ILI9325_Portrait_64K_Gpio16Latch LcdAccess;
 LcdAccess *tft;
 DefaultBacklight *backlight;
 

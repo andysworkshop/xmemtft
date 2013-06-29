@@ -25,7 +25,7 @@ extern const uint32_t LogoPixelsSize;
  * The orientation and colour depth that we will use
  */
 
-typedef ILI9481_Landscape_64K_Gpio TftPanel;
+typedef ILI9481_Landscape_64K_Gpio16Latch TftPanel;
 TftPanel *tft;
 
 /*

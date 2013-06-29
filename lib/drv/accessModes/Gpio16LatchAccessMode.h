@@ -10,7 +10,7 @@
 
 /**
  * @defgroup AccessModes
- * @file Gpio16AccessMode.h
+ * @file Gpio16LatchAccessMode.h
  * @brief The access mode for 8-bit GPIO access to a 16-bit panel using a latch.
  */
 
@@ -25,7 +25,7 @@ namespace lcd {
 	/**
 	 * @brief Access mode for optimised 16-bit I/O through a latch.
 	 *
-	 * Pin and port mappings for using the Gpio16AccessMode against the same pins that
+	 * Pin and port mappings for using the Gpio16LatchAccessMode against the same pins that
 	 * XMEM on the Arduino Mega would use. Here they are:
 	 *
 	 *  +---------+------+----------+
@@ -47,7 +47,7 @@ namespace lcd {
 	 *  @ingroup AccessModes
 	 */
 
-	struct Gpio16AccessModeXmemMapping {
+	struct Gpio16LatchAccessModeXmemMapping {
 		enum {
 
 			// ports are the I/O index, not the physical address
@@ -96,7 +96,7 @@ namespace lcd {
 	 */
 
 	template<typename TPinMappings>
-	class Gpio16AccessMode {
+	class Gpio16LatchAccessMode {
 
 		protected:
 			static uint8_t _streamIndex;
@@ -120,7 +120,7 @@ namespace lcd {
 	 */
 
 	template <typename TPinMappings>
-	uint8_t Gpio16AccessMode<TPinMappings>::_streamIndex=0;
+	uint8_t Gpio16LatchAccessMode<TPinMappings>::_streamIndex=0;
 
 
 	/**
@@ -133,7 +133,7 @@ namespace lcd {
 
 	template<class TPinMappings>
 	__attribute__((always_inline))
-	inline void Gpio16AccessMode<TPinMappings>::writeCommandData(uint8_t cmd,uint8_t lo8,uint8_t hi8) {
+	inline void Gpio16LatchAccessMode<TPinMappings>::writeCommandData(uint8_t cmd,uint8_t lo8,uint8_t hi8) {
 
 		writeCommand(cmd,0);
 		writeData(lo8,hi8);
@@ -147,7 +147,7 @@ namespace lcd {
 	 */
 
 	template<class TPinMappings>
-	inline void Gpio16AccessMode<TPinMappings>::writeCommand(uint8_t lo8,uint8_t hi8) {
+	inline void Gpio16LatchAccessMode<TPinMappings>::writeCommand(uint8_t lo8,uint8_t hi8) {
 
 	  __asm volatile(
 	  		"  sbi %1, %5   \n\t"			// ALE   = HIGH
@@ -180,7 +180,7 @@ namespace lcd {
 	 */
 
 	template<class TPinMappings>
-	inline void Gpio16AccessMode<TPinMappings>::writeStreamedData(uint8_t data) {
+	inline void Gpio16LatchAccessMode<TPinMappings>::writeStreamedData(uint8_t data) {
 
 		if(_streamIndex==0) {
 
@@ -226,7 +226,7 @@ namespace lcd {
 	 */
 
 	template<class TPinMappings>
-	inline void Gpio16AccessMode<TPinMappings>::writeData(uint8_t lo8,uint8_t hi8) {
+	inline void Gpio16LatchAccessMode<TPinMappings>::writeData(uint8_t lo8,uint8_t hi8) {
 
 	  __asm volatile(
 	  		"  sbi %1, %5   \n\t"			// ALE   = HIGH
@@ -260,7 +260,7 @@ namespace lcd {
 	 */
 
 	template<class TPinMappings>
-	inline void Gpio16AccessMode<TPinMappings>::writeDataAgain(uint8_t /* lo8 */,uint8_t /* hi8 */) {
+	inline void Gpio16LatchAccessMode<TPinMappings>::writeDataAgain(uint8_t /* lo8 */,uint8_t /* hi8 */) {
 
 		__asm volatile(
 				"  cbi %0, %1   \n\t"			// /WR   = LOW
@@ -283,7 +283,7 @@ namespace lcd {
 	 */
 
 	template<class TPinMappings>
-	inline void Gpio16AccessMode<TPinMappings>::writeMultiData(uint32_t howMuch,uint8_t lo8,uint8_t hi8) {
+	inline void Gpio16LatchAccessMode<TPinMappings>::writeMultiData(uint32_t howMuch,uint8_t lo8,uint8_t hi8) {
 
 		__asm volatile(
 				"	   sbi  %9, %7       \n\t"			// ALE   = HIGH
@@ -508,7 +508,7 @@ namespace lcd {
 	 */
 
 	template<class TPinMappings>
-	inline void Gpio16AccessMode<TPinMappings>::initialise() {
+	inline void Gpio16LatchAccessMode<TPinMappings>::initialise() {
 
 		// reset pin
 
@@ -533,7 +533,7 @@ namespace lcd {
 	 */
 
 	template<class TPinMappings>
-	inline void Gpio16AccessMode<TPinMappings>::initOutputHigh(uint8_t port,uint8_t pin) {
+	inline void Gpio16LatchAccessMode<TPinMappings>::initOutputHigh(uint8_t port,uint8_t pin) {
 
 	  // DDR is always at port address-1
 
@@ -552,7 +552,7 @@ namespace lcd {
 	 */
 
 	template<class TPinMappings>
-	inline void Gpio16AccessMode<TPinMappings>::hardReset() {
+	inline void Gpio16LatchAccessMode<TPinMappings>::hardReset() {
 
 		// pull reset low for 10ms
 
@@ -567,7 +567,7 @@ namespace lcd {
 	 * Typedefs for easier access
 	 */
 
-	typedef Gpio16AccessMode<Gpio16AccessModeXmemMapping> DefaultMegaGpio16AccessMode;
+	typedef Gpio16LatchAccessMode<Gpio16LatchAccessModeXmemMapping> DefaultMegaGpio16LatchAccessMode;
 }
 
 

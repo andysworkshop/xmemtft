@@ -25,7 +25,7 @@ namespace lcd {
 
 	/**
 	 * Specialisation of ILI9325Orientation for the panel in LANDSCAPE mode.
-	 * @tparam TAccessMode the access mode implementation, e.g. Gpio16AccessMode
+	 * @tparam TAccessMode the access mode implementation, e.g. Gpio16LatchAccessMode
 	 * @ingroup ILI9325
 	 */
 

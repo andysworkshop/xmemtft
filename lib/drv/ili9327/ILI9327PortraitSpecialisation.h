@@ -21,7 +21,7 @@ namespace lcd {
 
 	/**
 	 * @brief Specialisation of ILI9327Orientation for the panel in PORTRAIT mode.
-	 * @tparam TAccessMode the access mode implementation, eg Gpio16AccessMode
+	 * @tparam TAccessMode the access mode implementation, eg Gpio16LatchAccessMode
 	 * @ingroup ILI9327
 	 */
 

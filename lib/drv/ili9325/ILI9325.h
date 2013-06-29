@@ -36,7 +36,7 @@ namespace lcd {
 	 * @ingroup ILI9325
 	 * @tparam TOrientation The desired panel orientation, LANDSCAPE or PORTRAIT
 	 * @tparam TColourDepth The colour depth for your use, just 64K is supported for this panel.
-	 * @tparam TAccessMode The access mode that you want to talk to this panel with, e.g. Gpio16AccessMode.
+	 * @tparam TAccessMode The access mode that you want to talk to this panel with, e.g. Gpio16LatchAccessMode.
 	 */
 
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>

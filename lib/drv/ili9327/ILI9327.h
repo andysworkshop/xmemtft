@@ -28,7 +28,7 @@ namespace lcd {
 	 * depth, orientation and access mode.
 	 * @tparam TOrientation The desired panel orientation, LANDSCAPE or PORTRAIT
 	 * @tparam TColourDepth The colour depth for your use, just 64K is supported for this panel.
-	 * @tparam TAccessMode The access mode that you want to talk to this panel with, e.g. Gpio16AccessMode.
+	 * @tparam TAccessMode The access mode that you want to talk to this panel with, e.g. Gpio16LatchAccessMode.
 	 * @tparam TPanelTraits Constants and functions specific to the actual panel.
 	 */
 

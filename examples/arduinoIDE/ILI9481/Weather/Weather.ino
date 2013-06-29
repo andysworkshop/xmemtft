@@ -71,7 +71,7 @@ enum {
 
 // We'll be working in portrait mode, 64K
 
-typedef ILI9481_Portrait_64K_Gpio LcdAccess;
+typedef ILI9481_Portrait_64K_Gpio16Latch LcdAccess;
 LcdAccess *tft;
 DefaultBacklight *backlight;
 

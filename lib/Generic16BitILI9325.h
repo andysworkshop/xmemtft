@@ -20,7 +20,7 @@
 #include "gl/DoublePrecision.h"
 #include "gl/ColourNames.h"
 #include "drv/accessModes/Xmem16AccessMode.h"
-#include "drv/accessModes/Gpio16AccessMode.h"
+#include "drv/accessModes/Gpio16LatchAccessMode.h"
 #include "drv/ILI9325/ILI9325.h"
 #include "GetFarAddress.h"
 #include "Font.h"
@@ -40,21 +40,21 @@ namespace lcd {
 	 * Generic ILI9325 XMEM16 interface: 64K colours, portrait and landscape
 	 */
 
-	typedef GraphicsLibrary<ILI9325<PORTRAIT,COLOURS_16BIT,Xmem16AccessMode>,Xmem16AccessMode> ILI9325_Portrait_64K;
-	typedef GraphicsLibrary<ILI9325<LANDSCAPE,COLOURS_16BIT,Xmem16AccessMode>,Xmem16AccessMode> ILI9325_Landscape_64K;
+	typedef GraphicsLibrary<ILI9325<PORTRAIT,COLOURS_16BIT,Xmem16AccessMode>,Xmem16AccessMode> ILI9325_Portrait_64K_Xmem16;
+	typedef GraphicsLibrary<ILI9325<LANDSCAPE,COLOURS_16BIT,Xmem16AccessMode>,Xmem16AccessMode> ILI9325_Landscape_64K_Xmem16;
 
-	typedef TerminalPortraitImpl<ILI9325_Portrait_64K> ILI9325_Terminal_Portrait_64K;
-	typedef TerminalLandscapeImpl<ILI9325_Landscape_64K>ILI9325_Terminal_Landscape_64K;
+	typedef TerminalPortraitImpl<ILI9325_Portrait_64K_Xmem16> ILI9325_Terminal_Portrait_64K_Xmem16;
+	typedef TerminalLandscapeImpl<ILI9325_Landscape_64K_Xmem16> ILI9325_Terminal_Landscape_64K_Xmem16;
 
 	/*
-	 * Generic ILI9325 GPIO16 interface: 64K colours, portrait and landscape
+	 * Generic ILI9325 GPIO16 latched interface: 64K colours, portrait and landscape
 	 */
 
-	typedef GraphicsLibrary<ILI9325<PORTRAIT,COLOURS_16BIT,DefaultMegaGpio16AccessMode>,DefaultMegaGpio16AccessMode> ILI9325_Portrait_64K_Gpio;
-	typedef GraphicsLibrary<ILI9325<LANDSCAPE,COLOURS_16BIT,DefaultMegaGpio16AccessMode>,DefaultMegaGpio16AccessMode> ILI9325_Landscape_64K_Gpio;
+	typedef GraphicsLibrary<ILI9325<PORTRAIT,COLOURS_16BIT,DefaultMegaGpio16LatchAccessMode>,DefaultMegaGpio16LatchAccessMode> ILI9325_Portrait_64K_Gpio16Latch;
+	typedef GraphicsLibrary<ILI9325<LANDSCAPE,COLOURS_16BIT,DefaultMegaGpio16LatchAccessMode>,DefaultMegaGpio16LatchAccessMode> ILI9325_Landscape_64K_Gpio16Latch;
 
-	typedef TerminalPortraitImpl<ILI9325_Portrait_64K_Gpio> ILI9325_Terminal_Portrait_64K_Gpio;
-	typedef TerminalLandscapeImpl<ILI9325_Landscape_64K_Gpio>ILI9325_Terminal_Landscape_64K_Gpio;
+	typedef TerminalPortraitImpl<ILI9325_Portrait_64K_Gpio16Latch> ILI9325_Terminal_Portrait_64K_Gpio16Latch;
+	typedef TerminalLandscapeImpl<ILI9325_Landscape_64K_Gpio16Latch> ILI9325_Terminal_Landscape_64K_Gpio16Latch;
 
 	/*
 	 * The default for most people is a PWM output on pin #2

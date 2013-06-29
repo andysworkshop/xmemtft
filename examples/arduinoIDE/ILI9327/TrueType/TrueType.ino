@@ -21,7 +21,7 @@ extern const uint32_t LogoPixelsSize;
  * The orientation and colour depth that we will use
  */
 
-typedef ILI9327_400x240_Landscape_64K_Gpio LcdAccess;
+typedef ILI9327_400x240_Landscape_64K_Gpio16Latch LcdAccess;
 
 DefaultBacklight *backlight;
 LcdAccess *tft;
