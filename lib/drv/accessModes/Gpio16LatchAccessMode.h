@@ -10,7 +10,15 @@
 
 /**
  * @defgroup AccessModes
+ * @brief Interface between the MCU and the panel.
+ *
+ * An access mode takes care of transferring data from the MCU to the panel. The access mode must
+ * be capable of resetting the panel as well as writing data and commands.
+ */
+
+/**
  * @file Gpio16LatchAccessMode.h
+ * @ingroup AccessModes
  * @brief The access mode for 8-bit GPIO access to a 16-bit panel using a latch.
  */
 

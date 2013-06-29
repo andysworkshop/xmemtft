@@ -11,12 +11,27 @@
 #pragma once
 
 
+/**
+ * @file LzgText.inl
+ * @brief Compressed TrueType font output functions
+ *
+ * The LzgFontConv utility allows you to compress and save characters from TrueType fonts that will
+ * be compiled into flash memory as bitmaps. These functions are used to decompress and write out
+ * those characters using a familiar character 'string' interface.
+ *
+ * @ingroup GraphicsLibrary
+ */
+
+
 namespace lcd {
 
 
-	/*
+	/**
 	 * Write a null terminated string of characters to the display.
-	 * Returns the size of the string
+	 * @param p The upper-left co-ordinate on the panel to start writing at.
+	 * @param font The LzgFont that the characters will come from.
+	 * @param str The character string to write.
+	 * @return The pixel size of the string.
 	 */
 
 	template<class TDevice,class TAccessMode>
@@ -49,8 +64,11 @@ namespace lcd {
 	}
 
 
-	/*
+	/**
 	 * Write a single character
+	 * @param p The upper-left co-ordinate on the panel to start writing at.
+	 * @param font The LzgFont that the characters will come from.
+	 * @param fc The FontChar definition of the character to write. LzgFont.getCharacter() will get you this structure,.
 	 */
 
 	template<class TDevice,class TAccessMode>

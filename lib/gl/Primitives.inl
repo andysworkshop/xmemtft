@@ -62,13 +62,19 @@ namespace lcd {
 			y1=p2.Y;
 
 			if(x0>x1) {
-				x0^=x1;
-				x1^=x0;
-				x0^=x1;
 
-				y0^=y1;
-				y1^=y0;
-				y0^=y1;
+				// the optimiser does this swap method faster than
+				// the xor-trick
+
+				int16_t t;
+
+				t=x0;
+				x0=x1;
+				x1=t;
+
+				t=y0;
+				y0=y1;
+				y1=t;
 			}
 
 			// calculate constants up-front

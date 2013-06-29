@@ -8,22 +8,29 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file Bitmap.h
+ * @brief The definition of the Bitmap structure
+ * @ingroup GraphicsLibrary
+ */
+
 #pragma once
 
 
 namespace lcd {
 
-	/*
-	 * Structure that defines a bitmap
+	/**
+	 * @brief Structure that defines a bitmap
+	 * @ingroup GraphicsLibrary
 	 */
 
 	struct Bitmap {
 
-		Size Dimensions;			// pixel Width,Height
-		uint32_t Pixels;			// memory location. the choice of flash/sram is not mandated here
-		uint32_t DataSize;		// byte-size of the buffer pointed to by the Pixels member
+		Size Dimensions;			///< pixel Width,Height
+		uint32_t Pixels;			///< memory location. the choice of flash/sram is not mandated here
+		uint32_t DataSize;		///< byte-size of the buffer pointed to by the Pixels member
 
-		/*
+		/**
 		 * Default constructor
 		 */
 

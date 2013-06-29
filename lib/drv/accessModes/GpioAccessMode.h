@@ -11,6 +11,7 @@
 
 /**
  * @file GpioAccessMode.h
+ * @ingroup AccessModes
  * @brief The access mode for 8-bit GPIO access to an 8-bit panel interface.
  */
 

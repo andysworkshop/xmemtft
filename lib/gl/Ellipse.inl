@@ -11,11 +11,22 @@
 #pragma once
 
 
+/**
+ * @file Ellipse.inl
+ * @brief Ellipse drawing functionality
+ * @ingroup GraphicsLibrary
+ */
+
+
 namespace lcd {
 
 	/**
-	 * Fill an ellipse with the foreground colour. This is the algorithm documented in the paper
-	 * "Drawing Ellipses Using Filled Rectangles" by L. Patrick.
+	 * @brief Fill an ellipse with the foreground colour.
+	 *
+	 * This is the algorithm documented in the paper "Drawing Ellipses Using Filled Rectangles" by L. Patrick.
+	 *
+	 * @param center The panel co-ords of the center of the ellipse.
+	 * @param size The size of the ellipse, expressed as its bounding rectangle with the center of that rectangle given by the 'center' parameter.
 	 */
 
 	template<class TDevice,class TAccessMode>
@@ -81,12 +92,13 @@ namespace lcd {
 		}
 	}
 
+
 	/**
 	 * Draw an ellipse with the foreground colour using the fast bresenham algorithm. This method is an implementation of
 	 * the pseudo-code in the paper "A Fast Bresenham Type Algorithm For Drawing Ellipses" by John Kennedy.
 	 *
-	 * @param[in] center The center point.
-	 * @param[in] size The radius width and height.
+	 * @param center The center point.
+	 * @param size The radius width and height.
 	 */
 
 	template<class TDevice,class TAccessMode>
@@ -152,6 +164,10 @@ namespace lcd {
 		}
 	}
 
+
+	/*
+	 * Utility function for the bresenham algorithm.
+	 */
 
 	template<class TDevice,class TAccessMode>
 	inline void GraphicsLibrary<TDevice,TAccessMode>::plot4EllipsePoints(int16_t cx,int16_t cy,int16_t x,int16_t y) const {

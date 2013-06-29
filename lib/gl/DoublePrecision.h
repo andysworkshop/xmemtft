@@ -8,23 +8,35 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file DoublePrecision.h
+ * @brief Management class for floating point output
+ * @ingroup GraphicsLibrary
+ */
+
 #pragma once
 
 
-/*
- * Carrier class for a double and it's desired output
- * precision
+/**
+ * @brief Carrier class for a double and it's desired output precision.
+ *
+ * This class is used for text output so that you can specify how precise
+ * you need the output to be.
+ *
+ * @ingroup GraphicsLibrary
  */
 
 struct DoublePrecision {
 
 	// public members
 
-	double Value;
-	uint8_t Precision;
+	double Value;						///< The floating point value
+	uint8_t Precision;			///< The desired number of fractional digits
 
-	/*
+	/**
 	 * Constructor. Must be fully constructed.
+	 * @param d The double-precision value
+	 * @param precision The desired number of fractional digits
 	 */
 
 	DoublePrecision(double d,uint8_t precision) {

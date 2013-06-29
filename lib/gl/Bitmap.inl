@@ -8,14 +8,22 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file Bitmap.inl
+ * @brief Graphics library bitmap functionality
+ * @ingroup GraphicsLibrary
+ */
+
 #pragma once
 
 
 namespace lcd {
 
-	/*
+	/**
 	 * Draw a bitmap on the display at the given position. The bitmap is stored in flash
 	 * as an uncompressed sequence of bytes
+	 * @param p The top-left screen co-ord of where to draw the bitmap
+	 * @param bm The structure that defines the bitmap
 	 */
 
 	template<class TDevice,class TAccessMode>
@@ -37,9 +45,11 @@ namespace lcd {
 	}
 
 
-	/*
+	/**
 	 * Draw a bitmap on the display at the given position. The bitmap is stored in flash
 	 * as an LZG compressed sequence of bytes. This costs you 2Kb of stack space to call.
+	 * @param p top-left screen co-ord of where to draw the bitmap
+	 * @param bm The structure that defines the bitmap
 	 */
 
 	template<class TDevice,class TAccessMode>
@@ -62,8 +72,10 @@ namespace lcd {
 	}
 
 
-	/*
+	/**
 	 * Draw a JPEG on the display at the given position. It's assumed to be in flash.
+	 * @param pt top-left screen co-ord of where to draw the bitmap
+	 * @param ds The data source that defines where the JPEG data comes from. For example, JpegFlashDataSource or JpegSerialDataSource.
 	 */
 
 	template<class TDevice,class TAccessMode>

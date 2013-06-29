@@ -10,6 +10,7 @@
 
 /**
  * @file Xmem16AccessMode.h
+ * @ingroup AccessModes
  * @brief The access mode for 8-bit XMEM access to a 16-bit panel using a latch.
  */
 

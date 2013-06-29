@@ -8,15 +8,23 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file ColourNames.h
+ * @brief X11 colour names
+ * @ingroup GraphicsLibrary
+ */
+
 #pragma once
 
-/*
- * Convenient names for a lot of colours. This is the X11 set as
- * documented at http://en.wikipedia.org/wiki/X11_color_names
- */
 
 namespace lcd {
 	namespace ColourNames {
+
+		/**
+		 * Convenient names for a lot of colours. This is the X11 set as
+		 * documented at http://en.wikipedia.org/wiki/X11_color_names
+		 */
+
 		enum {
 			SNOW=0xfffafa,
 			GHOSTWHITE=0xf8f8ff,

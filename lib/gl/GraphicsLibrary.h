@@ -8,6 +8,19 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @defgroup GraphicsLibrary
+ * @brief Drawing and bitmap output functions.
+ *
+ * The graphics library provides the interface to the user that allows drawing,
+ * text output and bitmap drawing.
+ */
+
+/**
+ * @file GraphicsLibrary.h
+ * @brief The main graphics library header file.
+ */
+
 #pragma once
 
 
@@ -16,6 +29,9 @@ namespace lcd {
 	/**
 	 * Template implementation of a graphics library. This library inherits from the device implementation
 	 * that provides the methods that the graphics library needs to access the hardware
+	 * @ingroup GraphicsLibrary
+	 * @tparam TDevice the underlying device (e.g. an instantiation of the ILI9325 template)
+	 * @tparam TAccessMode The access mode, (e.g. an instantiation of the Gpio16LatchAccessMode template)
 	 */
 
 	template<class TDevice,class TAccessMode>

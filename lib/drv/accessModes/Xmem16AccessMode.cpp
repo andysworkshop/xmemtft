@@ -10,6 +10,7 @@
 
 /**
  * @file Xmem16AccessMode.cpp
+ * @ingroup AccessModes
  * @brief Initialise the static members in the class.
  */
 

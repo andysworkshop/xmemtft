@@ -8,13 +8,20 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file Fundamentals.inl
+ * @brief Helper functions, colour setters etc.
+ * @ingroup GraphicsLibrary
+ */
+
 #pragma once
 
 
 namespace lcd {
 
-	/*
-	 * set the foreground
+	/**
+	 * Set the foreground colour
+	 * @param cr The foreground colour.
 	 */
 
 	template<class TDevice,class TDeviceAccessMode>
@@ -22,8 +29,10 @@ namespace lcd {
 		this->unpackColour(cr,_foreground);
 	}
 
-	/*
-	 * set the background
+
+	/**
+	 * Set the background colour
+	 * @param cr The foreground colour.
 	 */
 
 	template<class TDevice,class TDeviceAccessMode>
@@ -32,8 +41,9 @@ namespace lcd {
 	}
 
 
-	/*
+	/**
 	 * Get the panel maximum x-coord
+	 * @return The last co-ordinate on the X-axis
 	 */
 
 	template<class TDevice,class TDeviceAccessMode>
@@ -41,8 +51,10 @@ namespace lcd {
 	  return this->getWidth()-1;
 	}
 
-	/*
+
+	/**
 	 * Get the panel maximum y-coord
+	 * @return The last co-ordinate on the Y-axis
 	 */
 
 	template<class TDevice,class TDeviceAccessMode>
@@ -50,8 +62,9 @@ namespace lcd {
 		return this->getHeight()-1;
 	}
 
-	/*
-	 * clear screen to the background colour
+
+	/**
+	 * Clear screen to the background colour
 	 */
 
 	template<class TDevice,class TDeviceAccessMode>
@@ -70,9 +83,11 @@ namespace lcd {
 	}
 
 
-	/*
-	 * min, max, abs in the C libraries are a total trainwreck. macros? functions? you just can't rely on it.
-	 * We'll avoid that disaster zone and do it the STL way. i.e. the right way.
+	/**
+	 * template Max() implementation
+	 * @param a The first type to compare, as a reference
+	 * @param b The second type to compare, as a reference
+	 * @return The greater of the two types, as a reference
 	 */
 
 	template<class TDevice,class TDeviceAccessMode>
@@ -81,11 +96,26 @@ namespace lcd {
 		return (a>b) ? a : b;
 	}
 
+
+	/**
+	 * template Min() implementation
+	 * @param a The first type to compare, as a reference
+	 * @param b The second type to compare, as a reference
+	 * @return The lesser of the two types, as a reference
+	 */
+
 	template<class TDevice,class TDeviceAccessMode>
 	template<typename T>
 	inline const T& GraphicsLibrary<TDevice,TDeviceAccessMode>::Min(const T& a,const T& b) {
 		return (a<b) ? a : b;
 	}
+
+
+	/**
+	 * template Abs() implementation
+	 * @param a The input value.
+	 * @return The value, made positive if it wasn't already.
+	 */
 
 	template<class TDevice,class TDeviceAccessMode>
 	template<typename T>
