@@ -76,13 +76,14 @@ namespace lcd {
 		return 320;
 	}
 
+
 	/**
 	 * Move the display output rectangle
 	 * @param rc The display output rectangle
 	 */
 
-	template<class TAccessMode>
-	inline void ILI9325Orientation<PORTRAIT,TAccessMode>::moveTo(const Rectangle& rc) const {
+	template<class TAccessMode,class TPanelTraits>
+	inline void MC2PA8201Orientation<PORTRAIT,TAccessMode,TPanelTraits>::moveTo(const Rectangle& rc) const {
 		moveTo(rc.X,rc.Y,rc.X+rc.Width-1,rc.Y+rc.Height-1);
 	}
 

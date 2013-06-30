@@ -115,7 +115,7 @@ namespace lcd {
 
 	/**
 	 * Get the parameter to the MEMORY_ACCESS_CONTROL command
-	 * @return 0x50
+	 * @return 0x60
 	 */
 
 	template<>

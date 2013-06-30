@@ -110,7 +110,8 @@ namespace lcd {
 
 		// reset the scrolling area
 
-		setScrollArea(0,TPanelTraits::getScrollHeight());
+		if(TPanelTraits::template hasHardwareScrolling<TOrientation>())
+			setScrollArea(0,TPanelTraits::getScrollHeight());
 
 		// wait at least 120ms before we can turn the display on
 
