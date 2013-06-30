@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file ILI9481PortraitSpecialisation.h
+ * @brief Specialisation of ILI9481Orientation for portrait mode.
+ * @ingroup ILI9481
+ */
+
 #pragma once
 
 
@@ -17,6 +23,7 @@ namespace lcd {
 	/**
 	 * Specialisation of ILI9481Orientation for the panel in PORTRAIT mode.
 	 * @tparam TAccessMode the access mode implementation, eg Xmem16AccessMode
+	 * @ingroup ILI9481
 	 */
 
 	template<class TAccessMode>

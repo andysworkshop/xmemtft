@@ -8,12 +8,17 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file GetFarAddress.h
+ * @brief Provide access to large binaries compiled into flash.
+ */
+
 #pragma once
 
 
 #ifndef GET_FAR_ADDRESS
 
-/*
+/**
  * All credit to Carlos Lamas for this patch:
  * https://savannah.nongnu.org/patch/?6352
  *

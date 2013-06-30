@@ -11,6 +11,7 @@
 /**
  * @file HX8347AColour.h
  * @brief Generic template definition.
+ * @ingroup HX8347A
  */
 
 

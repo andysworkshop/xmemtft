@@ -17,6 +17,7 @@
 /**
  * @file ILI9325Colour16Specialisation.h
  * @brief Specialisation of ILI9325Colour for 16-bit colours.
+ * @ingroup ILI9325
  */
 
 #pragma once
@@ -51,6 +52,7 @@ namespace lcd {
 			uint8_t getBytesPerPixel() const;
 	};
 
+
 	/**
 	 * Get the register setting for 16-bit colours
 	 * @return 16-bit interface pixel format register setting
@@ -60,6 +62,7 @@ namespace lcd {
 	inline uint16_t ILI9325Colour<COLOURS_16BIT,TAccessMode>::getInterfacePixelFormat() const {
 		return 0x0000;
 	}
+
 
 	/**
 	 * Unpack the colour from rrggbb to the internal 5-6-5 format

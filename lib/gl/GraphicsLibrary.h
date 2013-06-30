@@ -14,11 +14,37 @@
  *
  * The graphics library provides the interface to the user that allows drawing,
  * text output and bitmap drawing.
- */
-
-/**
+ *
  * @file GraphicsLibrary.h
  * @brief The main graphics library header file.
+ * @ingroup GraphicsLibrary
+ *
+ * @mainpage
+ *
+ * Welcome to the documentation for the xmemtft library. This documentation is automatically
+ * generated from comments in the source code by the Doyxgen utility.
+ *
+ * @section getting_started Getting Started
+ *
+ * This library started out as a companion to my reverse engineering efforts for the Nokia 6300
+ * TFT panel and has evolved over time to support more and more panels, not just from Nokia but
+ * from generic interfaces such as the ILI9325, 9327, 9481 and HX8347A.
+ *
+ * Step-by-step instructions can be found at my website:
+ *
+ * http://andybrown.me.uk/wk/2012/06/04/nokia-qvga-tft-lcd-for-the-arduino-mega-graphics-library-part-2-of-2/
+ *
+ * Also see the initial reverse-engineering effort:
+ *
+ * http://andybrown.me.uk/wk/2012/06/05/nokia-lcd-for-arduino-mega-1/
+ *
+ * Other articles are available on my website that describe the reverse engineering of the Nokia N82,
+ * N93, N95 8Gb and E73.
+ *
+ * The 16-bit latched interface, the high-performance access modes and examples for the Ilitek and
+ * Himax controllers are documented here:
+ *
+ * http://andybrown.me.uk/wk/2013/06/08/a-generic-16-bit-lcd-adaptor-for-the-arduino
  */
 
 #pragma once

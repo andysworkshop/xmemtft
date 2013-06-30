@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file Generic16BitHX8347A.h
+ * @brief Typedefs for using an HX8347A in 16-bit mode
+ * @ingroup HX8347A
+ */
+
 #pragma once
 
 #include <Arduino.h>

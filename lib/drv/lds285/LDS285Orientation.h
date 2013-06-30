@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file LDS285Orientation.h
+ * @brief Generic template definition.
+ * @ingroup LDS285
+ */
+
 #pragma once
 
 
@@ -15,8 +21,10 @@ namespace lcd {
 
 
 	/**
+	 * @brief Forward declaration of the LDS285Orientation template
 	 * Empty generic class definition for LDS285 orientation-dependent operations
 	 * Everything is provided in the specialisations.
+	 * @ingroup LDS285
 	 */
 
 	template<Orientation TOrientation,class TAccessMode,class TPanelTraits>

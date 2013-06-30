@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file LzgFlashDecoder.h
+ * @brief LZG decompression interface.
+ * @ingroup Decoders
+ */
+
 #pragma once
 
 
@@ -16,6 +22,8 @@ namespace lcd {
 
 	/**
 	 * LZG decoder template class
+	 * @tparam AccessMode The access mode in use
+	 * @ingroup Decoders
 	 */
 
 	template<class TAccessMode>
@@ -29,9 +37,11 @@ namespace lcd {
 	};
 
 
-	/*
+	/**
 	 * Decode the LZG stream and write to the LCD. This function costs you
 	 * 2Kb of stack to call (note the circbuf size)
+	 * @param in The 32-bit flash address of the data.
+	 * @param insize The size of the compressed data.
 	 */
 
 	template<class TAccessMode>

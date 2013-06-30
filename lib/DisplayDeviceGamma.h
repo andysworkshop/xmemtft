@@ -4,6 +4,10 @@
  * Please see website for licensing terms.
  */
 
+/**
+ * @file DisplayDeviceGamma.h
+ * @brief Gamma handling base class
+ */
 
 #pragma once
 

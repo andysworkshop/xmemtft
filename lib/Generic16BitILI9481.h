@@ -8,6 +8,13 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file Generic16BitILI9481.h
+ * @brief Typedefs for using an ILI9481 in 16-bit mode
+ * @ingroup ILI9481
+ */
+
+
 #pragma once
 
 #include <Arduino.h>

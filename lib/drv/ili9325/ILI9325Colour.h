@@ -18,6 +18,7 @@
 /**
  * @file ILI9325Colour.h
  * @brief Generic template definition.
+ * @ingroup ILI9325
  */
 
 #pragma once

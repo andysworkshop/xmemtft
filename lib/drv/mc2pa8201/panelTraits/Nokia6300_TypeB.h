@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file Nokia6300_TypeB.h
+ * @brief Panel-specific traits for the Nokia 6300 Type B.
+ * @ingroup MC2PA8201
+ */
+
 #pragma once
 
 
@@ -19,6 +25,7 @@ namespace lcd {
 	 * 1. Positive scroll offsets scroll upwards
 	 * 2. (page,column) addressing is swapped for landscape mode
 	 * 3. BGR and RGB are both supported but we always use RGB anyway
+	 * @ingroup MC2PA8201
 	 */
 
 	class Nokia6300_TypeB {

@@ -10,13 +10,19 @@
 
 #pragma once
 
+/**
+ * @file LDS285Colour24Specialisation.h
+ * @brief Specialisation of LDS285Colour for 24-bit colours.
+ * @ingroup LDS285
+ */
 
 namespace lcd {
 
 
 	/**
 	 * Template class holding the specialisation of LDS285Colour for 24-bit colours
-	 * @tparam TAccessMode The access mode class (e.g. FSMC)
+	 * @tparam TAccessMode The access mode class
+	 * @ingroup LDS285
 	 */
 
 	template<class TAccessMode,class TPanelTraits>

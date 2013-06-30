@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file TerminalPortraitImpl.h
+ * @brief Functionality for portrait orienatation terminals.
+ * @ingroup Terminal
+ */
+
 #pragma once
 
 #include "terminal/TerminalBase.h"
@@ -16,9 +22,14 @@
 namespace lcd {
 
 
-	/*
-	 * Implementation of a terminal for LCDs in portrait mode. In this mode hardware
+	/**
+	 * @brief Implementation of a terminal for LCDs in portrait mode.
+	 *
+	 * In this mode hardware
 	 * scrolling is supported and will be used when the terminal "goes off the bottom".
+	 *
+	 * @tparam TGraphicsLibrary. The graphics library implementation.
+	 * @ingroup Terminal
 	 */
 
 	template<class TGraphicsLibrary>
@@ -45,8 +56,12 @@ namespace lcd {
 	};
 
 
-	/*
-	 * Constructor
+	/**
+	 * @brief Constructor. You probably want to call clearScreen before you get going.
+	 * @param gl A pointer to the graphics library implementation.
+	 * @param font A pointer to the fixed-width font to use.
+	 * @param smoothScrollStep The number of milliseconds to wait between scrolling lines to give the impression of
+	 * smoothness. The default is 5.
 	 */
 
 	template<class TGraphicsLibrary>
@@ -59,8 +74,9 @@ namespace lcd {
 	}
 
 
-	/*
-	 * Scroll the display by one line
+	/**
+	 * Scroll the display by one line (required by TerminalBase).
+	 * This implementation does smooth scrolling using the hardware.
 	 */
 
 	template<class TGraphicsLibrary>
@@ -101,8 +117,9 @@ namespace lcd {
 	}
 
 
-	/*
-	 * Reset after clear
+	/**
+	 * Reset after clear (required by TerminalBase).
+	 * The scroll position is reset to zero.
 	 */
 
 	template<class TGraphicsLibrary>

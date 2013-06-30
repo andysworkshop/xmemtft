@@ -10,8 +10,14 @@
 
 /**
  * @defgroup HX8347A
+ * @brief Himax HX8347A
+ *
+ * The HX8347A is a popular QVGA controller found in many of the shields and LCD breakout boards.
+ * The user can specialise based on the desired colour depth, orientation and access mode.
+ *
  * @file HX8347A.h
  * @brief Core HX8347A support. Contains the initialisation sequence and other non-specific members.
+ * @ingroup HX8347A
  */
 
 #pragma once
@@ -25,9 +31,6 @@ namespace lcd {
 
 	/**
 	 * @brief Generic HX8347A template.
-	 *
-	 * The HX8347A is a popular QVGA controller found in many of the shields and LCD breakout boards.
-	 * The user can specialise based on the desired colour depth, orientation and access mode.
    *
 	 * @ingroup HX8347A
 	 * @tparam TOrientation The desired panel orientation, LANDSCAPE or PORTRAIT

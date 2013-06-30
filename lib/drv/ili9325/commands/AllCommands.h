@@ -12,12 +12,11 @@
  * Implementation for Adafruit TFT LCD copyright (c) 2013 Colin Irwin, see
  * http://aethersdr.org/ for details. Provided under original terms and
  * conditions.
- *
  */
 
 /**
- * @file Commands for the ILI9325 that we use
- * Contains commands used by the ILI9325
+ * @file AllCommands.h
+ * @brief Commands for the ILI9325 that we use
  * @ingroup ILI9325
  */
 

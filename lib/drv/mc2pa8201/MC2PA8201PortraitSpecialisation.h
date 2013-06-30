@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file MC2PA8201PortraitSpecialisation.h
+ * @brief Specialisation of MC2PA8201Orientation for portrait mode.
+ * @ingroup MC2PA8201
+ */
+
 #pragma once
 
 
@@ -17,6 +23,7 @@ namespace lcd {
 	/**
 	 * Specialisation of MC2PA8201Orientation for the panel in PORTRAIT mode.
 	 * @tparam TAccessMode the access mode implementation, eg XmemAccessMode
+	 * @ingroup MC2PA8201
 	 */
 
 	template<class TAccessMode,class TPanelTraits>

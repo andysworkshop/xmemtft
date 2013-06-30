@@ -8,14 +8,21 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file ILI9481Colour16Specialisation.h
+ * @brief Specialisation of ILI9481Colour for 16-bit colours.
+ * @ingroup ILI9481
+ */
+
 #pragma once
 
 
 namespace lcd {
 
-
 	/**
-	 * Template class holding the specialisation of ILI9481Colour for 16-bit colours
+	 * @brief Template specialisation of ILI9481Colour for 16-bit colours
+	 * @tparam TAccessMode The access mode in use.
+	 * @ingroup ILI9481
 	 */
 
 	template<class TAccessMode>
@@ -46,7 +53,8 @@ namespace lcd {
 
 
 	/**
-	 * get the pixel format command value
+	 * Get the register setting for 16-bit colours
+	 * @return 16-bit interface pixel format register setting
 	 */
 
 	template<class TAccessMode>
@@ -57,10 +65,10 @@ namespace lcd {
 
 	/**
 	 * Unpack the colour from rrggbb to the internal 5-6-5 format
-
+   *
 	 * 00000000RRRRRRRRGGGGGGGGBBBBBBBB ->
-	 * RRRRRGGG,GGGBBBBB
-
+	 * 0000000000000000RRRRRGGGGGGBBBBB
+   *
 	 * @param src rrggbb
 	 * @param dest The unpacked colour structure
 	 */

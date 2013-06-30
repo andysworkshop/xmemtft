@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file Commands for the ILI9481 that we use
+ * Contains commands used by the ILI9481
+ * @ingroup ILI9481
+ */
+
 #pragma once
 
 

@@ -11,6 +11,7 @@
 /**
  * @file HX8347ALandscapeSpecialisation.h
  * @brief Specialisation of HX8347AOrientation for landscape mode.
+ * @ingroup HX8347A
  */
 
 

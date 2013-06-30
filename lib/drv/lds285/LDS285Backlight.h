@@ -8,16 +8,23 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file LDS285Backlight.h
+ * @brief Implementation of the LDS285 backlight.
+ * @ingroup LDS285
+ */
+
 #pragma once
 
 
 namespace lcd {
 
 
-	/*
+	/**
 	 * Class to encapsulate a 0..100% backlight control on a Nokia 95 8Gb
 	 * controller (LDS285) where the backlight is built in to the panel
 	 * and managed by software.
+	 * @tparam The access mode in use.
 	 */
 
 	template<class TAccessMode>
@@ -33,10 +40,11 @@ namespace lcd {
 	};
 
 
-	/*
+	/**
 	 * Constructor - set to the user start value (default zero) but don't write out
 	 * to the panel because we can't guarantee that the user has initialised the panel
 	 * at the point this constructor is called.
+	 * @param initialPercentage The 0..100 percentage to start off with.
 	 */
 
 	template<class TAccessMode>
@@ -45,9 +53,11 @@ namespace lcd {
 	}
 
 
-	/*
+	/**
 	 * fade up or down to the supplied percentage waiting
 	 * for msPerStep millis between each step
+	 * @param newPercentage The new backlight percentage.
+	 * @param msPerStep How many milliseconds to wait between 1% steps.
 	 */
 
 	template<class TAccessMode>
@@ -67,8 +77,9 @@ namespace lcd {
 	}
 
 
-	/*
+	/**
 	 * Set a new backlight brightness level to a percentage
+	 * @param percentage The new percentage to go straight to.
 	 */
 
 	template<class TAccessMode>

@@ -11,6 +11,7 @@
 /**
  * @file HX8347APortraitSpecialisation.h
  * @brief Specialisation of HX8347AOrientation for portrait mode.
+ * @ingroup HX8347A
  */
 
 

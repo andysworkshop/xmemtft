@@ -8,49 +8,71 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file Point.h
+ * @brief The definition of the Point structure
+ * @ingroup GraphicsLibrary
+ */
+
+
 #pragma once
 
 
 namespace lcd {
 
 	/**
-	 * (x,y) co-ordinate structure
+	 * @brief (x,y) co-ordinate structure
+	 * @ingroup GraphicsLibrary
 	 */
 
 	struct Point {
 
-			int16_t X,Y;
+		/**
+		 * @brief X and Y co-ordinates as signed values
+		 *
+		 * The actual permitted display values are unsigned. We keep them as signed to allow
+		 * intermediate calculations using points to go negative.
+		 */
 
-			/**
-			 * Return a (0,0) point.
-			 */
+		int16_t X,Y;
 
-			static const Point Origin;
 
-			/*
-			 * Default constructor
-			 */
+		/**
+		 * Return a (0,0) point.
+		 */
 
-			Point()
-			 : X(), Y() {
-			}
+		static const Point Origin;
 
-			/*
-			 * Constructor with parameters
-			 */
 
-			Point(int16_t x,int16_t y) {
-				X=x;
-				Y=y;
-			}
+		/**
+		 * Default constructor
+		 */
 
-			/*
-			 * Copy constructor
-			 */
+		Point()
+		 : X(), Y() {
+		}
 
-			Point(const Point& p) {
-				X=p.X;
-				Y=p.Y;
-			}
-		};
+
+		/**
+		 * Constructor with parameters
+		 * @param x X-coord
+		 * @param y Y-coord
+		 */
+
+		Point(int16_t x,int16_t y) {
+			X=x;
+			Y=y;
+		}
+
+
+		/**
+		 * Copy constructor
+		 * @param p The point to copy from
+		 */
+
+		Point(const Point& p) {
+			X=p.X;
+			Y=p.Y;
+		}
+	};
 }

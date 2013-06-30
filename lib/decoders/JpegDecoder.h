@@ -8,13 +8,25 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file JpegDecoder.h
+ * @brief Picojpeg interface.
+ * @ingroup Decoders
+ */
+
 #pragma once
 
 
 namespace lcd {
 
-	/*
-	 * JPEG decoder
+
+	/**
+	 * @brief JPEG decoder
+	 *
+	 * This class implements the algorithm required by the picojpeg library.
+	 *
+	 * @tparam TAccessMode The access mode that we're using.
+	 * @ingroup Decoders
 	 */
 
 	template<class TAccessMode>

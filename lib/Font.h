@@ -8,6 +8,21 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @defgroup Fonts
+ * @brief Font functionality and structures.
+ *
+ * The graphics library provides the ability to manipulate TrueType fonts using the FontConv
+ * and LzgFontConv utilities. The utilities allow you to optimise your memory usage by only
+ * exporting the characters from the font that you require.
+ */
+
+/**
+ * @file Font.h
+ * @brief Font structures.
+ * @ingroup Fonts
+ */
+
 #pragma once
 
 #include <stdint.h>
@@ -17,8 +32,8 @@
 namespace lcd {
 
 	/**
-	 * Generic implementation of a font that's represented by bits in memory. The caller gets to decide how to
-	 * deal with those bits
+	 * @brief Generic implementation of a font that's represented by bits in memory.
+	 * @ingroup Fonts
 	 */
 
 	class FontBase {
@@ -46,20 +61,53 @@ namespace lcd {
 			FontType getType() const;
 	};
 
-	// stub types to allow method overloading in the GraphicsLibrary class. this first one is for
-	// bitmap fonts - the original font format
+
+	/**
+	 * @brief Bitmap font structure that can handle 8-bit fonts.
+	 *
+	 * FontConv creates instances of this class.
+	 *
+	 * @ingroup Fonts
+	 */
 
 	class Font : public FontBase {
 		public:
+
+			/**
+			 * Constructor
+			 * @param firstChar The first character in this font, usually an ASCII code.
+			 * @param characterCount The number of consecutive characters in this font.
+			 * @param height The font height in pixels.
+			 * @param spacing The spacing between characters in pixels.
+			 * @param characters A pointer to an array of FontChar structures that define each sequential character
+			 */
+
 			Font(uint8_t firstChar,uint8_t characterCount,uint8_t height,uint8_t spacing,const struct FontChar *characters)
 				: FontBase(FONT_BITMAP,firstChar,characterCount,height,spacing,characters) {
 			}
 	};
 
-	// and this one is for the Lzg TrueType fonts
+
+	/**
+	 * @brief LZG font structure that can handle complex TrueType font characters stored as bitmaps.
+	 *
+	 * LzgFontConv creates instances of this class.
+	 *
+	 * @ingroup Fonts
+	 */
 
 	class LzgFont : public FontBase {
 		public:
+
+			/**
+			 * Constructor
+			 * @param firstChar The first character in this font, usually an ASCII code.
+			 * @param characterCount The number of consecutive characters in this font.
+			 * @param height The font height in pixels.
+			 * @param spacing The spacing between characters in pixels.
+			 * @param characters A pointer to an array of FontChar structures that define each sequential character
+			 */
+
 			LzgFont(uint8_t firstChar,uint8_t characterCount,uint8_t height,uint8_t spacing,const struct FontChar *characters)
 				: FontBase(FONT_LZG,firstChar,characterCount,height,spacing,characters) {
 			}

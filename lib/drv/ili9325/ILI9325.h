@@ -16,8 +16,13 @@
 
 /**
  * @defgroup ILI9325
+ * @brief Ilitek ILI9325
+ *
+ * The user can specialise based on the desired colour depth, orientation and access mode.
+ *
  * @file ILI9325.h
  * @brief Core ILI9325 support. Contains the initialisation sequence and other non-specific members.
+ * @ingroup ILI9325
  */
 
 #pragma once
@@ -32,7 +37,6 @@ namespace lcd {
 	/**
 	 * @brief Generic ILI9325 template.
 	 *
-	 * The user can specialise based on the desired colour depth, orientation and access mode.
 	 * @ingroup ILI9325
 	 * @tparam TOrientation The desired panel orientation, LANDSCAPE or PORTRAIT
 	 * @tparam TColourDepth The colour depth for your use, just 64K is supported for this panel.

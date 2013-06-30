@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file LDS285LandscapeSpecialisation.h
+ * @brief Specialisation of LDS285Orientation for landscape mode.
+ * @ingroup LDS285
+ */
+
 #pragma once
 
 
@@ -16,7 +22,8 @@ namespace lcd {
 
 	/**
 	 * Specialisation of LDS285Orientation for the panel in LANDSCAPE mode.
-	 * @tparam TAccessMode the access mode implementation, e.g. FSMC
+	 * @tparam TAccessMode the access mode implementation, e.g. Gpio16LatchAccessMode
+	 * @ingroup LDS285
 	 */
 
 	template<class TAccessMode,class TPanelTraits>

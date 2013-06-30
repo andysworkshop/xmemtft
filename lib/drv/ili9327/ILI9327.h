@@ -10,8 +10,14 @@
 
 /**
  * @defgroup ILI9327
+ * @brief Ilitek ILI9327
+ *
+ * The user can specialise based on the desired colour depth, orientation and access mode. Panel sizes
+ * up to 400x232 are supported.
+ *
  * @file ILI9327.h
  * @brief Core ILI9327 support. Contains the initialisation sequence and other non-specific members.
+ * @ingroup ILI9327
  */
 
 #pragma once
@@ -24,8 +30,7 @@
 namespace lcd {
 
 	/**
-	 * Generic ILI9327 template. The user can specialise based on the desired colour
-	 * depth, orientation and access mode.
+	 * @brief Generic ILI9327 template.
 	 * @tparam TOrientation The desired panel orientation, LANDSCAPE or PORTRAIT
 	 * @tparam TColourDepth The colour depth for your use, just 64K is supported for this panel.
 	 * @tparam TAccessMode The access mode that you want to talk to this panel with, e.g. Gpio16LatchAccessMode.

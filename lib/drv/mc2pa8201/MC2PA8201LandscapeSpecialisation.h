@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file MC2PA8201LandscapeSpecialisation.h
+ * @brief Specialisation of MC2PA8201Orientation for landscape mode.
+ * @ingroup MC2PA8201
+ */
+
 #pragma once
 
 
@@ -17,6 +23,7 @@ namespace lcd {
 	/**
 	 * Specialisation of MC2PA8201Orientation for the panel in LANDSCAPE mode.
 	 * @tparam TAccessMode the access mode implementation, e.g. Xmem16AccessMode
+	 * @ingroup MC2PA8201
 	 */
 
 	template<class TAccessMode,class TPanelTraits>

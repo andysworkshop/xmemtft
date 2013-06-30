@@ -8,6 +8,11 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file AllCommands.h
+ * @brief Commands for the MC2PA8201 that we use
+ * @ingroup MC2PA8201
+ */
 
 #pragma once
 
@@ -15,7 +20,7 @@
 namespace lcd {
 	namespace mc2pa8201 {
 
-		/*
+		/**
 		 * The command set as documented in v0.99 of the datasheet
 		 */
 

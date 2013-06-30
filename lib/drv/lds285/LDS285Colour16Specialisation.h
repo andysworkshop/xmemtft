@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file LDS285Colour16Specialisation.h
+ * @brief Specialisation of LDS285Colour for 16-bit colours.
+ * @ingroup LDS285
+ */
+
 #pragma once
 
 
@@ -15,7 +21,9 @@ namespace lcd {
 
 
 	/**
-	 * Template class holding the specialisation of LDS285Colour for 16-bit colours
+	 * @brief Template specialisation of LDS285Colour for 16-bit colours
+	 * @tparam TAccessMode The access mode in use.
+	 * @ingroup LDS285
 	 */
 
 	template<class TAccessMode,class TPanelTraits>
@@ -58,10 +66,10 @@ namespace lcd {
 
 	/**
 	 * Unpack the colour from rrggbb to the internal 5-6-5 format
-
+	 *
 	 * 00000000RRRRRRRRGGGGGGGGBBBBBBBB ->
 	 * 0000000000000000RRRRRGGGGGGBBBBB
-
+	 *
 	 * @param src rrggbb
 	 * @param dest The unpacked colour structure
 	 */
@@ -81,6 +89,7 @@ namespace lcd {
 		dest.first=r | (g>>5);
 		dest.second=(g << 3) | (b >> 3);
 	}
+
 
 	/**
 	 * Unpack the colour from components to the internal format

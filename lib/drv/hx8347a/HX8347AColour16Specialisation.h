@@ -11,6 +11,7 @@
 /**
  * @file HX8347AColour16Specialisation.h
  * @brief Specialisation of HX8347AColour for 16-bit colours.
+ * @ingroup HX8347A
  */
 
 

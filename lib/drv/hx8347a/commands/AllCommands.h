@@ -10,7 +10,7 @@
 
 /**
  * @file Commands for the HX8347A that we use
- * Contains commands used by the HX8347A
+ * @brief Contains commands used by the HX8347A
  * @ingroup HX8347A
  */
 

@@ -11,6 +11,7 @@
 /**
  * @file ILI9327Colour16Specialisation.h
  * @brief Specialisation of ILI9327Colour for 16-bit colours.
+ * @ingroup ILI9327
  */
 
 #pragma once

@@ -8,13 +8,20 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file Rectangle.inl
+ * @brief Functions that operate on rectangles.
+ * @ingroup GraphicsLibrary
+ */
+
 #pragma once
 
 
 namespace lcd {
 
-	/*
+	/**
 	 * Fill a rectangle with the foreground colour
+	 * @parm rc The rectangle to fill.
 	 */
 
 	template<class TDevice,class TAccessMode>
@@ -25,8 +32,9 @@ namespace lcd {
 	}
 
 
-	/*
+	/**
 	 * Fill a rectangle with the background colour
+	 * @param rc The rectangle to clear.
 	 */
 
 	template<class TDevice,class TAccessMode>
@@ -37,9 +45,10 @@ namespace lcd {
 	}
 
 
-	/*
+	/**
 	 * Convenience function to draw an outline of a rectangle by calling fillRectangle 4 times
 	 * Filling rectangles is much more efficient than plotting points
+	 * @param rect The rectangle to draw.
 	 */
 
 	template<class TDevice,class TAccessMode>
@@ -70,15 +79,22 @@ namespace lcd {
 	}
 
 
-	/*
-	 * Gradient fill a rectangle from the foreground to the background colour
+	/**
+	 * Gradient fill a rectangle from the foreground to the background colour. This uses line
+	 * draing to create the gradient, which will fall back to a fast rectangle fill because
+	 * all the lines are straight.
+	 * @param rc The bounding rectangle of the entire gradient.
+	 * @param dir The direction of the gradient, horizontal or vertical.
+	 * @param first The starting colour of the gradient.
+	 * @param last The ending colour of the gradient.
 	 */
 
 	template<class TDevice,class TAccessMode>
-	inline void GraphicsLibrary<TDevice,TAccessMode>::gradientFillRectangle(const Rectangle& rc,
-																																	 Direction dir,
-																																	 TColour first,
-																																	 TColour last) const {
+	inline void GraphicsLibrary<TDevice,TAccessMode>::gradientFillRectangle(
+							const Rectangle& rc,
+							Direction dir,
+							TColour first,
+							TColour last) const {
 
 		uint8_t r1,g1,b1,r2,g2,b2;
 		int32_t rstep,gstep,bstep;

@@ -11,6 +11,7 @@
 /**
  * @file ILI9327Orientation.h
  * @brief Generic template definition.
+ * @ingroup ILI9327
  */
 
 

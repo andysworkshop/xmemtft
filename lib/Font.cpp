@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file Font.cpp
+ * @brief FontBase implementation.
+ * @ingroup Fonts
+ */
+
 #include <avr/pgmspace.h>
 #include <stdlib.h>
 #include <stddef.h>
@@ -16,8 +22,14 @@
 
 namespace lcd {
 
-	/*
+	/**
 	 * Constructor
+	 * @param type FONT_BITMAP or FONT_LZG.
+	 * @param firstChar The first character in this font, usually an ASCII code.
+	 * @param characterCount The number of consecutive characters in this font.
+	 * @param height The font height in pixels.
+	 * @param spacing The spacing between characters in pixels.
+	 * @param characters A pointer to an array of FontChar structures that define each sequential character
 	 */
 
 	FontBase::FontBase(FontType type,uint8_t firstChar,uint8_t characterCount,uint8_t height,uint8_t spacing,const struct FontChar *characters) {
@@ -31,8 +43,10 @@ namespace lcd {
 	}
 
 
-	/*
+	/**
 	 * Get the font character definition in progmem space
+	 * @param character The character code.
+	 * @param fc The strucutre to fill in.
 	 */
 
 	void FontBase::getCharacter(uint8_t character,FontChar& fc) const {
@@ -81,8 +95,10 @@ namespace lcd {
 		memcpy_P(&fc,ptr,sizeof(fc));
 	}
 
+
 	/**
 	 * Get the font height in pixels.
+	 * @return The height.
 	 */
 
 	uint8_t FontBase::getHeight() const {
@@ -92,6 +108,7 @@ namespace lcd {
 
 	/**
 	 * Get the inter-character spacing
+	 * @return The additional space between characters.
 	 */
 
 	uint8_t FontBase::getCharacterSpacing() const {
@@ -101,6 +118,7 @@ namespace lcd {
 
 	/**
 	 * Get the font type
+	 * @return FONT_BITMAP or FONT_LZG
 	 */
 
 	FontBase::FontType FontBase::getType() const {

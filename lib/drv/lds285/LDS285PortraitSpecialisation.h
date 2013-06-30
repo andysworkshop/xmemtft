@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file LDS285PortraitSpecialisation.h
+ * @brief Specialisation of LDS285Orientation for portrait mode.
+ * @ingroup LDS285
+ */
+
 #pragma once
 
 
@@ -17,6 +23,7 @@ namespace lcd {
 	/**
 	 * Specialisation of LDS285Orientation for the panel in PORTRAIT mode.
 	 * @tparam TAccessMode the access mode implementation, eg XMEM
+	 * @ingroup LDS285
 	 */
 
 	template<class TAccessMode,class TPanelTraits>

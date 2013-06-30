@@ -8,15 +8,24 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file LDS285Colour.h
+ * @brief Generic template definition.
+ * @ingroup LDS285
+ */
+
 #pragma once
 
 
 namespace lcd {
 
-
 	/**
+	 * @brief Forward declaration of the LDS285Colour template
+	 *
 	 * Empty generic class definition for LDS285 colour-dependent operations
 	 * Everything is provided in the specialisations.
+	 *
+	 * @ingroup LDS285
 	 */
 
 	template<ColourDepth TColour,class TAccessMode,class TPanelTraits>

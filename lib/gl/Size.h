@@ -8,51 +8,69 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file Size.h
+ * @brief The definition of the Size structure
+ * @ingroup GraphicsLibrary
+ */
+
 #pragma once
 
 
 namespace lcd {
 
 	/**
-	 * (width,height) size structure
+	 * @brief (width,height) size structure
 	 */
 
 	struct Size {
 
-			int16_t Width,Height;
+		/**
+		 * The width and height
+		 */
 
-			/*
-			 * Default constructor
-			 */
+		int16_t Width,Height;
 
-			Size()
-				: Width(), Height() {
-			}
 
-			/*
-			 * Constructor
-			 */
+		/**
+		 * Default constructor
+		 */
 
-			Size(int16_t width,int16_t height) :
-				Width(width),
-				Height(height) {
-			}
+		Size()
+			: Width(), Height() {
+		}
 
-			/*
-			 * Copy constructor
-			 */
 
-			Size(const Size& src) {
-				Width=src.Width;
-				Height=src.Height;
-			}
+		/**
+		 * Constructor with parameters
+		 * @param width The width
+		 * @param height The height
+		 */
 
-			/*
-			 * Get the area covered by this size
-			 */
+		Size(int16_t width,int16_t height) :
+			Width(width),
+			Height(height) {
+		}
 
-			uint32_t getArea() const {
-				return static_cast<uint32_t>(Width)*static_cast<uint32_t>(Height);
-			}
-		};
+
+		/**
+		 * Copy constructor
+		 * @param src Where to copy from.
+		 */
+
+		Size(const Size& src) {
+			Width=src.Width;
+			Height=src.Height;
+		}
+
+
+		/**
+		 * Get the area covered by this size
+		 * @return The width multiplied by the height.
+		 */
+
+		uint32_t getArea() const {
+			return static_cast<uint32_t>(Width)*static_cast<uint32_t>(Height);
+		}
+	};
 }

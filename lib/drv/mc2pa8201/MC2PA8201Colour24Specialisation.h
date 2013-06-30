@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file MC2PA8201Colour24Specialisation.h
+ * @brief Specialisation of MC2PA8201Colour for 24-bit colours.
+ * @ingroup MC2PA8201
+ */
+
 #pragma once
 
 
@@ -16,7 +22,8 @@ namespace lcd {
 
 	/**
 	 * Template class holding the specialisation of MC2PA8201Colour for 24-bit colours
-	 * @tparam TAccessMode The access mode class (e.g. FSMC)
+	 * @tparam TAccessMode The access mode class
+	 *  @ingroup MC2PA8201
 	 */
 
 	template<class TAccessMode,class TPanelTraits>

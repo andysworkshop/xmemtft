@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file AllCommands.h
+ * @brief Commands for the LDS285 that we use
+ * @ingroup LDS285
+ */
+
 
 #pragma once
 
@@ -15,7 +21,7 @@
 namespace lcd {
 	namespace lds285 {
 
-		/*
+		/**
 		 * The command set as documented the preliminary datasheet
 		 */
 

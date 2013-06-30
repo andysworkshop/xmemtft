@@ -17,6 +17,7 @@
 /**
  * @file ILI9325Orientation.h
  * @brief Generic template definition.
+ * @ingroup ILI9325
  */
 
 #pragma once

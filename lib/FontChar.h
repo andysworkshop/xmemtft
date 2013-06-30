@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file FontChar.h
+ * @brief FontChar definition.
+ * @ingroup Fonts
+ */
+
 #pragma once
 
 #include <stdint.h>
@@ -16,17 +22,13 @@
 namespace lcd {
 
 	/**
-	 *  A Single font character definition
+	 * @brief A Single font character definition
+	 * @ingroup Fonts
 	 */
 
 	struct FontChar {
-		// The character code
-		uint8_t Code;
-
-		// Pixel width of this char (limit 255 pixels)
-		uint8_t PixelWidth;
-
-		// Bit-stream of data packed left to right, top to bottom
-		const uint8_t* Data;
+		uint8_t Code;						///< The character code
+		uint8_t PixelWidth;			///< Pixel width of this char (limit 255 pixels)
+		const uint8_t* Data;		///< Bit-stream of data packed left to right, top to bottom
 	};
 }

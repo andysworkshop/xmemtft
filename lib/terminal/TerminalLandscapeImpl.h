@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file TerminalLandscapeImpl.h
+ * @brief Functionality for landscape orienatation terminals.
+ * @ingroup Terminal
+ */
+
 #pragma once
 
 #include "terminal/TerminalBase.h"
@@ -16,10 +22,15 @@
 namespace lcd {
 
 
-	/*
-	 * Implementation of a terminal for LCDs in landscape mode. In this mode hardware
+	/**
+	 * @brief Implementation of a terminal for LCDs in landscape mode.
+	 *
+	 * In this mode hardware
 	 * scrolling is not supported and the terminal will clear down and go back to the
 	 * top when the bottom is reached.
+	 *
+	 * @tparam TGraphicsLibrary. The graphics library implementation.
+	 * @ingroup Terminal
 	 */
 
 	template<class TGraphicsLibrary>
@@ -36,8 +47,10 @@ namespace lcd {
 	};
 
 
-	/*
-	 * Constructor
+	/**
+	 * @brief Constructor. You probably want to call clearScreen before you get going.
+	 * @param gl A pointer to the graphics library implementation.
+	 * @param font A pointer to the fixed-width font to use.
 	 */
 
 	template<class TGraphicsLibrary>
@@ -48,8 +61,9 @@ namespace lcd {
 	}
 
 
-	/*
-	 * Scroll the display by one line
+	/**
+	 * Scroll the display by one line (required by TerminalBase).
+	 * This implementation just clears the screen.
 	 */
 
 	template<class TGraphicsLibrary>
@@ -58,8 +72,9 @@ namespace lcd {
 	}
 
 
-	/*
-	 * Reset after clear
+	/**
+	 * Reset after clear (required by TerminalBase).
+	 * This does nothing.
 	 */
 
 	template<class TGraphicsLibrary>

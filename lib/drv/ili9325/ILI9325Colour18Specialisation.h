@@ -17,6 +17,7 @@
 /**
  * @file ILI9325Colour18Specialisation.h
  * @brief Specialisation of ILI9325Colour for 16-bit colours.
+ * @ingroup ILI9325
  */
 
 

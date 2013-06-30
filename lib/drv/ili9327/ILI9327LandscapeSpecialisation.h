@@ -11,6 +11,7 @@
 /**
  * @file ILI9327LandscapeSpecialisation.h
  * @brief Specialisation of ILI9327Orientation for landscape mode.
+ * @ingroup ILI9327
  */
 
 #pragma once

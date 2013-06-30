@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file NokiaN93_TypeA.h
+ * @brief Panel-specific traits for the Nokia N93 Type A.
+ * @ingroup MC2PA8201
+ */
+
 #pragma once
 
 #include "drv/mc2pa8201/commands/AllCommands.h"
@@ -21,6 +27,7 @@ namespace lcd {
 	 * 1. Hardware scrolling is not supported
 	 * 2. (page,column) addressing is not swapped for landscape mode
 	 * 3. Memory access control is handled
+	 * @ingroup MC2PA8201
 	 */
 
 	class NokiaN93_TypeA {

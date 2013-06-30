@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file NokiaN82.h
+ * @brief Typedefs for using the Nokia N82 panel
+ * @ingroup MC2PA8201
+ */
+
 #pragma once
 
 #include <Arduino.h>

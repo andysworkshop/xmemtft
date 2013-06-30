@@ -17,6 +17,7 @@
 /**
  * @file ILI9325PortraitSpecialisation.h
  * @brief Specialisation of ILI9325Orientation for portrait mode.
+ * @ingroup ILI9325
  */
 
 #pragma once

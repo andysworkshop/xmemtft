@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file Generic16BitILI9327.h
+ * @brief Typedefs for using an ILI9327 in 16-bit mode
+ * @ingroup ILI9327
+ */
+
 #pragma once
 
 #include <Arduino.h>

@@ -8,6 +8,13 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file Nokia6300.h
+ * @brief Typedefs for using the Nokia 6300 panel
+ * @ingroup MC2PA8201
+ */
+
+
 #pragma once
 
 #include <Arduino.h>

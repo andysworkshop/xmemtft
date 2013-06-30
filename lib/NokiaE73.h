@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file NokiaE73.h
+ * @brief Typedefs for using the Nokia E73 panel
+ * @ingroup MC2PA8201
+ */
+
 #pragma once
 
 #include <Arduino.h>

@@ -1,3 +1,10 @@
+/**
+ * @file PicoJpeg.h
+ * @brief The picojpeg implementation
+ * @ingroup Decoders
+ * @copyright Public domain, Rich Geldreich <richgel99@gmail.com>
+ */
+
 //------------------------------------------------------------------------------
 // picojpeg v1.0 - Public domain, Rich Geldreich <richgel99@gmail.com>
 //------------------------------------------------------------------------------

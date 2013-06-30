@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file MC2PA8201Colour16Specialisation.h
+ * @brief Specialisation of MC2PA8201Colour for 16-bit colours.
+ * @ingroup MC2PA8201
+ */
+
 #pragma once
 
 
@@ -15,7 +21,9 @@ namespace lcd {
 
 
 	/**
-	 * Template class holding the specialisation of MC2PA8201Colour for 16-bit colours
+	 * @brief Template specialisation of MC2PA8201Colour for 16-bit colours
+	 * @tparam TAccessMode The access mode in use.
+	 * @ingroup MC2PA8201
 	 */
 
 	template<class TAccessMode,class TPanelTraits>
@@ -58,10 +66,10 @@ namespace lcd {
 
 	/**
 	 * Unpack the colour from rrggbb to the internal 5-6-5 format
-
+   *
 	 * 00000000RRRRRRRRGGGGGGGGBBBBBBBB ->
 	 * 0000000000000000RRRRRGGGGGGBBBBB
-
+	 *
 	 * @param src rrggbb
 	 * @param dest The unpacked colour structure
 	 */

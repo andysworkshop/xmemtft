@@ -8,19 +8,37 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file Primitives.inl
+ * @brief Point plotting, line drawing
+ *
+ * These low-level primitives form the basis for some of the higher level algorithms.
+ *
+ * @ingroup GraphicsLibrary
+ */
+
+
 #pragma once
 
 
 namespace lcd {
 
-	/*
-	 * plot a point in the foreground colour
+	/**
+	 * Plot a point in the foreground colour
+	 * @param p The location to plot.
 	 */
 
 	template<class TDevice,class TAccessMode>
 	inline void GraphicsLibrary<TDevice,TAccessMode>::plotPoint(const Point& p) const {
 		plotPoint(p.X,p.Y);
 	}
+
+
+	/**
+	 * Plot a point in the foreground colour. Moves the drawing window to the point and plots it.
+	 * @param x The x-coord to plot
+	 * @param y The y-coord to plot
+	 */
 
 	template<class TDevice,class TAccessMode>
 	inline void GraphicsLibrary<TDevice,TAccessMode>::plotPoint(int16_t x,int16_t y) const {
@@ -40,7 +58,15 @@ namespace lcd {
 
 
 	/**
-	 * Draw a line between two points. Uses the bresenham algorithm for lines that are not straight
+	 * @brief Draw a line between two points.
+	 *
+	 * Uses the bresenham algorithm for lines that are not straight. This is an optimised version
+	 * of the algorithm that takes advantage of the windowed capability of the TFT panel controller.
+	 * See my website for a writeup of how this algorithm works and a performance analysis versus
+	 * standard bresenham and the 'Extremely Fast Line Algorithm'.
+	 *
+	 * @param p1 The first end of the line.
+	 * @param p2 The other end of the line.
    */
 
 	template<class TDevice,class TAccessMode>

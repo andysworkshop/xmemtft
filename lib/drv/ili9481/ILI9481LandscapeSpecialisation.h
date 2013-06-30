@@ -8,6 +8,13 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file ILI9481LandscapeSpecialisation.h
+ * @brief Specialisation of ILI9481Orientation for landscape mode.
+ * @ingroup ILI9481
+ */
+
+
 #pragma once
 
 
@@ -17,6 +24,7 @@ namespace lcd {
 	/**
 	 * Specialisation of ILI9481Orientation for the panel in LANDSCAPE mode.
 	 * @tparam TAccessMode the access mode implementation, e.g. Xmem16AccessMode
+	 * @ingroup ILI9481
 	 */
 
 	template<class TAccessMode>

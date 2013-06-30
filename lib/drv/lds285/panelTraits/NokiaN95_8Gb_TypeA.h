@@ -8,6 +8,15 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file NokiaN95_8Gb_TypeA.h
+ * @brief Panel traits unique to the Nokia N95 8Gb Type A.
+ *
+ * See my website for documentation about the various panel types
+ *
+ * @ingroup LDS285
+ */
+
 #pragma once
 
 #include "drv/lds285/commands/AllCommands.h"
@@ -18,6 +27,7 @@ namespace lcd {
 	/**
 	 * Panel traits for a Type A Nokia N95 8Gb. The type A screen does not
 	 * flip column and row addresses in portrait mode
+	 * @ingroup LDS285
 	 */
 
 	class NokiaN95_8Gb_TypeA {

@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file NokiaN95_8Gb.h
+ * @brief Typedefs for using the Nokia N95 8Gb panel
+ * @ingroup LDS285
+ */
+
 #pragma once
 
 #include <Arduino.h>

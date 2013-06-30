@@ -8,17 +8,38 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @defgroup Terminal
+ * @brief Terminal emulation functionality.
+ *
+ * The terminal emulation functionality allows you to use the panel as a left to right, top to bottom
+ * text-output terminal using a fixed font for output. If the panel supports hardware scrolling in the
+ * direction appropriate for your chosen panel orientation then it is utilised to provide smooth scrolling
+ * when the text reaches the bottom of the terminal.
+ */
+
+/**
+ * @file TerminalBase.h
+ * @brief Common functionality for portrait and landscape orienatation terminals.
+ * @ingroup Terminal
+ */
+
 #pragma once
 
 
 namespace lcd {
 
-	/*
-	 * Base class to manage the display as a character terminal. Derivations for both landscape
-	 * and portrait mode are supplied. Hardware scrolling is supported in portrait mode. In landscape
-	 * mode the terminal will clear and restart at the top when the end is reached.
+	/**
+	 * @brief Base class to manage the display as a character terminal.
 	 *
-	 * The font must be fixed width or wierd stuff will happen.
+	 * Derivations for both landscape and portrait mode are supplied. Hardware scrolling is supported
+	 * in portrait mode. In landscape mode the terminal will clear and restart at the top when the end is reached.
+	 * The font must be fixed width or wierd stuff will happen. Each controller implementation contains appropriate
+	 * typedefs for terminal implementations in landscape and portrait.
+	 *
+	 * @tparam TImpl This a CRTP-style class. TImpl is the type of the derived class.
+	 * @tparam TGraphicsLibrary. The graphics library implementation.
+	 * @ingroup Terminal
 	 */
 
 	template<class TImpl,class TGraphicsLibrary>
@@ -56,8 +77,10 @@ namespace lcd {
 	};
 
 
-	/*
-	 * Constructor. You probably want to call clearScreen before you get going
+	/**
+	 * @brief Constructor. You probably want to call clearScreen before you get going.
+	 * @param gl A pointer to the graphics library implementation.
+	 * @param font A pointer to the fixed-width font to use.
 	 */
 
 	template<class TImpl,class TGraphicsLibrary>
@@ -71,8 +94,8 @@ namespace lcd {
 	}
 
 
-	/*
-	 * Calculate the terminal size, in characters.
+	/**
+	 * @brief Calculate the terminal size, in characters.
 	 */
 
 	template<class TImpl,class TGraphicsLibrary>
@@ -94,8 +117,8 @@ namespace lcd {
 	}
 
 
-	/*
-	 * Clear the screen
+	/**
+	 * @brief Clear the screen and reset to (0,0)
 	 */
 
 	template<class TImpl,class TGraphicsLibrary>
@@ -121,7 +144,7 @@ namespace lcd {
 
 
 	/**
-	 * Clear just the current line
+	 * @brief Clear just the current line and reset X to zero.
 	 */
 
 	template<class TImpl,class TGraphicsLibrary>
@@ -140,8 +163,9 @@ namespace lcd {
 	}
 
 
-	/*
-	 * Write a line to the display
+	/**
+	 * @brief Write a line to the display
+	 * @param str The string to write.
 	 */
 
 	template<class TImpl,class TGraphicsLibrary>
@@ -153,8 +177,9 @@ namespace lcd {
 	}
 
 
-	/*
-	 * Write a character to the display
+	/**
+	 * @brief Write a character to the display
+	 * @param c The character to write.
 	 */
 
 	template<class TImpl,class TGraphicsLibrary>
@@ -192,8 +217,10 @@ namespace lcd {
 	}
 
 
-	/*
-	 * Increment the row and scroll if we have hit the bottom. If the LCD implementation supports
+	/**
+	 * @brief Increment the row and scroll if we have hit the bottom.
+	 *
+	 * If the LCD implementation supports
 	 * hardware scrolling then we will use it, otherwise we just clear the display and start again
 	 * at the top left.
 	 */
@@ -208,8 +235,10 @@ namespace lcd {
 	}
 
 
-	/*
-	 * Write a string using the stream operator
+	/**
+	 * @brief Write a string using the stream operator
+	 * @param str The string to write
+	 * @return a self reference to allow chaining of << operators.
 	 */
 
 	template<class TImpl,class TGraphicsLibrary>
@@ -219,8 +248,11 @@ namespace lcd {
 		return *this;
 	}
 
-	/*
-	 * Write various types
+
+	/**
+	 * Output a character using a stream operator.
+	 * @param c The character to write out.
+	 * @return a self reference to allow chaining of << operators.
 	 */
 
 	template<class TImpl,class TGraphicsLibrary>
@@ -229,6 +261,13 @@ namespace lcd {
 		writeCharacter(c);
 		return *this;
 	}
+
+
+	/**
+	 * Output a 16-bit signed integer using a stream operator.
+	 * @param val the value to write out.
+	 * @return a self reference to allow chaining of << operators.
+	 */
 
 	template<class TImpl,class TGraphicsLibrary>
 	inline TerminalBase<TImpl,TGraphicsLibrary>& TerminalBase<TImpl,TGraphicsLibrary>::operator<<(int16_t val) {
@@ -240,6 +279,13 @@ namespace lcd {
 		return *this;
 	}
 
+
+	/**
+	 * Output a 32-bit signed integer using a stream operator.
+	 * @param val the value to write out.
+	 * @return a self reference to allow chaining of << operators.
+	 */
+
 	template<class TImpl,class TGraphicsLibrary>
 	inline TerminalBase<TImpl,TGraphicsLibrary>& TerminalBase<TImpl,TGraphicsLibrary>::operator<<(int32_t val) {
 
@@ -250,12 +296,29 @@ namespace lcd {
 		return *this;
 	}
 
+
+	/**
+	 * Output a double-precision number using the maximum number of fractional digits available. The maximum
+	 * number of fractional digits is 5 which is in line with the limits of the 32-bit floating point numbers
+	 * provided by avr-gcc.
+	 * @param val the value to write out.
+	 * @return a self reference to allow chaining of << operators.
+	 */
+
 	template<class TImpl,class TGraphicsLibrary>
 	inline TerminalBase<TImpl,TGraphicsLibrary>& TerminalBase<TImpl,TGraphicsLibrary>::operator<<(double val) {
 
 		operator<<(DoublePrecision(val,TGraphicsLibrary::MAX_DOUBLE_FRACTION_DIGITS));
 		return *this;
 	}
+
+
+	/**
+	 * Output a double-precision number using a structure that defines the number and the number of fractional
+	 * digits that you want to write (up to 5).
+	 * @param val the value to write out.
+	 * @return a self reference to allow chaining of << operators.
+	 */
 
 	template<class TImpl,class TGraphicsLibrary>
 	inline TerminalBase<TImpl,TGraphicsLibrary>& TerminalBase<TImpl,TGraphicsLibrary>::operator<<(const DoublePrecision& val) {

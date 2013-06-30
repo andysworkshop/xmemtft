@@ -8,6 +8,13 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file ILI9481Colour.h
+ * @brief Generic template definition.
+ * @ingroup ILI9481
+ */
+
+
 #pragma once
 
 
@@ -15,8 +22,12 @@ namespace lcd {
 
 
 	/**
+	 * @brief Forward declaration of the ILI9481Colour template
+	 *
 	 * Empty generic class definition for ILI9481 colour-dependent operations
 	 * Everything is provided in the specialisations.
+	 *
+	 * @ingroup ILI9481
 	 */
 
 	template<ColourDepth TColour,class TAccessMode>

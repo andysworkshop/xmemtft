@@ -8,13 +8,28 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @defgroup Decoders
+ * @brief JPEG and LZG display functionality
+ *
+ * The graphics library provides functionality to display JPEG files from data sources such
+ * as flash memory and serial interface. An Arduino Mega is required to use these functions.
+ */
+
+/**
+ * @file JpegDataSources.h
+ * @brief Serial and flash implementations.
+ * @ingroup Decoders
+ */
+
 #pragma once
 
 
 namespace lcd {
 
-	/*
-	 * Base class for Jpeg data sources
+	/**
+	 * @brief Base class for Jpeg data sources
+	 * @ingroup Decoders
 	 */
 
 	class JpegDataSource {
@@ -24,8 +39,9 @@ namespace lcd {
 	};
 
 
-	/*
-	 * Data source for reading from flash
+	/**
+	 * @brief Data source for reading from flash
+	 * @ingroup Decoders
 	 */
 
 	class JpegFlashDataSource : public JpegDataSource {
@@ -36,15 +52,30 @@ namespace lcd {
 
 		public:
 
+			/**
+			 * Constructor
+			 * @param memptr 32-bit address of the JPEG in flash.
+			 * @param memsize The size of the JPEG file.
+			 */
+
 			JpegFlashDataSource(uint32_t memptr,uint32_t memsize)
 			  : _memptr(memptr),
 			    _memsize(memsize) {
 			}
 
+
+			/**
+			 * Virtual destructor
+			 */
+
 			virtual ~JpegFlashDataSource() {}
 
-			/*
-			 * Get more bytes for the JPEG decoder
+
+			/**
+			 * Get more bytes for the JPEG decoder. The full range of flash memory is supported.
+			 * @param pBuf Where to store the bytes.
+			 * @param bufsize How many bytes to try to read.
+			 * @param[out] The number of bytes that we actually read.
 			 */
 
 			virtual void readNextBytes(uint8_t *pBuf,uint8_t bufsize,uint8_t *actuallyRead) {
@@ -66,8 +97,9 @@ namespace lcd {
 	};
 
 
-	/*
-	 * Data source for reading from the Arduino serial port
+	/**
+	 * @brief Data source for reading from the Arduino serial port
+	 * @ingroup Decoders
 	 */
 
 	class JpegSerialDataSource : public JpegDataSource {
@@ -79,6 +111,14 @@ namespace lcd {
 			uint16_t _chunkAvailable;
 
 		public:
+
+			/**
+			 * Constructor
+			 * @param serial The Arduino serial port implementation
+			 * @param jpegSize The size of the JPEG file
+			 * @param chunkSize How much to read in a batch from the serial port before ACK'ing it.
+			 */
+
 			JpegSerialDataSource(Stream& serial,uint32_t jpegSize,uint16_t chunkSize)
 			  : _serial(&serial),
 			    _available(jpegSize),
@@ -86,10 +126,19 @@ namespace lcd {
 			    _chunkAvailable(chunkSize) {
 			}
 
+
+			/**
+			 * Virtual destructor
+			 */
+
 			virtual ~JpegSerialDataSource() {}
 
-			/*
-			 * Get more bytes for the JPEG decoder
+
+			/**
+			 * Get more bytes for the JPEG decoder. The full range of flash memory is supported.
+			 * @param pBuf Where to store the bytes.
+			 * @param bufsize How many bytes to try to read.
+			 * @param[out] The number of bytes that we actually read.
 			 */
 
 			virtual void readNextBytes(uint8_t *pBuf,uint8_t bufsize,uint8_t *actuallyRead) {
@@ -122,5 +171,4 @@ namespace lcd {
 				}
 			}
 	};
-
 }

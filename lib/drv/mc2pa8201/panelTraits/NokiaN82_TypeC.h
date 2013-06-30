@@ -8,6 +8,13 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file NokiaN82_TypeC.h
+ * @brief Panel-specific traits for the Nokia N82 Type C.
+ * @ingroup MC2PA8201
+ */
+
+
 #pragma once
 
 
@@ -19,6 +26,7 @@ namespace lcd {
 	 * 1. Positive scroll offsets scroll downwards
 	 * 2. (page,column) addressing is not swapped for landscape mode
 	 * 3. RGB is the only transfer order supported
+	 * @ingroup MC2PA8201
 	 */
 
 	class NokiaN82_TypeC {

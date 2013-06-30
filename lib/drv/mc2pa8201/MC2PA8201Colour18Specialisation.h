@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file MC2PA8201Colour18Specialisation.h
+ * @brief Specialisation of MC2PA8201Colour for 18-bit colours.
+ * @ingroup MC2PA8201
+ */
+
 #pragma once
 
 
@@ -15,7 +21,7 @@ namespace lcd {
 
 	/**
 	 * Template class holding the specialisation of MC2PA8201Colour for 18-bit colours
-	 * @tparam TAccessMode The access mode class (e.g. FSMC)
+	 * @tparam TAccessMode The access mode class
 	 */
 
 	template<class TAccessMode,class TPanelTraits>
@@ -58,10 +64,10 @@ namespace lcd {
 
 	/**
 	 * Unpack the colour from rrggbb to the interal 6-6-6 format
-
+   *
 	 * 00000000RRRRRRRRGGGGGGGGBBBBBBBB ->
 	 * 00000000RRRRRR00GGGGGG00BBBBBB00
-
+	 *
 	 * @param src rrggbb
 	 * @param dest The unpacked colour structure
 	 */

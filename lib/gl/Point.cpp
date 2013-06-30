@@ -8,13 +8,22 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file Point.cpp
+ * @brief Static initialisers
+ * @ingroup GraphicsLibrary
+ */
+
+
 #include <stdint.h>
 #include "Point.h"
 
 
 namespace lcd {
 
-	// initialise the static member
+	/**
+	 * @brief initialise the static member
+	 */
 
 	const Point Point::Origin=Point(0,0);
 }

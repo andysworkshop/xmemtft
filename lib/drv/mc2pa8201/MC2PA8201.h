@@ -8,6 +8,19 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @defgroup MC2PA8201
+ * @brief Magnachip MC2PA8201
+ *
+ * The user can specialise based on the desired colour depth, orientation and access mode. Support is
+ * provided for the built-in backlight controller.
+ *
+ * @file MC2PA8201.h
+ * @brief Core MC2PA8201 support. Contains the initialisation sequence and other non-specific members.
+ * @ingroup MC2PA8201
+ */
+
+
 #pragma once
 
 #include "commands/Allcommands.h"
@@ -18,8 +31,13 @@
 namespace lcd {
 
 	/**
-	 * Generic MC2PA8201 template. The user can specialise based on the desired colour
-	 * depth, orientation and access mode.
+	 * @brief Generic MC2PA8201 template.
+	 *
+	 * @ingroup MC2PA8201
+	 * @tparam TOrientation The desired panel orientation, LANDSCAPE or PORTRAIT
+	 * @tparam TColourDepth The colour depth for your use, just 64K is supported for this panel.
+	 * @tparam TAccessMode The access mode that you want to talk to this panel with, e.g. XmemAccessMode.
+	 * @tparam TPanelTraits Panel-specific traits.
 	 */
 
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
@@ -163,6 +181,8 @@ namespace lcd {
 
 	/**
 	 * Transfer data bytes, en-masse
+	 * @param data The 32-bit address in flash
+	 * @param numBytes The number of bytes to transfer
 	 */
 
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>

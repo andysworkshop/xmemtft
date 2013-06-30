@@ -8,6 +8,18 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @defgroup ILI9481
+ * @brief Ilitek ILI9481
+ *
+ * The user can specialise based on the desired colour depth, orientation and access mode.
+ *
+ * @file ILI9481.h
+ * @brief Core ILI9481 support. Contains the initialisation sequence and other non-specific members.
+ * @ingroup ILI9481
+ */
+
+
 #pragma once
 
 #include "commands/Allcommands.h"
@@ -19,8 +31,12 @@
 namespace lcd {
 
 	/**
-	 * Generic ILI9481 template. The user can specialise based on the desired colour
-	 * depth, orientation and access mode.
+	 * @brief Generic ILI9481 template.
+	 *
+	 * @ingroup ILI9481
+	 * @tparam TOrientation The desired panel orientation, LANDSCAPE or PORTRAIT
+	 * @tparam TColourDepth The colour depth for your use, just 64K is supported for this panel.
+	 * @tparam TAccessMode The access mode that you want to talk to this panel with, e.g. Gpio16LatchAccessMode.
 	 */
 
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
@@ -222,7 +238,9 @@ namespace lcd {
 
 
 	/**
-	 * Transfer data bytes, en-masse
+	 * Write raw bytes from SRAM
+	 * @param data data source
+	 * @param numBytes number of bytes to write.
 	 */
 
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>

@@ -8,6 +8,12 @@
  * This notice may not be removed or altered from any source distribution.
  */
 
+/**
+ * @file NokiaE73_TypeA.h
+ * @brief Panel-specific traits for the Nokia E73 Type A.
+ * @ingroup MC2PA8201
+ */
+
 #pragma once
 
 #include "drv/mc2pa8201/commands/AllCommands.h"
@@ -21,6 +27,7 @@ namespace lcd {
 	 * 1. Positive scroll offsets scroll downwards
 	 * 2. (page,column) addressing is swapped for landscape mode
 	 * 3. BGR and RGB are both supported but we always use RGB anyway
+	 * @ingroup MC2PA8201
 	 */
 
 	class NokiaE73_TypeA {
