@@ -27,7 +27,7 @@ namespace lcd {
 	 * running in 18-bit (262K colour) mode
 	 */
 
-	class Adafruit18AccessMode {
+	class AdafruitAccessMode {
 
 		public:
 
