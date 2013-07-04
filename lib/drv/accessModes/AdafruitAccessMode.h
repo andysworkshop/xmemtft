@@ -21,19 +21,19 @@
 
 namespace lcd {
 
-	/*
-	 * Base for an LCD that can be addressed over the GPIO interface. The GPIO pins are the same
-	 * as would be used for XMEM except that we control them using GPIO port access. This is slower
-	 * than XMEM but free's up all the unused address lines (A9..A15) for program use.
+
+	/**
+	 * This class provides an access mode for the Adafruit 2.8" ILI9325 shield
+	 * running in 18-bit (262K colour) mode
 	 */
 
-	class AdafruitAccessMode {
+	class Adafruit18AccessMode {
 
 		public:
 
 			enum {
 
-				/*
+				/**
 				 * I/O port numbers and address. We'll use the single-cycle OUT asm instruction
 				 * to write data and we'll use the 2-cycle SBI and CBI instructions to set and
 				 * clear bits in the registers used for the control lines. That means that we
@@ -45,40 +45,46 @@ namespace lcd {
 				 * "x" means that the Arduino does not expose the pin in that position.
 				 */
 
-#if defined(__AVR_ATmega2560__)
+#if defined(__AVR_ATmega2560__) || defined(__AVR_ATmega1280__)
 
 				IO_PORTF = 0x11, // 0,1,2,3,4,5,6,7 (analog pins)
 
 #else
 
-#error "Unsupported MCU type (2560 is supported)"
+#error "Unsupported MCU type (2560 and 1280 are supported)"
 
 #endif
 
-				/*
+				/**
 				 * Here's where you choose the pins for the Adafruit interface.
 				 */
 
-				RD_PIN=0,
-				WR_PIN=1,
-				RS_PIN=2,
-				CS_PIN=3,
-				CARD_CS_PIN=3,
+				RD_PIN=0,					///< read
+				WR_PIN=1,					///< write
+				RS_PIN=2,					///< register/data select
+				CS_PIN=3,					///< chip-select
+				CARD_CS_PIN=3,		///< sd-card chip-select
 			};
 
 		public:
 			static void initialise();
 			static void hardReset();
-			static void writeCommand(uint8_t command) __attribute((always_inline));
-			static void writeData(uint8_t data) __attribute((always_inline));
-			static void writeCommandData(uint8_t command,uint8_t lo8,uint8_t hi8) __attribute((always_inline));
+
+			static void writeCommand(uint8_t lo8);
+			static void writeData(uint8_t data);
+			static void writeData(uint8_t lo8,uint8_t hi8);
+			static void writeCommandData(uint8_t cmd,uint8_t lo8,uint8_t hi8=0);
+			static void writeDataAgain(uint8_t lo8,uint8_t hi8=0);
+			static void writeMultiData(uint32_t howMuch,uint8_t lo8,uint8_t hi8=0);
+			static void writeStreamedData(uint8_t data);
 	};
 
+
 	/**
-	 * Write a command to the XMEM interface
+	 * Write a command byte
 	 */
 
-	inline void AdafruitAccessMode::writeCommand(uint8_t command) {
+	inline void AdafruitAccessMode::writeCommand(uint8_t lo8) {
 
 		// set the RS line
 
@@ -97,9 +103,9 @@ namespace lcd {
 
 		// write the specified command value
 
-		PORTH=(PORTH & B10000111) | (((command) & B11000000) >> 3) | (((command) & B00000011) << 5);
-		PORTB=(PORTB & B01001111) | (((command) & B00101100) << 2);
-		PORTG=(PORTG & B11011111) | (((command) & B00010000) << 1);
+		PORTH=(PORTH & B10000111) | (((lo8) & B11000000) >> 3) | (((lo8) & B00000011) << 5);
+		PORTB=(PORTB & B01001111) | (((lo8) & B00101100) << 2);
+		PORTG=(PORTG & B11011111) | (((lo8) & B00010000) << 1);
 
 		// toggle the WR line
 
@@ -107,8 +113,10 @@ namespace lcd {
 		PORTF|=(1 << WR_PIN);
 	}
 
+
 	/**
-	 * Write a data value to the XMEM interface
+	 * Write an 8-bit data value
+	 * @param data The 8-bit data value
 	 */
 
 	inline void AdafruitAccessMode::writeData(uint8_t data) {
@@ -129,11 +137,68 @@ namespace lcd {
 		PORTF|=(1 << WR_PIN);
 	}
 
+
 	/**
-	 * Write a command to the XMEM interface
+	 * Write 16-bits of data
+	 * @param lo8 The low 8 bits
+	 * @param hi8 The high 8-bits
 	 */
 
-	inline void AdafruitAccessMode::writeCommandData(uint8_t command,uint8_t lo8,uint8_t hi8) {
+	inline void AdafruitAccessMode::writeData(uint8_t lo8,uint8_t hi8) {
+		writeData(lo8);
+		writeData(hi8);
+	}
+
+
+	/**
+	 * Write the same 16-bits of data as was last written with writeData(lo,hi). Those
+	 * bytes are presented again here for drivers where no optimisation is possible,
+	 * such as this one.
+	 * @param lo8 The low 8 bits
+	 * @param hi8 The high 8-bits
+	 */
+
+	inline void AdafruitAccessMode::writeDataAgain(uint8_t lo8,uint8_t hi8) {
+		writeData(lo8,hi8);
+	}
+
+
+	/**
+	 * Repeatedly write out 16-bits of data.
+	 * @param howMuch The repeat count.
+	 * @param lo8 The low 8 bits
+	 * @param hi8 The high 8-bits
+	 */
+
+	inline void AdafruitAccessMode::writeMultiData(uint32_t howMuch,uint8_t lo8,uint8_t hi8) {
+
+		// no optimisation is possible
+
+		while(howMuch--)
+			writeData(lo8,hi8);
+	}
+
+
+	/**
+	 * Write a single byte out from a stream of colour values. This is used when streaming
+	 * data to the display from a decompression routine. This interface is 8-bit so we don't
+	 * need to buffer the byte, it can go straight out.
+	 * @param data The next byte in the stream
+	 */
+
+	inline void AdafruitAccessMode::writeStreamedData(uint8_t data) {
+		writeData(data);
+	}
+
+
+	/**
+	 * Write a command and 16-bits of data
+	 * @param cmd The command to write
+	 * @param lo8 The low 8-bits
+	 * @param hi8 The high 8-bits
+	 */
+
+	inline void AdafruitAccessMode::writeCommandData(uint8_t cmd,uint8_t lo8,uint8_t hi8) {
 
 		// set the RS line
 
@@ -152,9 +217,9 @@ namespace lcd {
 
 		// write the specified command value
 
-		PORTH=(PORTH & B10000111) | (((command) & B11000000) >> 3) | (((command) & B00000011) << 5);
-		PORTB=(PORTB & B01001111) | (((command) & B00101100) << 2);
-		PORTG=(PORTG & B11011111) | (((command) & B00010000) << 1);
+		PORTH=(PORTH & B10000111) | (((cmd) & B11000000) >> 3) | (((cmd) & B00000011) << 5);
+		PORTB=(PORTB & B01001111) | (((cmd) & B00101100) << 2);
+		PORTG=(PORTG & B11011111) | (((cmd) & B00010000) << 1);
 
 		// toggle the WR line
 
@@ -191,6 +256,7 @@ namespace lcd {
 		PORTF|=(1 << WR_PIN);
 	}
 
+
 	/**
 	 * Setup the pin modes and directions
 	 */
@@ -220,7 +286,8 @@ namespace lcd {
 		DDRG|=B00100000;
 	}
 
-	/*
+
+	/**
 	 * Perform a hard reset
 	 */
 
