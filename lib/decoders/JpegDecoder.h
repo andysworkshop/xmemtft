@@ -70,7 +70,7 @@ namespace lcd {
 							int bx_limit=min(8,imageInfo.m_width-(mcu_x*imageInfo.m_MCUWidth+x));
 
 							tLCD::template moveTo<TOrientation>(
-									Rectangle(pt.X+mcu_x*imageInfo.m_MCUWidth,pt.Y+mcu_y*imageInfo.m_MCUHeight,bx_limit,by_limit));
+									Rectangle(pt.X+mcu_x*imageInfo.m_MCUWidth+x,pt.Y+mcu_y*imageInfo.m_MCUHeight+y,bx_limit,by_limit));
 
 							tLCD::beginWriting();
 
