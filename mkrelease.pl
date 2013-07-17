@@ -35,7 +35,8 @@ sub copyMiscFiles {
 
     print("Copying misc files...\n");
 
-    fcopy("CHANGELOG.html","/tmp/xmemtft") or die("Failed to copy: $!");
+    fcopy("README.md","/tmp/xmemtft") or die("Failed to copy: $!");
+    fcopy("LICENSE.md","/tmp/xmemtft") or die("Failed to copy: $!");
 }
 
 
