@@ -57,7 +57,7 @@ namespace lcd {
 	 */
 
 	template<class TAccessMode>
-	static void LG_KF700PanelTraits<TAccessMode>::initialise() {
+	inline void LG_KF700PanelTraits::initialise() {
 
 		// do the startup sequence
 
@@ -124,7 +124,7 @@ namespace lcd {
 	 */
 
 	template<class TAccessMode>
-	static void LG_KF700PanelTraits<TAccessMode>::wake() {
-		initialise();
+	inline void LG_KF700PanelTraits::wake() {
+		LG_KF700PanelTraits::initialise<TAccessMode>();
 	}
 }

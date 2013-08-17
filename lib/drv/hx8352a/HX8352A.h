@@ -34,6 +34,7 @@
 #include "commands/Allcommands.h"
 #include "HX8352AColour.h"
 #include "HX8352AOrientation.h"
+#include "HX8352AGamma.h"
 
 
 namespace lcd {
@@ -61,6 +62,7 @@ namespace lcd {
 
 			void initialise() const;
 
+			void applyGamma(HX8352AGamma& gamma) const;
 			void beginWriting() const;
 			void sleep() const;
 			void wake() const;
@@ -98,11 +100,11 @@ namespace lcd {
 
 		// the panels are different, so the setup and initialisation moves to the traits
 
-		TPanelTraits::initialise<TPanelTraits>();
+		TPanelTraits::template initialise<TAccessMode>();
 
 		// set the orientation and scroll area
 
-		TPanelTraits::writeCommandData(hx8352a::MEMORY_ACCESS_CONTROL,this->getMemoryAccessControl());
+		TAccessMode::writeCommandData(hx8352a::MEMORY_ACCESS_CONTROL,this->getMemoryAccessControl());
 		setScrollArea(0,TPanelTraits::LONG_SIDE);
 	}
 
@@ -149,6 +151,28 @@ namespace lcd {
 
 
 	/**
+	 * Apply the panel gamma settings
+	 * @param gamma The gamma class containing the one value
+	 */
+
+	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
+	inline void HX8352A<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::applyGamma(HX8352AGamma& gamma) const {
+		TAccessMode::writeCommand(hx8352a::GAMMA_1+0,gamma[0]);
+		TAccessMode::writeCommand(hx8352a::GAMMA_1+1,gamma[1]);
+		TAccessMode::writeCommand(hx8352a::GAMMA_1+2,gamma[2]);
+		TAccessMode::writeCommand(hx8352a::GAMMA_1+3,gamma[3]);
+		TAccessMode::writeCommand(hx8352a::GAMMA_1+4,gamma[4]);
+		TAccessMode::writeCommand(hx8352a::GAMMA_1+5,gamma[5]);
+		TAccessMode::writeCommand(hx8352a::GAMMA_1+6,gamma[6]);
+		TAccessMode::writeCommand(hx8352a::GAMMA_1+7,gamma[7]);
+		TAccessMode::writeCommand(hx8352a::GAMMA_1+8,gamma[8]);
+		TAccessMode::writeCommand(hx8352a::GAMMA_1+9,gamma[9]);
+		TAccessMode::writeCommand(hx8352a::GAMMA_1+10,gamma[10]);
+		TAccessMode::writeCommand(hx8352a::GAMMA_1+11,gamma[11]);
+	}
+
+
+	/**
 	 * Wake the panel up. The wakeup sequence needs to set the power and
 	 * oscillation parameters which are panel-specific. Hence we defer to
 	 * the panel traits for the implementation.
@@ -156,7 +180,7 @@ namespace lcd {
 
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
 	inline void HX8352A<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::wake() const {
-		TPanelTraits::wake<TAccessMode>();
+		TPanelTraits::template wake<TAccessMode>();
 	}
 
 
@@ -203,6 +227,11 @@ namespace lcd {
 	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
 	inline void HX8352A<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::rawFlashTransfer(uint32_t data,uint32_t numBytes) const {
 
+		uint32_t numPixels;
+
+		numPixels=numBytes/2;
+
+		// handle data in the lower and upper segments with possible overlap
 		// a single 16-bit pixel should not overlap the segments
 
 		while(data<65536 && numPixels>0) {

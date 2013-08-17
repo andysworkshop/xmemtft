@@ -149,7 +149,7 @@ namespace lcd {
 		first=cr.lo8;
 		second=cr.hi8;
 
-		TAccessMode::writeCommand(hx8352a::WRITE_MEMORY_START);
+		TAccessMode::writeCommand(hx8352a::MEMORY_WRITE);
 		TAccessMode::writeMultiData(numPixels,first,second);
 	}
 
@@ -180,7 +180,7 @@ namespace lcd {
 	template<class TAccessMode>
 	inline void HX8352AColour<COLOURS_16BIT,TAccessMode>::rawFlashTransfer(uint32_t buffer,uint32_t numPixels) const {
 
-		TAccessMode::writeCommand(hx8352a::WRITE_MEMORY_START);
+		TAccessMode::writeCommand(hx8352a::MEMORY_WRITE);
 		TAccessMode::rawFlashTransfer(buffer,numPixels*2);
 	}
 
