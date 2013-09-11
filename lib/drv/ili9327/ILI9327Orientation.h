@@ -38,9 +38,9 @@ namespace lcd {
  * @ingroup ILI9327
  */
 
-	template<Orientation TOrientation,class TAccessMode,class TPanelTraits>
-	class ILI9327Orientation {
-	};
+  template<Orientation TOrientation,class TAccessMode,class TPanelTraits>
+  class ILI9327Orientation {
+  };
 }
 
 

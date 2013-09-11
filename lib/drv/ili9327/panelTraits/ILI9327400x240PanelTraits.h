@@ -31,18 +31,18 @@
 namespace lcd {
 
 
-	/**
-	 * Traits class for the ILI9327 that declares a "short" panel
-	 * of 400x240, less than the driver maximum of 432x240
-	 * @ingroup ILI9327
-	 */
+  /**
+   * Traits class for the ILI9327 that declares a "short" panel
+   * of 400x240, less than the driver maximum of 432x240
+   * @ingroup ILI9327
+   */
 
-	class ILI9327400x240PanelTraits {
+  class ILI9327400x240PanelTraits {
 
-		public:
-			enum {
-				LONG_SIDE = 400,						///< this panel is 400 on the long side
-				SHORT_SIDE = 240						///< this panel is 240 on the short side
-			};
-	};
+    public:
+      enum {
+        LONG_SIDE = 400,            ///< this panel is 400 on the long side
+        SHORT_SIDE = 240            ///< this panel is 240 on the short side
+      };
+  };
 }

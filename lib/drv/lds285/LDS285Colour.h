@@ -29,17 +29,17 @@
 
 namespace lcd {
 
-	/**
-	 * @brief Forward declaration of the LDS285Colour template
-	 *
-	 * Empty generic class definition for LDS285 colour-dependent operations
-	 * Everything is provided in the specialisations.
-	 *
-	 * @ingroup LDS285
-	 */
+  /**
+   * @brief Forward declaration of the LDS285Colour template
+   *
+   * Empty generic class definition for LDS285 colour-dependent operations
+   * Everything is provided in the specialisations.
+   *
+   * @ingroup LDS285
+   */
 
-	template<ColourDepth TColour,class TAccessMode,class TPanelTraits>
-	class LDS285Colour;
+  template<ColourDepth TColour,class TAccessMode,class TPanelTraits>
+  class LDS285Colour;
 }
 
 

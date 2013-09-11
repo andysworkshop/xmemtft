@@ -31,17 +31,17 @@
 namespace lcd {
 
 
-	/**
-	 * @brief Forward declaration of the ILI9481Colour template
-	 *
-	 * Empty generic class definition for ILI9481 colour-dependent operations
-	 * Everything is provided in the specialisations.
-	 *
-	 * @ingroup ILI9481
-	 */
+  /**
+   * @brief Forward declaration of the ILI9481Colour template
+   *
+   * Empty generic class definition for ILI9481 colour-dependent operations
+   * Everything is provided in the specialisations.
+   *
+   * @ingroup ILI9481
+   */
 
-	template<ColourDepth TColour,class TAccessMode>
-	class ILI9481Colour;
+  template<ColourDepth TColour,class TAccessMode>
+  class ILI9481Colour;
 }
 
 

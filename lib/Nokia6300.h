@@ -54,155 +54,155 @@
 
 namespace lcd {
 
-	#if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
+  #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
 
-	/*
-	 * Nokia 6300 XMEM type A interface: 64K, 262K, 16M colours, portrait and landscape
-	 */
+  /*
+   * Nokia 6300 XMEM type A interface: 64K, 262K, 16M colours, portrait and landscape
+   */
 
-	typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_16BIT,XmemAccessMode,Nokia6300_TypeA>,XmemAccessMode> Nokia6300_Portrait_64K;
-	typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_16BIT,XmemAccessMode,Nokia6300_TypeA>,XmemAccessMode> Nokia6300_Landscape_64K;
+  typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_16BIT,XmemAccessMode,Nokia6300_TypeA>,XmemAccessMode> Nokia6300_Portrait_64K;
+  typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_16BIT,XmemAccessMode,Nokia6300_TypeA>,XmemAccessMode> Nokia6300_Landscape_64K;
 
-	typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_18BIT,XmemAccessMode,Nokia6300_TypeA>,XmemAccessMode> Nokia6300_Portrait_262K;
-	typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_18BIT,XmemAccessMode,Nokia6300_TypeA>,XmemAccessMode> Nokia6300_Landscape_262K;
+  typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_18BIT,XmemAccessMode,Nokia6300_TypeA>,XmemAccessMode> Nokia6300_Portrait_262K;
+  typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_18BIT,XmemAccessMode,Nokia6300_TypeA>,XmemAccessMode> Nokia6300_Landscape_262K;
 
-	typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_24BIT,XmemAccessMode,Nokia6300_TypeA>,XmemAccessMode> Nokia6300_Portrait_16M;
-	typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_24BIT,XmemAccessMode,Nokia6300_TypeA>,XmemAccessMode> Nokia6300_Landscape_16M;
+  typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_24BIT,XmemAccessMode,Nokia6300_TypeA>,XmemAccessMode> Nokia6300_Portrait_16M;
+  typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_24BIT,XmemAccessMode,Nokia6300_TypeA>,XmemAccessMode> Nokia6300_Landscape_16M;
 
-	typedef TerminalPortraitImpl<Nokia6300_Portrait_64K> Nokia6300_Terminal_Portrait_64K;
-	typedef TerminalLandscapeImpl<Nokia6300_Landscape_64K> Nokia6300_Terminal_Landscape_64K;
+  typedef TerminalPortraitImpl<Nokia6300_Portrait_64K> Nokia6300_Terminal_Portrait_64K;
+  typedef TerminalLandscapeImpl<Nokia6300_Landscape_64K> Nokia6300_Terminal_Landscape_64K;
 
-	typedef TerminalPortraitImpl<Nokia6300_Portrait_262K> Nokia6300_Terminal_Portrait_262K;
-	typedef TerminalLandscapeImpl<Nokia6300_Landscape_262K> Nokia6300_Terminal_Landscape_262K;
+  typedef TerminalPortraitImpl<Nokia6300_Portrait_262K> Nokia6300_Terminal_Portrait_262K;
+  typedef TerminalLandscapeImpl<Nokia6300_Landscape_262K> Nokia6300_Terminal_Landscape_262K;
 
-	typedef TerminalPortraitImpl<Nokia6300_Portrait_16M> Nokia6300_Terminal_Portrait_16M;
-	typedef TerminalLandscapeImpl<Nokia6300_Landscape_16M> Nokia6300_Terminal_Landscape_16M;
+  typedef TerminalPortraitImpl<Nokia6300_Portrait_16M> Nokia6300_Terminal_Portrait_16M;
+  typedef TerminalLandscapeImpl<Nokia6300_Landscape_16M> Nokia6300_Terminal_Landscape_16M;
 
-	/*
-	 * Nokia 6300 XMEM type B interface: 64K, 262K, 16M colours, portrait and landscape
-	 */
+  /*
+   * Nokia 6300 XMEM type B interface: 64K, 262K, 16M colours, portrait and landscape
+   */
 
-	typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_16BIT,XmemAccessMode,Nokia6300_TypeB>,XmemAccessMode> Nokia6300_Portrait_64K_TypeB;
-	typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_16BIT,XmemAccessMode,Nokia6300_TypeB>,XmemAccessMode> Nokia6300_Landscape_64K_TypeB;
+  typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_16BIT,XmemAccessMode,Nokia6300_TypeB>,XmemAccessMode> Nokia6300_Portrait_64K_TypeB;
+  typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_16BIT,XmemAccessMode,Nokia6300_TypeB>,XmemAccessMode> Nokia6300_Landscape_64K_TypeB;
 
-	typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_18BIT,XmemAccessMode,Nokia6300_TypeB>,XmemAccessMode> Nokia6300_Portrait_262K_TypeB;
-	typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_18BIT,XmemAccessMode,Nokia6300_TypeB>,XmemAccessMode> Nokia6300_Landscape_262K_TypeB;
+  typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_18BIT,XmemAccessMode,Nokia6300_TypeB>,XmemAccessMode> Nokia6300_Portrait_262K_TypeB;
+  typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_18BIT,XmemAccessMode,Nokia6300_TypeB>,XmemAccessMode> Nokia6300_Landscape_262K_TypeB;
 
-	typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_24BIT,XmemAccessMode,Nokia6300_TypeB>,XmemAccessMode> Nokia6300_Portrait_16M_TypeB;
-	typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_24BIT,XmemAccessMode,Nokia6300_TypeB>,XmemAccessMode> Nokia6300_Landscape_16M_TypeB;
+  typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_24BIT,XmemAccessMode,Nokia6300_TypeB>,XmemAccessMode> Nokia6300_Portrait_16M_TypeB;
+  typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_24BIT,XmemAccessMode,Nokia6300_TypeB>,XmemAccessMode> Nokia6300_Landscape_16M_TypeB;
 
-	typedef TerminalPortraitImpl<Nokia6300_Portrait_64K_TypeB> Nokia6300_Terminal_Portrait_64K_TypeB;
-	typedef TerminalLandscapeImpl<Nokia6300_Landscape_64K_TypeB> Nokia6300_Terminal_Landscape_64K_TypeB;
+  typedef TerminalPortraitImpl<Nokia6300_Portrait_64K_TypeB> Nokia6300_Terminal_Portrait_64K_TypeB;
+  typedef TerminalLandscapeImpl<Nokia6300_Landscape_64K_TypeB> Nokia6300_Terminal_Landscape_64K_TypeB;
 
-	typedef TerminalPortraitImpl<Nokia6300_Portrait_262K_TypeB> Nokia6300_Terminal_Portrait_262K_TypeB;
-	typedef TerminalLandscapeImpl<Nokia6300_Landscape_262K_TypeB> Nokia6300_Terminal_Landscape_262K_TypeB;
+  typedef TerminalPortraitImpl<Nokia6300_Portrait_262K_TypeB> Nokia6300_Terminal_Portrait_262K_TypeB;
+  typedef TerminalLandscapeImpl<Nokia6300_Landscape_262K_TypeB> Nokia6300_Terminal_Landscape_262K_TypeB;
 
-	typedef TerminalPortraitImpl<Nokia6300_Portrait_16M_TypeB> Nokia6300_Terminal_Portrait_16M_TypeB;
-	typedef TerminalLandscapeImpl<Nokia6300_Landscape_16M_TypeB> Nokia6300_Terminal_Landscape_16M_TypeB;
+  typedef TerminalPortraitImpl<Nokia6300_Portrait_16M_TypeB> Nokia6300_Terminal_Portrait_16M_TypeB;
+  typedef TerminalLandscapeImpl<Nokia6300_Landscape_16M_TypeB> Nokia6300_Terminal_Landscape_16M_TypeB;
 
-	/*
-	 * Nokia 6300 XMEM type C interface: 64K, 262K, 16M colours, portrait and landscape
-	 */
+  /*
+   * Nokia 6300 XMEM type C interface: 64K, 262K, 16M colours, portrait and landscape
+   */
 
-	typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_16BIT,XmemAccessMode,Nokia6300_TypeC>,XmemAccessMode> Nokia6300_Portrait_64K_TypeC;
-	typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_16BIT,XmemAccessMode,Nokia6300_TypeC>,XmemAccessMode> Nokia6300_Landscape_64K_TypeC;
+  typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_16BIT,XmemAccessMode,Nokia6300_TypeC>,XmemAccessMode> Nokia6300_Portrait_64K_TypeC;
+  typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_16BIT,XmemAccessMode,Nokia6300_TypeC>,XmemAccessMode> Nokia6300_Landscape_64K_TypeC;
 
-	typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_18BIT,XmemAccessMode,Nokia6300_TypeC>,XmemAccessMode> Nokia6300_Portrait_262K_TypeC;
-	typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_18BIT,XmemAccessMode,Nokia6300_TypeC>,XmemAccessMode> Nokia6300_Landscape_262K_TypeC;
+  typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_18BIT,XmemAccessMode,Nokia6300_TypeC>,XmemAccessMode> Nokia6300_Portrait_262K_TypeC;
+  typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_18BIT,XmemAccessMode,Nokia6300_TypeC>,XmemAccessMode> Nokia6300_Landscape_262K_TypeC;
 
-	typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_24BIT,XmemAccessMode,Nokia6300_TypeC>,XmemAccessMode> Nokia6300_Portrait_16M_TypeC;
-	typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_24BIT,XmemAccessMode,Nokia6300_TypeC>,XmemAccessMode> Nokia6300_Landscape_16M_TypeC;
+  typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_24BIT,XmemAccessMode,Nokia6300_TypeC>,XmemAccessMode> Nokia6300_Portrait_16M_TypeC;
+  typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_24BIT,XmemAccessMode,Nokia6300_TypeC>,XmemAccessMode> Nokia6300_Landscape_16M_TypeC;
 
-	typedef TerminalPortraitImpl<Nokia6300_Portrait_64K_TypeC> Nokia6300_Terminal_Portrait_64K_TypeC;
-	typedef TerminalLandscapeImpl<Nokia6300_Landscape_64K_TypeC> Nokia6300_Terminal_Landscape_64K_TypeC;
+  typedef TerminalPortraitImpl<Nokia6300_Portrait_64K_TypeC> Nokia6300_Terminal_Portrait_64K_TypeC;
+  typedef TerminalLandscapeImpl<Nokia6300_Landscape_64K_TypeC> Nokia6300_Terminal_Landscape_64K_TypeC;
 
-	typedef TerminalPortraitImpl<Nokia6300_Portrait_262K_TypeC> Nokia6300_Terminal_Portrait_262K_TypeC;
-	typedef TerminalLandscapeImpl<Nokia6300_Landscape_262K_TypeC> Nokia6300_Terminal_Landscape_262K_TypeC;
+  typedef TerminalPortraitImpl<Nokia6300_Portrait_262K_TypeC> Nokia6300_Terminal_Portrait_262K_TypeC;
+  typedef TerminalLandscapeImpl<Nokia6300_Landscape_262K_TypeC> Nokia6300_Terminal_Landscape_262K_TypeC;
 
-	typedef TerminalPortraitImpl<Nokia6300_Portrait_16M_TypeC> Nokia6300_Terminal_Portrait_16M_TypeC;
-	typedef TerminalLandscapeImpl<Nokia6300_Landscape_16M_TypeC> Nokia6300_Terminal_Landscape_16M_TypeC;
+  typedef TerminalPortraitImpl<Nokia6300_Portrait_16M_TypeC> Nokia6300_Terminal_Portrait_16M_TypeC;
+  typedef TerminalLandscapeImpl<Nokia6300_Landscape_16M_TypeC> Nokia6300_Terminal_Landscape_16M_TypeC;
 
-	/*
-	 * The default for most people is a PWM output on pin #2
-	 */
+  /*
+   * The default for most people is a PWM output on pin #2
+   */
 
-	typedef Backlight<2> DefaultBacklight;
+  typedef Backlight<2> DefaultBacklight;
 
-	#else			// !mega1280 && !mega2560
+  #else     // !mega1280 && !mega2560
 
-	/*
-	 * Pins 0..9 are used on the 328P for IO so we'll default the backlight to PWM pin #10
-	 */
+  /*
+   * Pins 0..9 are used on the 328P for IO so we'll default the backlight to PWM pin #10
+   */
 
-	typedef Backlight<10> DefaultBacklight;
+  typedef Backlight<10> DefaultBacklight;
 
-	#endif		// mega1280/mega2560
+  #endif    // mega1280/mega2560
 
-	/*
-	 * Nokia 6300 GPIO type A interface: 64K, 262K, 16M colours, portrait and landscape
-	 */
+  /*
+   * Nokia 6300 GPIO type A interface: 64K, 262K, 16M colours, portrait and landscape
+   */
 
-	typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_16BIT,GpioAccessMode,Nokia6300_TypeA>,GpioAccessMode> Nokia6300_Portrait_64K_Gpio;
-	typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_16BIT,GpioAccessMode,Nokia6300_TypeA>,GpioAccessMode> Nokia6300_Landscape_64K_Gpio;
+  typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_16BIT,GpioAccessMode,Nokia6300_TypeA>,GpioAccessMode> Nokia6300_Portrait_64K_Gpio;
+  typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_16BIT,GpioAccessMode,Nokia6300_TypeA>,GpioAccessMode> Nokia6300_Landscape_64K_Gpio;
 
-	typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_18BIT,GpioAccessMode,Nokia6300_TypeA>,GpioAccessMode> Nokia6300_Portrait_262K_Gpio;
-	typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_18BIT,GpioAccessMode,Nokia6300_TypeA>,GpioAccessMode> Nokia6300_Landscape_262K_Gpio;
+  typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_18BIT,GpioAccessMode,Nokia6300_TypeA>,GpioAccessMode> Nokia6300_Portrait_262K_Gpio;
+  typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_18BIT,GpioAccessMode,Nokia6300_TypeA>,GpioAccessMode> Nokia6300_Landscape_262K_Gpio;
 
-	typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_24BIT,GpioAccessMode,Nokia6300_TypeA>,GpioAccessMode> Nokia6300_Portrait_16M_Gpio;
-	typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_24BIT,GpioAccessMode,Nokia6300_TypeA>,GpioAccessMode> Nokia6300_Landscape_16M_Gpio;
+  typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_24BIT,GpioAccessMode,Nokia6300_TypeA>,GpioAccessMode> Nokia6300_Portrait_16M_Gpio;
+  typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_24BIT,GpioAccessMode,Nokia6300_TypeA>,GpioAccessMode> Nokia6300_Landscape_16M_Gpio;
 
-	typedef TerminalPortraitImpl<Nokia6300_Portrait_64K_Gpio> Nokia6300_Terminal_Portrait_64K_Gpio;
-	typedef TerminalLandscapeImpl<Nokia6300_Landscape_64K_Gpio> Nokia6300_Terminal_Landscape_64K_Gpio;
+  typedef TerminalPortraitImpl<Nokia6300_Portrait_64K_Gpio> Nokia6300_Terminal_Portrait_64K_Gpio;
+  typedef TerminalLandscapeImpl<Nokia6300_Landscape_64K_Gpio> Nokia6300_Terminal_Landscape_64K_Gpio;
 
-	typedef TerminalPortraitImpl<Nokia6300_Portrait_262K_Gpio> Nokia6300_Terminal_Portrait_262K_Gpio;
-	typedef TerminalLandscapeImpl<Nokia6300_Landscape_262K_Gpio> Nokia6300_Terminal_Landscape_262K_Gpio;
+  typedef TerminalPortraitImpl<Nokia6300_Portrait_262K_Gpio> Nokia6300_Terminal_Portrait_262K_Gpio;
+  typedef TerminalLandscapeImpl<Nokia6300_Landscape_262K_Gpio> Nokia6300_Terminal_Landscape_262K_Gpio;
 
-	typedef TerminalPortraitImpl<Nokia6300_Portrait_16M_Gpio> Nokia6300_Terminal_Portrait_16M_Gpio;
-	typedef TerminalLandscapeImpl<Nokia6300_Landscape_16M_Gpio> Nokia6300_Terminal_Landscape_16M_Gpio;
+  typedef TerminalPortraitImpl<Nokia6300_Portrait_16M_Gpio> Nokia6300_Terminal_Portrait_16M_Gpio;
+  typedef TerminalLandscapeImpl<Nokia6300_Landscape_16M_Gpio> Nokia6300_Terminal_Landscape_16M_Gpio;
 
-	/*
-	 * Nokia 6300 GPIO type B interface: 64K, 262K, 16M colours, portrait and landscape
-	 */
+  /*
+   * Nokia 6300 GPIO type B interface: 64K, 262K, 16M colours, portrait and landscape
+   */
 
-	typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_16BIT,GpioAccessMode,Nokia6300_TypeB>,GpioAccessMode> Nokia6300_Portrait_64K_TypeB_Gpio;
-	typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_16BIT,GpioAccessMode,Nokia6300_TypeB>,GpioAccessMode> Nokia6300_Landscape_64K_TypeB_Gpio;
+  typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_16BIT,GpioAccessMode,Nokia6300_TypeB>,GpioAccessMode> Nokia6300_Portrait_64K_TypeB_Gpio;
+  typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_16BIT,GpioAccessMode,Nokia6300_TypeB>,GpioAccessMode> Nokia6300_Landscape_64K_TypeB_Gpio;
 
-	typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_18BIT,GpioAccessMode,Nokia6300_TypeB>,GpioAccessMode> Nokia6300_Portrait_262K_TypeB_Gpio;
-	typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_18BIT,GpioAccessMode,Nokia6300_TypeB>,GpioAccessMode> Nokia6300_Landscape_262K_TypeB_Gpio;
+  typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_18BIT,GpioAccessMode,Nokia6300_TypeB>,GpioAccessMode> Nokia6300_Portrait_262K_TypeB_Gpio;
+  typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_18BIT,GpioAccessMode,Nokia6300_TypeB>,GpioAccessMode> Nokia6300_Landscape_262K_TypeB_Gpio;
 
-	typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_24BIT,GpioAccessMode,Nokia6300_TypeB>,GpioAccessMode> Nokia6300_Portrait_16M_TypeB_Gpio;
-	typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_24BIT,GpioAccessMode,Nokia6300_TypeB>,GpioAccessMode> Nokia6300_Landscape_16M_TypeB_Gpio;
+  typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_24BIT,GpioAccessMode,Nokia6300_TypeB>,GpioAccessMode> Nokia6300_Portrait_16M_TypeB_Gpio;
+  typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_24BIT,GpioAccessMode,Nokia6300_TypeB>,GpioAccessMode> Nokia6300_Landscape_16M_TypeB_Gpio;
 
-	typedef TerminalPortraitImpl<Nokia6300_Portrait_64K_TypeB_Gpio> Nokia6300_Terminal_Portrait_64K_TypeB_Gpio;
-	typedef TerminalLandscapeImpl<Nokia6300_Landscape_64K_TypeB_Gpio> Nokia6300_Terminal_Landscape_64K_TypeB_Gpio;
+  typedef TerminalPortraitImpl<Nokia6300_Portrait_64K_TypeB_Gpio> Nokia6300_Terminal_Portrait_64K_TypeB_Gpio;
+  typedef TerminalLandscapeImpl<Nokia6300_Landscape_64K_TypeB_Gpio> Nokia6300_Terminal_Landscape_64K_TypeB_Gpio;
 
-	typedef TerminalPortraitImpl<Nokia6300_Portrait_262K_TypeB_Gpio> Nokia6300_Terminal_Portrait_262K_TypeB_Gpio;
-	typedef TerminalLandscapeImpl<Nokia6300_Landscape_262K_TypeB_Gpio> Nokia6300_Terminal_Landscape_262K_TypeB_Gpio;
+  typedef TerminalPortraitImpl<Nokia6300_Portrait_262K_TypeB_Gpio> Nokia6300_Terminal_Portrait_262K_TypeB_Gpio;
+  typedef TerminalLandscapeImpl<Nokia6300_Landscape_262K_TypeB_Gpio> Nokia6300_Terminal_Landscape_262K_TypeB_Gpio;
 
-	typedef TerminalPortraitImpl<Nokia6300_Portrait_16M_TypeB_Gpio> Nokia6300_Terminal_Portrait_16M_TypeB_Gpio;
-	typedef TerminalLandscapeImpl<Nokia6300_Landscape_16M_TypeB_Gpio> Nokia6300_Terminal_Landscape_16M_TypeB_Gpio;
+  typedef TerminalPortraitImpl<Nokia6300_Portrait_16M_TypeB_Gpio> Nokia6300_Terminal_Portrait_16M_TypeB_Gpio;
+  typedef TerminalLandscapeImpl<Nokia6300_Landscape_16M_TypeB_Gpio> Nokia6300_Terminal_Landscape_16M_TypeB_Gpio;
 
-	/*
-	 * Nokia 6300 GPIO type C interface: 64K, 262K, 16M colours, portrait and landscape
-	 */
+  /*
+   * Nokia 6300 GPIO type C interface: 64K, 262K, 16M colours, portrait and landscape
+   */
 
-	typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_16BIT,GpioAccessMode,Nokia6300_TypeC>,GpioAccessMode> Nokia6300_Portrait_64K_TypeC_Gpio;
-	typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_16BIT,GpioAccessMode,Nokia6300_TypeC>,GpioAccessMode> Nokia6300_Landscape_64K_TypeC_Gpio;
+  typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_16BIT,GpioAccessMode,Nokia6300_TypeC>,GpioAccessMode> Nokia6300_Portrait_64K_TypeC_Gpio;
+  typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_16BIT,GpioAccessMode,Nokia6300_TypeC>,GpioAccessMode> Nokia6300_Landscape_64K_TypeC_Gpio;
 
-	typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_18BIT,GpioAccessMode,Nokia6300_TypeC>,GpioAccessMode> Nokia6300_Portrait_262K_TypeC_Gpio;
-	typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_18BIT,GpioAccessMode,Nokia6300_TypeC>,GpioAccessMode> Nokia6300_Landscape_262K_TypeC_Gpio;
+  typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_18BIT,GpioAccessMode,Nokia6300_TypeC>,GpioAccessMode> Nokia6300_Portrait_262K_TypeC_Gpio;
+  typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_18BIT,GpioAccessMode,Nokia6300_TypeC>,GpioAccessMode> Nokia6300_Landscape_262K_TypeC_Gpio;
 
-	typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_24BIT,GpioAccessMode,Nokia6300_TypeC>,GpioAccessMode> Nokia6300_Portrait_16M_TypeC_Gpio;
-	typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_24BIT,GpioAccessMode,Nokia6300_TypeC>,GpioAccessMode> Nokia6300_Landscape_16M_TypeC_Gpio;
+  typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_24BIT,GpioAccessMode,Nokia6300_TypeC>,GpioAccessMode> Nokia6300_Portrait_16M_TypeC_Gpio;
+  typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_24BIT,GpioAccessMode,Nokia6300_TypeC>,GpioAccessMode> Nokia6300_Landscape_16M_TypeC_Gpio;
 
-	typedef TerminalPortraitImpl<Nokia6300_Portrait_64K_TypeC_Gpio> Nokia6300_Terminal_Portrait_64K_TypeC_Gpio;
-	typedef TerminalLandscapeImpl<Nokia6300_Landscape_64K_TypeC_Gpio> Nokia6300_Terminal_Landscape_64K_TypeC_Gpio;
+  typedef TerminalPortraitImpl<Nokia6300_Portrait_64K_TypeC_Gpio> Nokia6300_Terminal_Portrait_64K_TypeC_Gpio;
+  typedef TerminalLandscapeImpl<Nokia6300_Landscape_64K_TypeC_Gpio> Nokia6300_Terminal_Landscape_64K_TypeC_Gpio;
 
-	typedef TerminalPortraitImpl<Nokia6300_Portrait_262K_TypeC_Gpio> Nokia6300_Terminal_Portrait_262K_TypeC_Gpio;
-	typedef TerminalLandscapeImpl<Nokia6300_Landscape_262K_TypeC_Gpio> Nokia6300_Terminal_Landscape_262K_TypeC_Gpio;
+  typedef TerminalPortraitImpl<Nokia6300_Portrait_262K_TypeC_Gpio> Nokia6300_Terminal_Portrait_262K_TypeC_Gpio;
+  typedef TerminalLandscapeImpl<Nokia6300_Landscape_262K_TypeC_Gpio> Nokia6300_Terminal_Landscape_262K_TypeC_Gpio;
 
-	typedef TerminalPortraitImpl<Nokia6300_Portrait_16M_TypeC_Gpio> Nokia6300_Terminal_Portrait_16M_TypeC_Gpio;
-	typedef TerminalLandscapeImpl<Nokia6300_Landscape_16M_TypeC_Gpio> Nokia6300_Terminal_Landscape_16M_TypeC_Gpio;
+  typedef TerminalPortraitImpl<Nokia6300_Portrait_16M_TypeC_Gpio> Nokia6300_Terminal_Portrait_16M_TypeC_Gpio;
+  typedef TerminalLandscapeImpl<Nokia6300_Landscape_16M_TypeC_Gpio> Nokia6300_Terminal_Landscape_16M_TypeC_Gpio;
 }
 
 

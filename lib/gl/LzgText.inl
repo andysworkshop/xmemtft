@@ -36,74 +36,74 @@
 namespace lcd {
 
 
-	/**
-	 * Write a null terminated string of characters to the display.
-	 * @param p The upper-left co-ordinate on the panel to start writing at.
-	 * @param font The LzgFont that the characters will come from.
-	 * @param str The character string to write.
-	 * @return The pixel size of the string.
-	 */
+  /**
+   * Write a null terminated string of characters to the display.
+   * @param p The upper-left co-ordinate on the panel to start writing at.
+   * @param font The LzgFont that the characters will come from.
+   * @param str The character string to write.
+   * @return The pixel size of the string.
+   */
 
-	template<class TDevice,class TAccessMode>
-	inline Size GraphicsLibrary<TDevice,TAccessMode>::writeString(const Point& p,const LzgFont& font,const char *str) const {
+  template<class TDevice,class TAccessMode>
+  inline Size GraphicsLibrary<TDevice,TAccessMode>::writeString(const Point& p,const LzgFont& font,const char *str) const {
 
-		const char *ptr;
-		Point pos(p);
-		FontChar fc;
-		int16_t width;
-		Size s;
+    const char *ptr;
+    Point pos(p);
+    FontChar fc;
+    int16_t width;
+    Size s;
 
-		s.Height=font.getHeight();
-		s.Width=0;
+    s.Height=font.getHeight();
+    s.Width=0;
 
-		// print each character in turn
+    // print each character in turn
 
-		for(ptr=str;*ptr;ptr++) {
+    for(ptr=str;*ptr;ptr++) {
 
-			font.getCharacter(*ptr,fc);
+      font.getCharacter(*ptr,fc);
 
-			if(fc.Code!=' ')										// space is special and never has any data but does have a size
-				writeCharacter(pos,font,fc);
+      if(fc.Code!=' ')                    // space is special and never has any data but does have a size
+        writeCharacter(pos,font,fc);
 
-			width=fc.PixelWidth+font.getCharacterSpacing();
-			pos.X+=width;
-			s.Width+=width;
-		}
+      width=fc.PixelWidth+font.getCharacterSpacing();
+      pos.X+=width;
+      s.Width+=width;
+    }
 
-		return s;
-	}
+    return s;
+  }
 
 
-	/**
-	 * Write a single character
-	 * @param p The upper-left co-ordinate on the panel to start writing at.
-	 * @param font The LzgFont that the characters will come from.
-	 * @param fc The FontChar definition of the character to write. LzgFont.getCharacter() will get you this structure,.
-	 */
+  /**
+   * Write a single character
+   * @param p The upper-left co-ordinate on the panel to start writing at.
+   * @param font The LzgFont that the characters will come from.
+   * @param fc The FontChar definition of the character to write. LzgFont.getCharacter() will get you this structure,.
+   */
 
-	template<class TDevice,class TAccessMode>
-	inline void GraphicsLibrary<TDevice,TAccessMode>::writeCharacter(const Point& p,const LzgFont& font,const FontChar& fc) const {
+  template<class TDevice,class TAccessMode>
+  inline void GraphicsLibrary<TDevice,TAccessMode>::writeCharacter(const Point& p,const LzgFont& font,const FontChar& fc) const {
 
-		Bitmap bm;
-		uint16_t lsb,msb;
-		const uint8_t *ptr;
-		Point charLocation(p);
+    Bitmap bm;
+    uint16_t lsb,msb;
+    const uint8_t *ptr;
+    Point charLocation(p);
 
-		// extract the data size and data ptr
+    // extract the data size and data ptr
 
-		ptr=fc.Data;
-		lsb=pgm_read_byte(ptr++);
-		msb=pgm_read_byte(ptr++);
+    ptr=fc.Data;
+    lsb=pgm_read_byte(ptr++);
+    msb=pgm_read_byte(ptr++);
 
-		// set up the rest of the structure
+    // set up the rest of the structure
 
-		bm.Dimensions.Width=fc.PixelWidth;
-		bm.Dimensions.Height=font.getHeight();
-		bm.DataSize=(msb<<8) | lsb;
-		bm.Pixels=reinterpret_cast<uint32_t>(ptr);
+    bm.Dimensions.Width=fc.PixelWidth;
+    bm.Dimensions.Height=font.getHeight();
+    bm.DataSize=(msb<<8) | lsb;
+    bm.Pixels=reinterpret_cast<uint32_t>(ptr);
 
-		// draw the bitmap
+    // draw the bitmap
 
-		drawCompressedBitmap(charLocation,bm);
-	}
+    drawCompressedBitmap(charLocation,bm);
+  }
 }

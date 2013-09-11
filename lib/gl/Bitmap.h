@@ -29,23 +29,23 @@
 
 namespace lcd {
 
-	/**
-	 * @brief Structure that defines a bitmap
-	 * @ingroup GraphicsLibrary
-	 */
+  /**
+   * @brief Structure that defines a bitmap
+   * @ingroup GraphicsLibrary
+   */
 
-	struct Bitmap {
+  struct Bitmap {
 
-		Size Dimensions;			///< pixel Width,Height
-		uint32_t Pixels;			///< memory location. the choice of flash/sram is not mandated here
-		uint32_t DataSize;		///< byte-size of the buffer pointed to by the Pixels member
+    Size Dimensions;      ///< pixel Width,Height
+    uint32_t Pixels;      ///< memory location. the choice of flash/sram is not mandated here
+    uint32_t DataSize;    ///< byte-size of the buffer pointed to by the Pixels member
 
-		/**
-		 * Default constructor
-		 */
+    /**
+     * Default constructor
+     */
 
-		Bitmap()
-			: Dimensions(), Pixels() {
-		}
-	};
+    Bitmap()
+      : Dimensions(), Pixels() {
+    }
+  };
 }

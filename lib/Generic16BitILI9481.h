@@ -53,31 +53,31 @@ namespace lcd {
 
 #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
 
-	/*
-	 * Generic ILI9481 XMEM16 interface: 64K colours, portrait and landscape
-	 */
+  /*
+   * Generic ILI9481 XMEM16 interface: 64K colours, portrait and landscape
+   */
 
-	typedef GraphicsLibrary<ILI9481<PORTRAIT,COLOURS_16BIT,Xmem16AccessMode>,Xmem16AccessMode> ILI9481_Portrait_64K_Xmem16;
-	typedef GraphicsLibrary<ILI9481<LANDSCAPE,COLOURS_16BIT,Xmem16AccessMode>,Xmem16AccessMode> ILI9481_Landscape_64K_Xmem16;
+  typedef GraphicsLibrary<ILI9481<PORTRAIT,COLOURS_16BIT,Xmem16AccessMode>,Xmem16AccessMode> ILI9481_Portrait_64K_Xmem16;
+  typedef GraphicsLibrary<ILI9481<LANDSCAPE,COLOURS_16BIT,Xmem16AccessMode>,Xmem16AccessMode> ILI9481_Landscape_64K_Xmem16;
 
-	typedef TerminalPortraitImpl<ILI9481_Portrait_64K_Xmem16> ILI9481_Terminal_Portrait_64K_Xmem16;
-	typedef TerminalLandscapeImpl<ILI9481_Landscape_64K_Xmem16> ILI9481_Terminal_Landscape_64K_Xmem16;
+  typedef TerminalPortraitImpl<ILI9481_Portrait_64K_Xmem16> ILI9481_Terminal_Portrait_64K_Xmem16;
+  typedef TerminalLandscapeImpl<ILI9481_Landscape_64K_Xmem16> ILI9481_Terminal_Landscape_64K_Xmem16;
 
-	/*
-	 * Generic ILI9481 GPIO16 latched interface: 64K colours, portrait and landscape
-	 */
+  /*
+   * Generic ILI9481 GPIO16 latched interface: 64K colours, portrait and landscape
+   */
 
-	typedef GraphicsLibrary<ILI9481<PORTRAIT,COLOURS_16BIT,DefaultMegaGpio16LatchAccessMode>,DefaultMegaGpio16LatchAccessMode> ILI9481_Portrait_64K_Gpio16Latch;
-	typedef GraphicsLibrary<ILI9481<LANDSCAPE,COLOURS_16BIT,DefaultMegaGpio16LatchAccessMode>,DefaultMegaGpio16LatchAccessMode> ILI9481_Landscape_64K_Gpio16Latch;
+  typedef GraphicsLibrary<ILI9481<PORTRAIT,COLOURS_16BIT,DefaultMegaGpio16LatchAccessMode>,DefaultMegaGpio16LatchAccessMode> ILI9481_Portrait_64K_Gpio16Latch;
+  typedef GraphicsLibrary<ILI9481<LANDSCAPE,COLOURS_16BIT,DefaultMegaGpio16LatchAccessMode>,DefaultMegaGpio16LatchAccessMode> ILI9481_Landscape_64K_Gpio16Latch;
 
-	typedef TerminalPortraitImpl<ILI9481_Portrait_64K_Gpio16Latch> ILI9481_Terminal_Portrait_64K_Gpio16Latch;
-	typedef TerminalLandscapeImpl<ILI9481_Landscape_64K_Gpio16Latch> ILI9481_Terminal_Landscape_64K_Gpio16Latch;
+  typedef TerminalPortraitImpl<ILI9481_Portrait_64K_Gpio16Latch> ILI9481_Terminal_Portrait_64K_Gpio16Latch;
+  typedef TerminalLandscapeImpl<ILI9481_Landscape_64K_Gpio16Latch> ILI9481_Terminal_Landscape_64K_Gpio16Latch;
 
-	/*
-	 * The default for most people is a PWM output on pin #2
-	 */
+  /*
+   * The default for most people is a PWM output on pin #2
+   */
 
-	typedef Backlight<2> DefaultBacklight;
+  typedef Backlight<2> DefaultBacklight;
 
 #endif
 }

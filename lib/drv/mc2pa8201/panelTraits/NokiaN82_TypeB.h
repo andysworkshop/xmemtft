@@ -30,104 +30,104 @@
 
 namespace lcd {
 
-	/**
-	 * Panel traits for a Type B Nokia N82 panel
-	 *
-	 * 1. Positive scroll offsets scroll upwards
-	 * 2. (page,column) addressing is swapped for landscape mode
-	 * 3. BGR and RGB are both supported but we always use RGB anyway
-	 * @ingroup MC2PA8201
-	 */
+  /**
+   * Panel traits for a Type B Nokia N82 panel
+   *
+   * 1. Positive scroll offsets scroll upwards
+   * 2. (page,column) addressing is swapped for landscape mode
+   * 3. BGR and RGB are both supported but we always use RGB anyway
+   * @ingroup MC2PA8201
+   */
 
-	class NokiaN82_TypeB {
-		public:
-			static int16_t normaliseScrollPosition(int16_t scrollPosition);
+  class NokiaN82_TypeB {
+    public:
+      static int16_t normaliseScrollPosition(int16_t scrollPosition);
 
-			template<Orientation TOrientation>
-			static uint8_t getColumnAddressCommand();
+      template<Orientation TOrientation>
+      static uint8_t getColumnAddressCommand();
 
-			template<Orientation TOrientation>
-			static uint8_t getPageAddressCommand();
+      template<Orientation TOrientation>
+      static uint8_t getPageAddressCommand();
 
-			template<Orientation TOrientation>
-			static uint8_t getMemoryAccessControl();
+      template<Orientation TOrientation>
+      static uint8_t getMemoryAccessControl();
 
-			template<Orientation TOrientation>
-			static bool hasHardwareScrolling();
+      template<Orientation TOrientation>
+      static bool hasHardwareScrolling();
 
-			static uint16_t getScrollHeight();
-	};
-
-
-	/**
-	 * Get the maximum scroll height of the display
-	 * @return 320
-	 */
-
-	inline uint16_t NokiaN82_TypeB::getScrollHeight() {
-		return 320;
-	}
+      static uint16_t getScrollHeight();
+  };
 
 
-	/*
-	 * Hardware scrolling is supported
-	 */
+  /**
+   * Get the maximum scroll height of the display
+   * @return 320
+   */
 
-	template<Orientation TOrientation>
-	inline bool NokiaN82_TypeB::hasHardwareScrolling() {
-		return true;
-	}
-
-
-	/*
-	 * Normalise the scroll position for the setScrollPosition() call.
-	 */
-
-	inline int16_t NokiaN82_TypeB::normaliseScrollPosition(int16_t scrollPosition) {
-		return scrollPosition;
-	}
+  inline uint16_t NokiaN82_TypeB::getScrollHeight() {
+    return 320;
+  }
 
 
-	/**
-	 * Get the command used to set column address in landscape mode
-	 * @return mc2pa8201::COLUMN_ADDRESS_SET
-	 */
+  /*
+   * Hardware scrolling is supported
+   */
 
-	template<>
-	inline uint8_t NokiaN82_TypeB::getColumnAddressCommand<LANDSCAPE>() {
-		return mc2pa8201::COLUMN_ADDRESS_SET;
-	}
-
-
-	/**
-	 * Get the command used to set column address in landscape mode
-	 * @return mc2pa8201::PAGE_ADDRESS_SET
-	 */
-
-	template<>
-	inline uint8_t NokiaN82_TypeB::getPageAddressCommand<LANDSCAPE>() {
-		return mc2pa8201::PAGE_ADDRESS_SET;
-	}
+  template<Orientation TOrientation>
+  inline bool NokiaN82_TypeB::hasHardwareScrolling() {
+    return true;
+  }
 
 
-	/**
-	 * Get the parameter to the MEMORY_ACCESS_CONTROL command
-	 * @return 0xc0
-	 */
+  /*
+   * Normalise the scroll position for the setScrollPosition() call.
+   */
 
-	template<>
-	inline uint8_t NokiaN82_TypeB::getMemoryAccessControl<PORTRAIT>() {
-		return 0xc0;
-	}
+  inline int16_t NokiaN82_TypeB::normaliseScrollPosition(int16_t scrollPosition) {
+    return scrollPosition;
+  }
 
 
-	/**
-	 * Get the parameter to the MEMORY_ACCESS_CONTROL command
-	 * @return 0xa0
-	 */
+  /**
+   * Get the command used to set column address in landscape mode
+   * @return mc2pa8201::COLUMN_ADDRESS_SET
+   */
 
-	template<>
-	inline uint8_t NokiaN82_TypeB::getMemoryAccessControl<LANDSCAPE>() {
-		return 0xa0;
-	}
+  template<>
+  inline uint8_t NokiaN82_TypeB::getColumnAddressCommand<LANDSCAPE>() {
+    return mc2pa8201::COLUMN_ADDRESS_SET;
+  }
+
+
+  /**
+   * Get the command used to set column address in landscape mode
+   * @return mc2pa8201::PAGE_ADDRESS_SET
+   */
+
+  template<>
+  inline uint8_t NokiaN82_TypeB::getPageAddressCommand<LANDSCAPE>() {
+    return mc2pa8201::PAGE_ADDRESS_SET;
+  }
+
+
+  /**
+   * Get the parameter to the MEMORY_ACCESS_CONTROL command
+   * @return 0xc0
+   */
+
+  template<>
+  inline uint8_t NokiaN82_TypeB::getMemoryAccessControl<PORTRAIT>() {
+    return 0xc0;
+  }
+
+
+  /**
+   * Get the parameter to the MEMORY_ACCESS_CONTROL command
+   * @return 0xa0
+   */
+
+  template<>
+  inline uint8_t NokiaN82_TypeB::getMemoryAccessControl<LANDSCAPE>() {
+    return 0xa0;
+  }
 }

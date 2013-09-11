@@ -53,31 +53,31 @@ namespace lcd {
 
 #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
 
-	/*
-	 * Generic ILI9325 XMEM16 interface: 64K colours, portrait and landscape
-	 */
+  /*
+   * Generic ILI9325 XMEM16 interface: 64K colours, portrait and landscape
+   */
 
-	typedef GraphicsLibrary<ILI9325<PORTRAIT,COLOURS_16BIT,Xmem16AccessMode>,Xmem16AccessMode> ILI9325_Portrait_64K_Xmem16;
-	typedef GraphicsLibrary<ILI9325<LANDSCAPE,COLOURS_16BIT,Xmem16AccessMode>,Xmem16AccessMode> ILI9325_Landscape_64K_Xmem16;
+  typedef GraphicsLibrary<ILI9325<PORTRAIT,COLOURS_16BIT,Xmem16AccessMode>,Xmem16AccessMode> ILI9325_Portrait_64K_Xmem16;
+  typedef GraphicsLibrary<ILI9325<LANDSCAPE,COLOURS_16BIT,Xmem16AccessMode>,Xmem16AccessMode> ILI9325_Landscape_64K_Xmem16;
 
-	typedef TerminalPortraitImpl<ILI9325_Portrait_64K_Xmem16> ILI9325_Terminal_Portrait_64K_Xmem16;
-	typedef TerminalLandscapeImpl<ILI9325_Landscape_64K_Xmem16> ILI9325_Terminal_Landscape_64K_Xmem16;
+  typedef TerminalPortraitImpl<ILI9325_Portrait_64K_Xmem16> ILI9325_Terminal_Portrait_64K_Xmem16;
+  typedef TerminalLandscapeImpl<ILI9325_Landscape_64K_Xmem16> ILI9325_Terminal_Landscape_64K_Xmem16;
 
-	/*
-	 * Generic ILI9325 GPIO16 latched interface: 64K colours, portrait and landscape
-	 */
+  /*
+   * Generic ILI9325 GPIO16 latched interface: 64K colours, portrait and landscape
+   */
 
-	typedef GraphicsLibrary<ILI9325<PORTRAIT,COLOURS_16BIT,DefaultMegaGpio16LatchAccessMode>,DefaultMegaGpio16LatchAccessMode> ILI9325_Portrait_64K_Gpio16Latch;
-	typedef GraphicsLibrary<ILI9325<LANDSCAPE,COLOURS_16BIT,DefaultMegaGpio16LatchAccessMode>,DefaultMegaGpio16LatchAccessMode> ILI9325_Landscape_64K_Gpio16Latch;
+  typedef GraphicsLibrary<ILI9325<PORTRAIT,COLOURS_16BIT,DefaultMegaGpio16LatchAccessMode>,DefaultMegaGpio16LatchAccessMode> ILI9325_Portrait_64K_Gpio16Latch;
+  typedef GraphicsLibrary<ILI9325<LANDSCAPE,COLOURS_16BIT,DefaultMegaGpio16LatchAccessMode>,DefaultMegaGpio16LatchAccessMode> ILI9325_Landscape_64K_Gpio16Latch;
 
-	typedef TerminalPortraitImpl<ILI9325_Portrait_64K_Gpio16Latch> ILI9325_Terminal_Portrait_64K_Gpio16Latch;
-	typedef TerminalLandscapeImpl<ILI9325_Landscape_64K_Gpio16Latch> ILI9325_Terminal_Landscape_64K_Gpio16Latch;
+  typedef TerminalPortraitImpl<ILI9325_Portrait_64K_Gpio16Latch> ILI9325_Terminal_Portrait_64K_Gpio16Latch;
+  typedef TerminalLandscapeImpl<ILI9325_Landscape_64K_Gpio16Latch> ILI9325_Terminal_Landscape_64K_Gpio16Latch;
 
-	/*
-	 * The default for most people is a PWM output on pin #2
-	 */
+  /*
+   * The default for most people is a PWM output on pin #2
+   */
 
-	typedef Backlight<2> DefaultBacklight;
+  typedef Backlight<2> DefaultBacklight;
 
 #endif
 }

@@ -30,63 +30,63 @@
 
 namespace lcd {
 
-	/**
-	 * Simple class to encapsulate a 0..100% backlight.
-	 * control managed on a PWM pin.
-	 * @tparam pwmPin The arduino PWM pin number.
-	 */
+  /**
+   * Simple class to encapsulate a 0..100% backlight.
+   * control managed on a PWM pin.
+   * @tparam pwmPin The arduino PWM pin number.
+   */
 
-	template<uint8_t pwmPin=2>
-	class Backlight {
+  template<uint8_t pwmPin=2>
+  class Backlight {
 
-		protected:
-			uint8_t _currentPercentage;
+    protected:
+      uint8_t _currentPercentage;
 
-		public:
+    public:
 
-			/**
-			 * Constructor, initialise the pin
-			 * @param initialPercentage The initial backlight percentage, default is zero.
-			 */
+      /**
+       * Constructor, initialise the pin
+       * @param initialPercentage The initial backlight percentage, default is zero.
+       */
 
-			Backlight(uint8_t initialPercentage=0) {
-				pinMode(pwmPin,OUTPUT);
-				analogWrite(pwmPin,initialPercentage);
-				_currentPercentage=initialPercentage;
-			}
-
-
-			/**
-			 * Set the percentage.
-			 * @param percentage The percentage to set to.
-			 */
-
-			void setPercentage(uint8_t percentage) {
-				analogWrite(pwmPin,((uint16_t)percentage)*255/100);
-				_currentPercentage=percentage;
-			}
+      Backlight(uint8_t initialPercentage=0) {
+        pinMode(pwmPin,OUTPUT);
+        analogWrite(pwmPin,initialPercentage);
+        _currentPercentage=initialPercentage;
+      }
 
 
-			/**
-			 * Fade up or down to the supplied percentage waiting for msPerStep millis between each step.
-			 * @param newPercentage The percentage that we will finish at.
-			 * @param msPerStep The number of milliseconds to pause between each percent increment/decrement.
-			 */
+      /**
+       * Set the percentage.
+       * @param percentage The percentage to set to.
+       */
 
-			void fadeTo(uint8_t newPercentage,int msPerStep) {
+      void setPercentage(uint8_t percentage) {
+        analogWrite(pwmPin,((uint16_t)percentage)*255/100);
+        _currentPercentage=percentage;
+      }
 
-				int8_t direction;
 
-				if(newPercentage==_currentPercentage)
-					return;
+      /**
+       * Fade up or down to the supplied percentage waiting for msPerStep millis between each step.
+       * @param newPercentage The percentage that we will finish at.
+       * @param msPerStep The number of milliseconds to pause between each percent increment/decrement.
+       */
 
-				direction=newPercentage>_currentPercentage ? 1 : -1;
+      void fadeTo(uint8_t newPercentage,int msPerStep) {
 
-				while(newPercentage!=_currentPercentage) {
-					setPercentage(_currentPercentage+direction);
-					delay(msPerStep);
-				}
-			}
-	};
+        int8_t direction;
+
+        if(newPercentage==_currentPercentage)
+          return;
+
+        direction=newPercentage>_currentPercentage ? 1 : -1;
+
+        while(newPercentage!=_currentPercentage) {
+          setPercentage(_currentPercentage+direction);
+          delay(msPerStep);
+        }
+      }
+  };
 }
 

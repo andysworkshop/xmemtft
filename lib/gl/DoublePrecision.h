@@ -38,19 +38,19 @@
 
 struct DoublePrecision {
 
-	// public members
+  // public members
 
-	double Value;						///< The floating point value
-	uint8_t Precision;			///< The desired number of fractional digits
+  double Value;           ///< The floating point value
+  uint8_t Precision;      ///< The desired number of fractional digits
 
-	/**
-	 * Constructor. Must be fully constructed.
-	 * @param d The double-precision value
-	 * @param precision The desired number of fractional digits
-	 */
+  /**
+   * Constructor. Must be fully constructed.
+   * @param d The double-precision value
+   * @param precision The desired number of fractional digits
+   */
 
-	DoublePrecision(double d,uint8_t precision) {
-		Value=d;
-		Precision=precision;
-	}
+  DoublePrecision(double d,uint8_t precision) {
+    Value=d;
+    Precision=precision;
+  }
 };

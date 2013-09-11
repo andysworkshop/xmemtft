@@ -31,14 +31,14 @@
 
 namespace lcd {
 
-	/**
-	 * @brief A Single font character definition
-	 * @ingroup Fonts
-	 */
+  /**
+   * @brief A Single font character definition
+   * @ingroup Fonts
+   */
 
-	struct FontChar {
-		uint8_t Code;						///< The character code
-		uint8_t PixelWidth;			///< Pixel width of this char (limit 255 pixels)
-		const uint8_t* Data;		///< Bit-stream of data packed left to right, top to bottom
-	};
+  struct FontChar {
+    uint8_t Code;           ///< The character code
+    uint8_t PixelWidth;     ///< Pixel width of this char (limit 255 pixels)
+    const uint8_t* Data;    ///< Bit-stream of data packed left to right, top to bottom
+  };
 }

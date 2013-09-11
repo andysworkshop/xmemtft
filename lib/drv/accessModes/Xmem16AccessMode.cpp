@@ -31,7 +31,7 @@
 
 namespace lcd {
 
-	uint8_t Xmem16AccessMode::_streamIndex=0;
-	uint8_t Xmem16AccessMode::_streamByte=0;
+  uint8_t Xmem16AccessMode::_streamIndex=0;
+  uint8_t Xmem16AccessMode::_streamByte=0;
 }
 

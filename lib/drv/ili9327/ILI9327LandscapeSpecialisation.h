@@ -30,166 +30,166 @@
 namespace lcd {
 
 
-	/**
-	 * Specialisation of ILI9327Orientation for the panel in LANDSCAPE mode.
-	 * @tparam TAccessMode the access mode implementation, e.g. Gpio16LatchAccessMode
-	 * @ingroup ILI9327
-	 */
+  /**
+   * Specialisation of ILI9327Orientation for the panel in LANDSCAPE mode.
+   * @tparam TAccessMode the access mode implementation, e.g. Gpio16LatchAccessMode
+   * @ingroup ILI9327
+   */
 
-	template<class TAccessMode,class TPanelTraits>
-	class ILI9327Orientation<LANDSCAPE,TAccessMode,TPanelTraits> {
+  template<class TAccessMode,class TPanelTraits>
+  class ILI9327Orientation<LANDSCAPE,TAccessMode,TPanelTraits> {
 
-		protected:
-			uint16_t getOrientationAddressMode() const;
+    protected:
+      uint16_t getOrientationAddressMode() const;
 
-		public:
-			int16_t getWidth() const;
-			int16_t getHeight() const;
-			void moveTo(const Rectangle& rc) const;
-			void moveTo(int16_t xstart,int16_t ystart,int16_t xend,int16_t yend) const;
-			void moveX(int16_t xstart,int16_t xend) const;
-			void moveY(int16_t ystart,int16_t yend) const;
+    public:
+      int16_t getWidth() const;
+      int16_t getHeight() const;
+      void moveTo(const Rectangle& rc) const;
+      void moveTo(int16_t xstart,int16_t ystart,int16_t xend,int16_t yend) const;
+      void moveX(int16_t xstart,int16_t xend) const;
+      void moveY(int16_t ystart,int16_t yend) const;
 
-			void setScrollPosition(int16_t scrollPosition) const;
-	};
-
-
-	/**
-	 * Get the register setting for memory access control
-	 * @return The entry mode register setting for portrait
-	 */
-
-	template<class TAccessMode,class TPanelTraits>
-	inline uint16_t ILI9327Orientation<LANDSCAPE,TAccessMode,TPanelTraits>::getOrientationAddressMode() const {
-		return ili9327::PAGECOL_SELECTION | ili9327::HORIZONTAL_FLIP;
-	}
+      void setScrollPosition(int16_t scrollPosition) const;
+  };
 
 
-	/**
-	 * Get the width in pixels from the panel traits.
-	 * @return The panel width (e.g. 240)
-	 */
+  /**
+   * Get the register setting for memory access control
+   * @return The entry mode register setting for portrait
+   */
 
-	template<class TAccessMode,class TPanelTraits>
-	inline int16_t ILI9327Orientation<LANDSCAPE,TAccessMode,TPanelTraits>::getWidth() const {
-		return TPanelTraits::LONG_SIDE;
-	}
-
-
-	/**
-	 * Get the height in pixels from the panel traits.
-	 * @return The panel height (e.g. 400)
-	 */
-
-	template<class TAccessMode,class TPanelTraits>
-	inline int16_t ILI9327Orientation<LANDSCAPE,TAccessMode,TPanelTraits>::getHeight() const {
-		return TPanelTraits::SHORT_SIDE;
-	}
+  template<class TAccessMode,class TPanelTraits>
+  inline uint16_t ILI9327Orientation<LANDSCAPE,TAccessMode,TPanelTraits>::getOrientationAddressMode() const {
+    return ili9327::PAGECOL_SELECTION | ili9327::HORIZONTAL_FLIP;
+  }
 
 
-	/**
-	 * Move the display output rectangle
-	 * @param rc The display output rectangle
-	 */
+  /**
+   * Get the width in pixels from the panel traits.
+   * @return The panel width (e.g. 240)
+   */
 
-	template<class TAccessMode,class TPanelTraits>
-	inline void ILI9327Orientation<LANDSCAPE,TAccessMode,TPanelTraits>::moveTo(const Rectangle& rc) const {
-		moveTo(rc.X,rc.Y,rc.X+rc.Width-1,rc.Y+rc.Height-1);
-	}
-
-
-	/**
-	 * Move the display output rectangle
-	 * @param xstart left-most x co-ordinate
-	 * @param ystart top-most y co-ordinate
-	 * @param xend right-most x co-ordinate
-	 * @param yend bottom-most y co-ordinate
-	 */
-
-	template<class TAccessMode,class TPanelTraits>
-	inline void ILI9327Orientation<LANDSCAPE,TAccessMode,TPanelTraits>::moveTo(int16_t xstart,int16_t ystart,int16_t xend,int16_t yend) const {
-
-		uint16_t xoffset;
-
-		// bump past any hidden pixels
-
-		xoffset=432-TPanelTraits::LONG_SIDE;
-
-		TAccessMode::writeCommand(ili9327::SET_COLUMN_ADDRESS);
-		TAccessMode::writeData((xstart+xoffset) >> 8);
-		TAccessMode::writeData((xstart+xoffset) & 0xff);
-		TAccessMode::writeData((xend+xoffset) >>8);
-		TAccessMode::writeData((xend+xoffset) & 0xff);
-
-		TAccessMode::writeCommand(ili9327::SET_PAGE_ADDRESS);
-		TAccessMode::writeData(ystart >> 8);
-		TAccessMode::writeData(ystart & 0xff);
-		TAccessMode::writeData(yend >>8);
-		TAccessMode::writeData(yend & 0xff);
-	}
+  template<class TAccessMode,class TPanelTraits>
+  inline int16_t ILI9327Orientation<LANDSCAPE,TAccessMode,TPanelTraits>::getWidth() const {
+    return TPanelTraits::LONG_SIDE;
+  }
 
 
-	/**
-	 * Move the X position
-	 * @param xstart The new X start position
-	 * @param xend The new X end position
-	 */
+  /**
+   * Get the height in pixels from the panel traits.
+   * @return The panel height (e.g. 400)
+   */
 
-	template<class TAccessMode,class TPanelTraits>
-	inline void ILI9327Orientation<LANDSCAPE,TAccessMode,TPanelTraits>::moveX(int16_t xstart,int16_t xend) const {
-
-		uint16_t xoffset;
-
-		// bump past any hidden pixels
-
-		xoffset=432-TPanelTraits::LONG_SIDE;
-
-		TAccessMode::writeCommand(ili9327::SET_COLUMN_ADDRESS);
-		TAccessMode::writeData((xstart+xoffset) >> 8);
-		TAccessMode::writeData((xstart+xoffset) & 0xff);
-		TAccessMode::writeData((xend+xoffset) >>8);
-		TAccessMode::writeData((xend+xoffset) & 0xff);
-	}
+  template<class TAccessMode,class TPanelTraits>
+  inline int16_t ILI9327Orientation<LANDSCAPE,TAccessMode,TPanelTraits>::getHeight() const {
+    return TPanelTraits::SHORT_SIDE;
+  }
 
 
-	/**
-	 * Move the Y position
-	 * @param ystart The new Y position
-	 */
+  /**
+   * Move the display output rectangle
+   * @param rc The display output rectangle
+   */
 
-	template<class TAccessMode,class TPanelTraits>
-	inline void ILI9327Orientation<LANDSCAPE,TAccessMode,TPanelTraits>::moveY(int16_t ystart,int16_t yend) const {
-
-		TAccessMode::writeCommand(ili9327::SET_PAGE_ADDRESS);
-		TAccessMode::writeData(ystart >> 8);
-		TAccessMode::writeData(ystart & 0xff);
-		TAccessMode::writeData(yend >>8);
-		TAccessMode::writeData(yend & 0xff);
-	}
+  template<class TAccessMode,class TPanelTraits>
+  inline void ILI9327Orientation<LANDSCAPE,TAccessMode,TPanelTraits>::moveTo(const Rectangle& rc) const {
+    moveTo(rc.X,rc.Y,rc.X+rc.Width-1,rc.Y+rc.Height-1);
+  }
 
 
-	/**
-	 * Set a vertical scroll position
-	 * @param scrollPosition The new scroll position
-	 */
+  /**
+   * Move the display output rectangle
+   * @param xstart left-most x co-ordinate
+   * @param ystart top-most y co-ordinate
+   * @param xend right-most x co-ordinate
+   * @param yend bottom-most y co-ordinate
+   */
 
-	template<class TAccessMode,class TPanelTraits>
-	inline void ILI9327Orientation<LANDSCAPE,TAccessMode,TPanelTraits>::setScrollPosition(int16_t scrollPosition) const {
+  template<class TAccessMode,class TPanelTraits>
+  inline void ILI9327Orientation<LANDSCAPE,TAccessMode,TPanelTraits>::moveTo(int16_t xstart,int16_t ystart,int16_t xend,int16_t yend) const {
 
-		uint16_t yoffset;
+    uint16_t xoffset;
 
-		if(scrollPosition<0)
-			scrollPosition+=TPanelTraits::LONG_SIDE;
-		else if(scrollPosition>TPanelTraits::LONG_SIDE-1)
-			scrollPosition-=TPanelTraits::LONG_SIDE;
+    // bump past any hidden pixels
 
-		yoffset=432-TPanelTraits::LONG_SIDE;
+    xoffset=432-TPanelTraits::LONG_SIDE;
 
-		// write to the register
+    TAccessMode::writeCommand(ili9327::SET_COLUMN_ADDRESS);
+    TAccessMode::writeData((xstart+xoffset) >> 8);
+    TAccessMode::writeData((xstart+xoffset) & 0xff);
+    TAccessMode::writeData((xend+xoffset) >>8);
+    TAccessMode::writeData((xend+xoffset) & 0xff);
 
-		TAccessMode::writeCommand(ili9327::SET_SCROLL_START);
-		TAccessMode::writeData(((scrollPosition + yoffset) >> 8) & 1);
-		TAccessMode::writeData((scrollPosition + yoffset) & 0xff);
-	}
+    TAccessMode::writeCommand(ili9327::SET_PAGE_ADDRESS);
+    TAccessMode::writeData(ystart >> 8);
+    TAccessMode::writeData(ystart & 0xff);
+    TAccessMode::writeData(yend >>8);
+    TAccessMode::writeData(yend & 0xff);
+  }
+
+
+  /**
+   * Move the X position
+   * @param xstart The new X start position
+   * @param xend The new X end position
+   */
+
+  template<class TAccessMode,class TPanelTraits>
+  inline void ILI9327Orientation<LANDSCAPE,TAccessMode,TPanelTraits>::moveX(int16_t xstart,int16_t xend) const {
+
+    uint16_t xoffset;
+
+    // bump past any hidden pixels
+
+    xoffset=432-TPanelTraits::LONG_SIDE;
+
+    TAccessMode::writeCommand(ili9327::SET_COLUMN_ADDRESS);
+    TAccessMode::writeData((xstart+xoffset) >> 8);
+    TAccessMode::writeData((xstart+xoffset) & 0xff);
+    TAccessMode::writeData((xend+xoffset) >>8);
+    TAccessMode::writeData((xend+xoffset) & 0xff);
+  }
+
+
+  /**
+   * Move the Y position
+   * @param ystart The new Y position
+   */
+
+  template<class TAccessMode,class TPanelTraits>
+  inline void ILI9327Orientation<LANDSCAPE,TAccessMode,TPanelTraits>::moveY(int16_t ystart,int16_t yend) const {
+
+    TAccessMode::writeCommand(ili9327::SET_PAGE_ADDRESS);
+    TAccessMode::writeData(ystart >> 8);
+    TAccessMode::writeData(ystart & 0xff);
+    TAccessMode::writeData(yend >>8);
+    TAccessMode::writeData(yend & 0xff);
+  }
+
+
+  /**
+   * Set a vertical scroll position
+   * @param scrollPosition The new scroll position
+   */
+
+  template<class TAccessMode,class TPanelTraits>
+  inline void ILI9327Orientation<LANDSCAPE,TAccessMode,TPanelTraits>::setScrollPosition(int16_t scrollPosition) const {
+
+    uint16_t yoffset;
+
+    if(scrollPosition<0)
+      scrollPosition+=TPanelTraits::LONG_SIDE;
+    else if(scrollPosition>TPanelTraits::LONG_SIDE-1)
+      scrollPosition-=TPanelTraits::LONG_SIDE;
+
+    yoffset=432-TPanelTraits::LONG_SIDE;
+
+    // write to the register
+
+    TAccessMode::writeCommand(ili9327::SET_SCROLL_START);
+    TAccessMode::writeData(((scrollPosition + yoffset) >> 8) & 1);
+    TAccessMode::writeData((scrollPosition + yoffset) & 0xff);
+  }
 }
 

@@ -40,189 +40,189 @@
 
 namespace lcd {
 
-	/**
-	 * @brief Generic MC2PA8201 template.
-	 *
-	 * @ingroup MC2PA8201
-	 * @tparam TOrientation The desired panel orientation, LANDSCAPE or PORTRAIT
-	 * @tparam TColourDepth The colour depth for your use, just 64K is supported for this panel.
-	 * @tparam TAccessMode The access mode that you want to talk to this panel with, e.g. XmemAccessMode.
-	 * @tparam TPanelTraits Panel-specific traits.
-	 */
+  /**
+   * @brief Generic MC2PA8201 template.
+   *
+   * @ingroup MC2PA8201
+   * @tparam TOrientation The desired panel orientation, LANDSCAPE or PORTRAIT
+   * @tparam TColourDepth The colour depth for your use, just 64K is supported for this panel.
+   * @tparam TAccessMode The access mode that you want to talk to this panel with, e.g. XmemAccessMode.
+   * @tparam TPanelTraits Panel-specific traits.
+   */
 
-	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
-	class MC2PA8201 : public MC2PA8201Colour<TColourDepth,TAccessMode,TPanelTraits>,
-										public MC2PA8201Orientation<TOrientation,TAccessMode,TPanelTraits> {
+  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
+  class MC2PA8201 : public MC2PA8201Colour<TColourDepth,TAccessMode,TPanelTraits>,
+                    public MC2PA8201Orientation<TOrientation,TAccessMode,TPanelTraits> {
 
-		public:
-			enum {
-				SHORT_SIDE = 240,
-				LONG_SIDE = 320
-			};
+    public:
+      enum {
+        SHORT_SIDE = 240,
+        LONG_SIDE = 320
+      };
 
-		public:
-			MC2PA8201();
+    public:
+      MC2PA8201();
 
-			void initialise() const;
+      void initialise() const;
 
-			void beginWriting() const;
-			void sleep() const;
-			void wake() const;
-			void setScrollArea(uint16_t y,uint16_t height) const;
+      void beginWriting() const;
+      void sleep() const;
+      void wake() const;
+      void setScrollArea(uint16_t y,uint16_t height) const;
 
-			void rawFlashTransfer(uint32_t data,uint32_t numBytes) const;
-			void rawSramTransfer(uint8_t *data,uint32_t numBytes) const;
-	};
-
-
-	/**
-	 * Constructor
-	 */
-
-	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
-	inline MC2PA8201<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::MC2PA8201() {
-		initialise();
-	}
+      void rawFlashTransfer(uint32_t data,uint32_t numBytes) const;
+      void rawSramTransfer(uint8_t *data,uint32_t numBytes) const;
+  };
 
 
-	/**
-	 * Initialise the LCD. Do the reset sequence.
-	 */
+  /**
+   * Constructor
+   */
 
-	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
-	inline void MC2PA8201<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::initialise() const {
-
-		// initialise the access mode
-
-		TAccessMode::initialise();
-
-		// reset the device
-
-		TAccessMode::hardReset();
-
-		// post-reset sequence
-
-		TAccessMode::writeCommand(mc2pa8201::SLEEP_OUT);
-		delay(10);
-		TAccessMode::writeCommand(mc2pa8201::DISPLAY_INVERSION_OFF);
-		TAccessMode::writeCommand(mc2pa8201::IDLE_MODE_OFF);
-		TAccessMode::writeCommand(mc2pa8201::NORMAL_DISPLAY_MODE_ON);
-
-		// interface pixel format comes from the colour specialisation
-
-		TAccessMode::writeCommand(mc2pa8201::INTERFACE_PIXEL_FORMAT);
-		TAccessMode::writeData(this->getInterfacePixelFormat());
-
-		// memory access control comes from the orientation specialisation
-
-		TAccessMode::writeCommand(mc2pa8201::MEMORY_ACCESS_CONTROL);
-		TAccessMode::writeData(this->getMemoryAccessControl());
-
-		// reset the scrolling area
-
-		if(TPanelTraits::template hasHardwareScrolling<TOrientation>())
-			setScrollArea(0,TPanelTraits::getScrollHeight());
-
-		// wait at least 120ms before we can turn the display on
-
-		delay(125);
-		TAccessMode::writeCommand(mc2pa8201::DISPLAY_ON);
-	}
+  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
+  inline MC2PA8201<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::MC2PA8201() {
+    initialise();
+  }
 
 
-	/**
-	 * Send the panel to sleep
-	 */
+  /**
+   * Initialise the LCD. Do the reset sequence.
+   */
 
-	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
-	inline void MC2PA8201<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::sleep() const {
+  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
+  inline void MC2PA8201<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::initialise() const {
 
-		TAccessMode::writeCommand(mc2pa8201::DISPLAY_OFF);
-		TAccessMode::writeCommand(mc2pa8201::SLEEP_IN);
-		delay(5);
-	}
+    // initialise the access mode
 
+    TAccessMode::initialise();
 
-	/**
-	 * Wake the panel up
-	 */
+    // reset the device
 
-	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
-	inline void MC2PA8201<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::wake() const {
+    TAccessMode::hardReset();
 
-		TAccessMode::writeCommand(mc2pa8201::SLEEP_OUT);
-		delay(120);
-		TAccessMode::writeCommand(mc2pa8201::DISPLAY_ON);
-		delay(5);
-	}
+    // post-reset sequence
 
+    TAccessMode::writeCommand(mc2pa8201::SLEEP_OUT);
+    delay(10);
+    TAccessMode::writeCommand(mc2pa8201::DISPLAY_INVERSION_OFF);
+    TAccessMode::writeCommand(mc2pa8201::IDLE_MODE_OFF);
+    TAccessMode::writeCommand(mc2pa8201::NORMAL_DISPLAY_MODE_ON);
 
-	/**
-	 * Issue the command that allows graphics ram writing to commence
-	 */
+    // interface pixel format comes from the colour specialisation
 
-	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
-	inline void MC2PA8201<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::beginWriting() const {
-		TAccessMode::writeCommand(mc2pa8201::MEMORY_WRITE);
-	}
+    TAccessMode::writeCommand(mc2pa8201::INTERFACE_PIXEL_FORMAT);
+    TAccessMode::writeData(this->getInterfacePixelFormat());
 
+    // memory access control comes from the orientation specialisation
 
-	/**
-	 * Set the scroll area to a full-width rectangle region
-	 * @param y The y-co-ord of the region
-	 * @param height The height of the region
-	 */
+    TAccessMode::writeCommand(mc2pa8201::MEMORY_ACCESS_CONTROL);
+    TAccessMode::writeData(this->getMemoryAccessControl());
 
-	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
-	inline void MC2PA8201<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::setScrollArea(uint16_t y,uint16_t height) const {
+    // reset the scrolling area
 
-		uint16_t bfa;
+    if(TPanelTraits::template hasHardwareScrolling<TOrientation>())
+      setScrollArea(0,TPanelTraits::getScrollHeight());
 
-		bfa=TPanelTraits::getScrollHeight()-height-y;
+    // wait at least 120ms before we can turn the display on
 
-		TAccessMode::writeCommand(mc2pa8201::VERTICAL_SCROLLING_DEFINITION);
-		TAccessMode::writeData(y >> 8);
-		TAccessMode::writeData(y & 0xff);
-		TAccessMode::writeData(height >> 8);
-		TAccessMode::writeData(height & 0xff);
-		TAccessMode::writeData(bfa >> 8);
-		TAccessMode::writeData(bfa & 0xff);
-	}
+    delay(125);
+    TAccessMode::writeCommand(mc2pa8201::DISPLAY_ON);
+  }
 
 
-	/**
-	 * Transfer data bytes, en-masse
-	 * @param data The 32-bit address in flash
-	 * @param numBytes The number of bytes to transfer
-	 */
+  /**
+   * Send the panel to sleep
+   */
 
-	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
-	inline void MC2PA8201<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::rawFlashTransfer(uint32_t data,uint32_t numBytes) const {
+  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
+  inline void MC2PA8201<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::sleep() const {
 
-		// handle data in the lower and upper segments with possible overlap
-
-		while(data<65536 && numBytes>0) {
-			TAccessMode::writeData(pgm_read_byte_near(data++));
-			numBytes--;
-		}
-
-		while(numBytes>0) {
-			TAccessMode::writeData(pgm_read_byte_far(data++));
-			numBytes--;
-		}
-	}
+    TAccessMode::writeCommand(mc2pa8201::DISPLAY_OFF);
+    TAccessMode::writeCommand(mc2pa8201::SLEEP_IN);
+    delay(5);
+  }
 
 
-	/**
-	 * Write raw bytes from SRAM
-	 * @param data data source
-	 * @param numBytes number of bytes to write.
-	 */
+  /**
+   * Wake the panel up
+   */
 
-	template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
-	inline void MC2PA8201<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::rawSramTransfer(uint8_t *data,uint32_t numBytes) const {
+  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
+  inline void MC2PA8201<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::wake() const {
 
-		while(numBytes--)
-			TAccessMode::writeData(*data++);
-	}
+    TAccessMode::writeCommand(mc2pa8201::SLEEP_OUT);
+    delay(120);
+    TAccessMode::writeCommand(mc2pa8201::DISPLAY_ON);
+    delay(5);
+  }
+
+
+  /**
+   * Issue the command that allows graphics ram writing to commence
+   */
+
+  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
+  inline void MC2PA8201<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::beginWriting() const {
+    TAccessMode::writeCommand(mc2pa8201::MEMORY_WRITE);
+  }
+
+
+  /**
+   * Set the scroll area to a full-width rectangle region
+   * @param y The y-co-ord of the region
+   * @param height The height of the region
+   */
+
+  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
+  inline void MC2PA8201<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::setScrollArea(uint16_t y,uint16_t height) const {
+
+    uint16_t bfa;
+
+    bfa=TPanelTraits::getScrollHeight()-height-y;
+
+    TAccessMode::writeCommand(mc2pa8201::VERTICAL_SCROLLING_DEFINITION);
+    TAccessMode::writeData(y >> 8);
+    TAccessMode::writeData(y & 0xff);
+    TAccessMode::writeData(height >> 8);
+    TAccessMode::writeData(height & 0xff);
+    TAccessMode::writeData(bfa >> 8);
+    TAccessMode::writeData(bfa & 0xff);
+  }
+
+
+  /**
+   * Transfer data bytes, en-masse
+   * @param data The 32-bit address in flash
+   * @param numBytes The number of bytes to transfer
+   */
+
+  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
+  inline void MC2PA8201<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::rawFlashTransfer(uint32_t data,uint32_t numBytes) const {
+
+    // handle data in the lower and upper segments with possible overlap
+
+    while(data<65536 && numBytes>0) {
+      TAccessMode::writeData(pgm_read_byte_near(data++));
+      numBytes--;
+    }
+
+    while(numBytes>0) {
+      TAccessMode::writeData(pgm_read_byte_far(data++));
+      numBytes--;
+    }
+  }
+
+
+  /**
+   * Write raw bytes from SRAM
+   * @param data data source
+   * @param numBytes number of bytes to write.
+   */
+
+  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
+  inline void MC2PA8201<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::rawSramTransfer(uint8_t *data,uint32_t numBytes) const {
+
+    while(numBytes--)
+      TAccessMode::writeData(*data++);
+  }
 }

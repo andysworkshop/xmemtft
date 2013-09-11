@@ -30,16 +30,16 @@
 namespace lcd {
 
 
-	/**
-	 * @brief Forward declaration of the LDS285Orientation template
-	 * Empty generic class definition for LDS285 orientation-dependent operations
-	 * Everything is provided in the specialisations.
-	 * @ingroup LDS285
-	 */
+  /**
+   * @brief Forward declaration of the LDS285Orientation template
+   * Empty generic class definition for LDS285 orientation-dependent operations
+   * Everything is provided in the specialisations.
+   * @ingroup LDS285
+   */
 
-	template<Orientation TOrientation,class TAccessMode,class TPanelTraits>
-	class LDS285Orientation {
-	};
+  template<Orientation TOrientation,class TAccessMode,class TPanelTraits>
+  class LDS285Orientation {
+  };
 }
 
 
