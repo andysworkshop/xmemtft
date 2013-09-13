@@ -378,7 +378,7 @@ void rectTest() {
       tft->clearScreen();
 
     rc.X=(rand() % tft->getXmax()/2);
-    rc.Y=(rand() % tft->getXmax()/2);
+    rc.Y=(rand() % tft->getYmax()/2);
     rc.Width=rand() % (tft->getXmax()-rc.X);
     rc.Height=rand() % (tft->getYmax()-rc.Y);
 
