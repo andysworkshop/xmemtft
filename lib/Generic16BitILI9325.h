@@ -37,7 +37,7 @@
 #include "gl/ColourNames.h"
 #include "drv/accessModes/Xmem16AccessMode.h"
 #include "drv/accessModes/Gpio16LatchAccessMode.h"
-#include "drv/accessModes/Gpio16AccessMode.h"		// This is the GPIO access mode without using a latch
+#include "drv/accessModes/Gpio16AccessMode.h"
 #include "drv/ILI9325/ILI9325.h"
 #include "GetFarAddress.h"
 #include "Font.h"

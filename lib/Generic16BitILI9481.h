@@ -38,6 +38,7 @@
 #include "gl/ColourNames.h"
 #include "drv/accessModes/Xmem16AccessMode.h"
 #include "drv/accessModes/Gpio16LatchAccessMode.h"
+#include "drv/accessModes/Gpio16AccessMode.h"
 #include "drv/ILI9481/ILI9481.h"
 #include "GetFarAddress.h"
 #include "Font.h"
@@ -72,6 +73,16 @@ namespace lcd {
 
   typedef TerminalPortraitImpl<ILI9481_Portrait_64K_Gpio16Latch> ILI9481_Terminal_Portrait_64K_Gpio16Latch;
   typedef TerminalLandscapeImpl<ILI9481_Landscape_64K_Gpio16Latch> ILI9481_Terminal_Landscape_64K_Gpio16Latch;
+
+  /*
+   * Generic ILI9481 GPIO16 interface: 64K colours, portrait and landscape
+   */
+
+  typedef GraphicsLibrary<ILI9481<PORTRAIT,COLOURS_16BIT,DefaultMegaGpio16AccessMode>,DefaultMegaGpio16AccessMode> ILI9481_Portrait_64K_Gpio16;
+  typedef GraphicsLibrary<ILI9481<LANDSCAPE,COLOURS_16BIT,DefaultMegaGpio16AccessMode>,DefaultMegaGpio16AccessMode> ILI9481_Landscape_64K_Gpio16;
+
+  typedef TerminalPortraitImpl<ILI9481_Portrait_64K_Gpio16> ILI9481_Terminal_Portrait_64K_Gpio16;
+  typedef TerminalLandscapeImpl<ILI9481_Landscape_64K_Gpio16> ILI9481_Terminal_Landscape_64K_Gpio16;
 
   /*
    * The default for most people is a PWM output on pin #2

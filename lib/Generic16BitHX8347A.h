@@ -37,6 +37,7 @@
 #include "gl/ColourNames.h"
 #include "drv/accessModes/Xmem16AccessMode.h"
 #include "drv/accessModes/Gpio16LatchAccessMode.h"
+#include "drv/accessModes/Gpio16AccessMode.h"
 #include "drv/hx8347a/HX8347A.h"
 #include "GetFarAddress.h"
 #include "Font.h"
@@ -71,6 +72,16 @@ namespace lcd {
 
   typedef TerminalPortraitImpl<HX8347A_Portrait_64K_Gpio16Latch> HX8347A_Terminal_Portrait_64K_Gpio16Latch;
   typedef TerminalLandscapeImpl<HX8347A_Landscape_64K_Gpio16Latch> HX8347A_Terminal_Landscape_64K_Gpio16Latch;
+
+  /*
+   * Generic HX8347A GPIO16 interface: 64K colours, portrait and landscape
+   */
+
+  typedef GraphicsLibrary<HX8347A<PORTRAIT,COLOURS_16BIT,DefaultMegaGpio16AccessMode>,DefaultMegaGpio16AccessMode> HX8347A_Portrait_64K_Gpio16;
+  typedef GraphicsLibrary<HX8347A<LANDSCAPE,COLOURS_16BIT,DefaultMegaGpio16AccessMode>,DefaultMegaGpio16AccessMode> HX8347A_Landscape_64K_Gpio16;
+
+  typedef TerminalPortraitImpl<HX8347A_Portrait_64K_Gpio16> HX8347A_Terminal_Portrait_64K_Gpio16;
+  typedef TerminalLandscapeImpl<HX8347A_Landscape_64K_Gpio16> HX8347A_Terminal_Landscape_64K_Gpio16;
 
   /*
    * The default for most people is a PWM output on pin #2

@@ -37,6 +37,7 @@
 #include "gl/ColourNames.h"
 #include "drv/accessModes/Xmem16AccessMode.h"
 #include "drv/accessModes/Gpio16LatchAccessMode.h"
+#include "drv/accessModes/Gpio16AccessMode.h"
 #include "drv/ili9327/ILI9327.h"
 #include "drv/ili9327/panelTraits/ILI9327400x240PanelTraits.h"
 #include "GetFarAddress.h"
@@ -72,6 +73,16 @@ namespace lcd {
 
   typedef TerminalPortraitImpl<ILI9327_400x240_Portrait_64K_Gpio16Latch> ILI9327_400x240_Terminal_Portrait_64K_Gpio16Latch;
   typedef TerminalLandscapeImpl<ILI9327_400x240_Landscape_64K_Gpio16Latch> ILI9327_400x240_Terminal_Landscape_64K_Gpio16Latch;
+
+  /*
+   * Generic ILI9327 GPIO16 interface: 64K colours, portrait and landscape
+   */
+
+  typedef GraphicsLibrary<ILI9327<PORTRAIT,COLOURS_16BIT,DefaultMegaGpio16AccessMode,ILI9327400x240PanelTraits>,DefaultMegaGpio16AccessMode> ILI9327_400x240_Portrait_64K_Gpio16;
+  typedef GraphicsLibrary<ILI9327<LANDSCAPE,COLOURS_16BIT,DefaultMegaGpio16AccessMode,ILI9327400x240PanelTraits>,DefaultMegaGpio16AccessMode> ILI9327_400x240_Landscape_64K_Gpio16;
+
+  typedef TerminalPortraitImpl<ILI9327_400x240_Portrait_64K_Gpio16> ILI9327_400x240_Terminal_Portrait_64K_Gpio16;
+  typedef TerminalLandscapeImpl<ILI9327_400x240_Landscape_64K_Gpio16> ILI9327_400x240_Terminal_Landscape_64K_Gpio16;
 
   /*
    * The default for most people is a PWM output on pin #2
