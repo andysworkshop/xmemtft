@@ -30,102 +30,102 @@
 namespace lcd {
 
 
-	/**
-	 * @brief JPEG decoder
-	 *
-	 * This class implements the algorithm required by the picojpeg library.
-	 *
-	 * @tparam TAccessMode The access mode that we're using.
-	 * @ingroup Decoders
-	 */
+  /**
+   * @brief JPEG decoder
+   *
+   * This class implements the algorithm required by the picojpeg library.
+   *
+   * @tparam TAccessMode The access mode that we're using.
+   * @ingroup Decoders
+   */
 
-	template<class TAccessMode>
-	class JpegDecoder {
+  template<class TAccessMode>
+  class JpegDecoder {
 
-		typedef typename tLCD::template UnpackedColour<TColourDepth> UNPACKED_COLOUR;
+    typedef typename tLCD::template UnpackedColour<TColourDepth> UNPACKED_COLOUR;
 
-		public:
-			static void decode(const Point& pt,JpegDataSource& ds) {
+    public:
+      static void decode(const Point& pt,JpegDataSource& ds) {
 
-				pjpeg_image_info_t imageInfo;
-				UNPACKED_COLOUR cr;
+        pjpeg_image_info_t imageInfo;
+        UNPACKED_COLOUR cr;
 
-				// initialise the decoder
+        // initialise the decoder
 
-				if(pjpeg_decode_init(&imageInfo,ds)!=0)
-					return;
+        if(pjpeg_decode_init(&imageInfo,ds)!=0)
+          return;
 
-				int16_t mcu_x=0,mcu_y=0;
+        int16_t mcu_x=0,mcu_y=0;
 
-				for(;;) {
+        for(;;) {
 
-					if(pjpeg_decode_mcu()!=0)
-						return;
+          if(pjpeg_decode_mcu()!=0)
+            return;
 
-					if(mcu_y>=imageInfo.m_MCUSPerCol)
-						return;
+          if(mcu_y>=imageInfo.m_MCUSPerCol)
+            return;
 
-					for(int y=0;y<imageInfo.m_MCUHeight;y+=8) {
+          for(int y=0;y<imageInfo.m_MCUHeight;y+=8) {
 
-						int by_limit=min(8,imageInfo.m_height-(mcu_y*imageInfo.m_MCUHeight+y));
+            int by_limit=min(8,imageInfo.m_height-(mcu_y*imageInfo.m_MCUHeight+y));
 
-						for(int x=0;x<imageInfo.m_MCUWidth;x+=8) {
+            for(int x=0;x<imageInfo.m_MCUWidth;x+=8) {
 
-							uint16_t src_ofs=(x*8U)+(y*16U);
+              uint16_t src_ofs=(x*8U)+(y*16U);
 
-							uint8_t *pSrcR=imageInfo.m_pMCUBufR+src_ofs;
-							uint8_t *pSrcG=imageInfo.m_pMCUBufG+src_ofs;
-							uint8_t *pSrcB=imageInfo.m_pMCUBufB+src_ofs;
+              uint8_t *pSrcR=imageInfo.m_pMCUBufR+src_ofs;
+              uint8_t *pSrcG=imageInfo.m_pMCUBufG+src_ofs;
+              uint8_t *pSrcB=imageInfo.m_pMCUBufB+src_ofs;
 
-							int bx_limit=min(8,imageInfo.m_width-(mcu_x*imageInfo.m_MCUWidth+x));
+              int bx_limit=min(8,imageInfo.m_width-(mcu_x*imageInfo.m_MCUWidth+x));
 
-							tLCD::template moveTo<TOrientation>(
-									Rectangle(pt.X+mcu_x*imageInfo.m_MCUWidth+x,pt.Y+mcu_y*imageInfo.m_MCUHeight+y,bx_limit,by_limit));
+              tLCD::template moveTo<TOrientation>(
+                  Rectangle(pt.X+mcu_x*imageInfo.m_MCUWidth+x,pt.Y+mcu_y*imageInfo.m_MCUHeight+y,bx_limit,by_limit));
 
-							tLCD::beginWriting();
+              tLCD::beginWriting();
 
-							if(imageInfo.m_scanType==PJPG_GRAYSCALE) {
+              if(imageInfo.m_scanType==PJPG_GRAYSCALE) {
 
-								for(int by=0;by<by_limit;by++) {
+                for(int by=0;by<by_limit;by++) {
 
-									for(int bx=0;bx < bx_limit;bx++) {
-										tLCD::template unpackColourParts(*pSrcR,*pSrcR,*pSrcR,cr);
-										tLCD::template writePixel(cr);
-										pSrcR++;
-									}
+                  for(int bx=0;bx < bx_limit;bx++) {
+                    tLCD::template unpackColourParts(*pSrcR,*pSrcR,*pSrcR,cr);
+                    tLCD::template writePixel(cr);
+                    pSrcR++;
+                  }
 
-									pSrcR+=(8-bx_limit);
-								}
-							} else {
-								for(int by=0;by<by_limit;by++) {
+                  pSrcR+=(8-bx_limit);
+                }
+              } else {
+                for(int by=0;by<by_limit;by++) {
 
-									for(int bx=0;bx<bx_limit;bx++) {
+                  for(int bx=0;bx<bx_limit;bx++) {
 
-										tLCD::template unpackColourParts(*pSrcR,*pSrcG,*pSrcB,cr);
+                    tLCD::template unpackColourParts(*pSrcR,*pSrcG,*pSrcB,cr);
 
-										pSrcR++;
-										pSrcG++;
-										pSrcB++;
+                    pSrcR++;
+                    pSrcG++;
+                    pSrcB++;
 
-										tLCD::writePixel(cr);
-									}
+                    tLCD::writePixel(cr);
+                  }
 
-									pSrcR+=(8-bx_limit);
-									pSrcG+=(8-bx_limit);
-									pSrcB+=(8-bx_limit);
-								}
-							}
-						}
-					}
+                  pSrcR+=(8-bx_limit);
+                  pSrcG+=(8-bx_limit);
+                  pSrcB+=(8-bx_limit);
+                }
+              }
+            }
+          }
 
-					mcu_x++;
+          mcu_x++;
 
-					if(mcu_x==imageInfo.m_MCUSPerRow) {
-						mcu_x=0;
-						mcu_y++;
-					}
-				}
-			}
-	};
+          if(mcu_x==imageInfo.m_MCUSPerRow) {
+            mcu_x=0;
+            mcu_y++;
+          }
+        }
+      }
+  };
 }
 

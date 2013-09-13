@@ -34,16 +34,16 @@
 
 namespace lcd {
 
-	/**
-	 * @brief Forward declaration of the ILI9325Orientation template
-	 * Empty generic class definition for ILI9325 orientation-dependent operations
-	 * Everything is provided in the specialisations.
-	 * @ingroup ILI9325
-	 */
+  /**
+   * @brief Forward declaration of the ILI9325Orientation template
+   * Empty generic class definition for ILI9325 orientation-dependent operations
+   * Everything is provided in the specialisations.
+   * @ingroup ILI9325
+   */
 
-	template<Orientation TOrientation,class TAccessMode>
-	class ILI9325Orientation {
-	};
+  template<Orientation TOrientation,class TAccessMode>
+  class ILI9325Orientation {
+  };
 }
 
 /*

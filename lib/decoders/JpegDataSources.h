@@ -37,148 +37,148 @@
 
 namespace lcd {
 
-	/**
-	 * @brief Base class for Jpeg data sources
-	 * @ingroup Decoders
-	 */
+  /**
+   * @brief Base class for Jpeg data sources
+   * @ingroup Decoders
+   */
 
-	class JpegDataSource {
-		public:
-			virtual void readNextBytes(uint8_t *pBuf,uint8_t bufsize,uint8_t *actuallyRead)=0;
-			virtual ~JpegDataSource() {}
-	};
-
-
-	/**
-	 * @brief Data source for reading from flash
-	 * @ingroup Decoders
-	 */
-
-	class JpegFlashDataSource : public JpegDataSource {
-
-		protected:
-			uint32_t _memptr;
-			uint32_t _memsize;
-
-		public:
-
-			/**
-			 * Constructor
-			 * @param memptr 32-bit address of the JPEG in flash.
-			 * @param memsize The size of the JPEG file.
-			 */
-
-			JpegFlashDataSource(uint32_t memptr,uint32_t memsize)
-			  : _memptr(memptr),
-			    _memsize(memsize) {
-			}
+  class JpegDataSource {
+    public:
+      virtual void readNextBytes(uint8_t *pBuf,uint8_t bufsize,uint8_t *actuallyRead)=0;
+      virtual ~JpegDataSource() {}
+  };
 
 
-			/**
-			 * Virtual destructor
-			 */
+  /**
+   * @brief Data source for reading from flash
+   * @ingroup Decoders
+   */
 
-			virtual ~JpegFlashDataSource() {}
+  class JpegFlashDataSource : public JpegDataSource {
 
+    protected:
+      uint32_t _memptr;
+      uint32_t _memsize;
 
-			/**
-			 * Get more bytes for the JPEG decoder. The full range of flash memory is supported.
-			 * @param pBuf Where to store the bytes.
-			 * @param bufsize How many bytes to try to read.
-			 * @param[out] The number of bytes that we actually read.
-			 */
+    public:
 
-			virtual void readNextBytes(uint8_t *pBuf,uint8_t bufsize,uint8_t *actuallyRead) {
+      /**
+       * Constructor
+       * @param memptr 32-bit address of the JPEG in flash.
+       * @param memsize The size of the JPEG file.
+       */
 
-				uint8_t count;
-
-				count=_memsize<bufsize ? _memsize : bufsize;
-				*actuallyRead=count;
-				_memsize-=count;
-
-				while(count--) {
-
-					if(_memptr<=0xffff)
-						*pBuf++=pgm_read_byte_near(_memptr++);
-					else
-						*pBuf++=pgm_read_byte_far(_memptr++);
-				}
-			}
-	};
+      JpegFlashDataSource(uint32_t memptr,uint32_t memsize)
+        : _memptr(memptr),
+          _memsize(memsize) {
+      }
 
 
-	/**
-	 * @brief Data source for reading from the Arduino serial port
-	 * @ingroup Decoders
-	 */
+      /**
+       * Virtual destructor
+       */
 
-	class JpegSerialDataSource : public JpegDataSource {
-
-		protected:
-			Stream *_serial;
-			uint32_t _available;
-			uint16_t _chunkSize;
-			uint16_t _chunkAvailable;
-
-		public:
-
-			/**
-			 * Constructor
-			 * @param serial The Arduino serial port implementation
-			 * @param jpegSize The size of the JPEG file
-			 * @param chunkSize How much to read in a batch from the serial port before ACK'ing it.
-			 */
-
-			JpegSerialDataSource(Stream& serial,uint32_t jpegSize,uint16_t chunkSize)
-			  : _serial(&serial),
-			    _available(jpegSize),
-			    _chunkSize(chunkSize),
-			    _chunkAvailable(chunkSize) {
-			}
+      virtual ~JpegFlashDataSource() {}
 
 
-			/**
-			 * Virtual destructor
-			 */
+      /**
+       * Get more bytes for the JPEG decoder. The full range of flash memory is supported.
+       * @param pBuf Where to store the bytes.
+       * @param bufsize How many bytes to try to read.
+       * @param[out] The number of bytes that we actually read.
+       */
 
-			virtual ~JpegSerialDataSource() {}
+      virtual void readNextBytes(uint8_t *pBuf,uint8_t bufsize,uint8_t *actuallyRead) {
+
+        uint8_t count;
+
+        count=_memsize<bufsize ? _memsize : bufsize;
+        *actuallyRead=count;
+        _memsize-=count;
+
+        while(count--) {
+
+          if(_memptr<=0xffff)
+            *pBuf++=pgm_read_byte_near(_memptr++);
+          else
+            *pBuf++=pgm_read_byte_far(_memptr++);
+        }
+      }
+  };
 
 
-			/**
-			 * Get more bytes for the JPEG decoder. The full range of flash memory is supported.
-			 * @param pBuf Where to store the bytes.
-			 * @param bufsize How many bytes to try to read.
-			 * @param[out] The number of bytes that we actually read.
-			 */
+  /**
+   * @brief Data source for reading from the Arduino serial port
+   * @ingroup Decoders
+   */
 
-			virtual void readNextBytes(uint8_t *pBuf,uint8_t bufsize,uint8_t *actuallyRead) {
+  class JpegSerialDataSource : public JpegDataSource {
 
-				uint8_t count;
+    protected:
+      Stream *_serial;
+      uint32_t _available;
+      uint16_t _chunkSize;
+      uint16_t _chunkAvailable;
 
-				// will read up to the amount specified
+    public:
 
-				count=_available<bufsize ? _available : bufsize;
-				*actuallyRead=count;
-				_available-=count;
+      /**
+       * Constructor
+       * @param serial The Arduino serial port implementation
+       * @param jpegSize The size of the JPEG file
+       * @param chunkSize How much to read in a batch from the serial port before ACK'ing it.
+       */
 
-				// read each byte
+      JpegSerialDataSource(Stream& serial,uint32_t jpegSize,uint16_t chunkSize)
+        : _serial(&serial),
+          _available(jpegSize),
+          _chunkSize(chunkSize),
+          _chunkAvailable(chunkSize) {
+      }
 
-				while(count--) {
 
-					// read the next byte
+      /**
+       * Virtual destructor
+       */
 
-					while(_serial->available()==0);
-					*pBuf++=_serial->read();
+      virtual ~JpegSerialDataSource() {}
 
-					// software flow control - if we are at the end of a chunk then the sender
-					// is waiting for us to write back 0xaa as a signal that it can send more data
 
-					if(--_chunkAvailable==0) {
-						_serial->write(0xaa);
-						_chunkAvailable=_chunkSize;
-					}
+      /**
+       * Get more bytes for the JPEG decoder. The full range of flash memory is supported.
+       * @param pBuf Where to store the bytes.
+       * @param bufsize How many bytes to try to read.
+       * @param[out] The number of bytes that we actually read.
+       */
 
-				}
-			}
-	};
+      virtual void readNextBytes(uint8_t *pBuf,uint8_t bufsize,uint8_t *actuallyRead) {
+
+        uint8_t count;
+
+        // will read up to the amount specified
+
+        count=_available<bufsize ? _available : bufsize;
+        *actuallyRead=count;
+        _available-=count;
+
+        // read each byte
+
+        while(count--) {
+
+          // read the next byte
+
+          while(_serial->available()==0);
+          *pBuf++=_serial->read();
+
+          // software flow control - if we are at the end of a chunk then the sender
+          // is waiting for us to write back 0xaa as a signal that it can send more data
+
+          if(--_chunkAvailable==0) {
+            _serial->write(0xaa);
+            _chunkAvailable=_chunkSize;
+          }
+
+        }
+      }
+  };
 }

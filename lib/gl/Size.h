@@ -29,58 +29,58 @@
 
 namespace lcd {
 
-	/**
-	 * @brief (width,height) size structure
-	 */
+  /**
+   * @brief (width,height) size structure
+   */
 
-	struct Size {
+  struct Size {
 
-		/**
-		 * The width and height
-		 */
+    /**
+     * The width and height
+     */
 
-		int16_t Width,Height;
-
-
-		/**
-		 * Default constructor
-		 */
-
-		Size()
-			: Width(), Height() {
-		}
+    int16_t Width,Height;
 
 
-		/**
-		 * Constructor with parameters
-		 * @param width The width
-		 * @param height The height
-		 */
+    /**
+     * Default constructor
+     */
 
-		Size(int16_t width,int16_t height) :
-			Width(width),
-			Height(height) {
-		}
+    Size()
+      : Width(), Height() {
+    }
 
 
-		/**
-		 * Copy constructor
-		 * @param src Where to copy from.
-		 */
+    /**
+     * Constructor with parameters
+     * @param width The width
+     * @param height The height
+     */
 
-		Size(const Size& src) {
-			Width=src.Width;
-			Height=src.Height;
-		}
+    Size(int16_t width,int16_t height) :
+      Width(width),
+      Height(height) {
+    }
 
 
-		/**
-		 * Get the area covered by this size
-		 * @return The width multiplied by the height.
-		 */
+    /**
+     * Copy constructor
+     * @param src Where to copy from.
+     */
 
-		uint32_t getArea() const {
-			return static_cast<uint32_t>(Width)*static_cast<uint32_t>(Height);
-		}
-	};
+    Size(const Size& src) {
+      Width=src.Width;
+      Height=src.Height;
+    }
+
+
+    /**
+     * Get the area covered by this size
+     * @return The width multiplied by the height.
+     */
+
+    uint32_t getArea() const {
+      return static_cast<uint32_t>(Width)*static_cast<uint32_t>(Height);
+    }
+  };
 }

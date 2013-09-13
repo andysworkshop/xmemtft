@@ -49,29 +49,29 @@
 
 namespace lcd {
 
-	/*
-	 * Backlight PWM control is available for the Adafruit LCD on pin #3
-	 */
+  /*
+   * Backlight PWM control is available for the Adafruit LCD on pin #3
+   */
 
-	typedef Backlight<3> DefaultBacklight;
+  typedef Backlight<3> DefaultBacklight;
 
-	/*
-	 * Adafruit GPIO interface: 65K colours, portrait and landscape
-	 */
+  /*
+   * Adafruit GPIO interface: 65K colours, portrait and landscape
+   */
 
-	typedef GraphicsLibrary<ILI9325<PORTRAIT,COLOURS_16BIT,AdafruitAccessMode>,AdafruitAccessMode> Adafruit_Portrait_65K_Gpio;
-	typedef GraphicsLibrary<ILI9325<LANDSCAPE,COLOURS_16BIT,AdafruitAccessMode>,AdafruitAccessMode> Adafruit_Landscape_65K_Gpio;
+  typedef GraphicsLibrary<ILI9325<PORTRAIT,COLOURS_16BIT,AdafruitAccessMode>,AdafruitAccessMode> Adafruit_Portrait_65K_Gpio;
+  typedef GraphicsLibrary<ILI9325<LANDSCAPE,COLOURS_16BIT,AdafruitAccessMode>,AdafruitAccessMode> Adafruit_Landscape_65K_Gpio;
 
-	typedef TerminalPortraitImpl<Adafruit_Portrait_65K_Gpio> Adafruit_Terminal_Portrait_65K_Gpio;
-	typedef TerminalLandscapeImpl<Adafruit_Landscape_65K_Gpio> Adafruit_Terminal_Landscape_65K_Gpio;
+  typedef TerminalPortraitImpl<Adafruit_Portrait_65K_Gpio> Adafruit_Terminal_Portrait_65K_Gpio;
+  typedef TerminalLandscapeImpl<Adafruit_Landscape_65K_Gpio> Adafruit_Terminal_Landscape_65K_Gpio;
 
-	/*
-	 * Adafruit GPIO interface: 262K colours, portrait and landscape
-	 */
+  /*
+   * Adafruit GPIO interface: 262K colours, portrait and landscape
+   */
 
-	typedef GraphicsLibrary<ILI9325<PORTRAIT,COLOURS_18BIT,AdafruitAccessMode>,AdafruitAccessMode> Adafruit_Portrait_262K_Gpio;
-	typedef GraphicsLibrary<ILI9325<LANDSCAPE,COLOURS_18BIT,AdafruitAccessMode>,AdafruitAccessMode> Adafruit_Landscape_262K_Gpio;
+  typedef GraphicsLibrary<ILI9325<PORTRAIT,COLOURS_18BIT,AdafruitAccessMode>,AdafruitAccessMode> Adafruit_Portrait_262K_Gpio;
+  typedef GraphicsLibrary<ILI9325<LANDSCAPE,COLOURS_18BIT,AdafruitAccessMode>,AdafruitAccessMode> Adafruit_Landscape_262K_Gpio;
 
-	typedef TerminalPortraitImpl<Adafruit_Portrait_262K_Gpio> Adafruit_Terminal_Portrait_262K_Gpio;
-	typedef TerminalLandscapeImpl<Adafruit_Landscape_262K_Gpio> Adafruit_Terminal_Landscape_262K_Gpio;
+  typedef TerminalPortraitImpl<Adafruit_Portrait_262K_Gpio> Adafruit_Terminal_Portrait_262K_Gpio;
+  typedef TerminalLandscapeImpl<Adafruit_Landscape_262K_Gpio> Adafruit_Terminal_Landscape_262K_Gpio;
 }

@@ -31,16 +31,16 @@
 namespace lcd {
 
 
-	/**
-	 * @brief Forward declaration of the MC2PA8201Orientation template
-	 * Empty generic class definition for MC2PA8201 orientation-dependent operations
-	 * Everything is provided in the specialisations.
-	 * @ingroup MC2PA8201
-	 */
+  /**
+   * @brief Forward declaration of the MC2PA8201Orientation template
+   * Empty generic class definition for MC2PA8201 orientation-dependent operations
+   * Everything is provided in the specialisations.
+   * @ingroup MC2PA8201
+   */
 
-	template<Orientation TOrientation,class TAccessMode,class TPanelTraits>
-	class MC2PA8201Orientation {
-	};
+  template<Orientation TOrientation,class TAccessMode,class TPanelTraits>
+  class MC2PA8201Orientation {
+  };
 }
 
 

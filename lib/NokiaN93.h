@@ -51,67 +51,67 @@
 
 namespace lcd {
 
-	#if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
+  #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
 
-	/*
-	 * Nokia N93 XMEM type A interface: 64K, 262K, 16M colours, portrait and landscape
-	 */
+  /*
+   * Nokia N93 XMEM type A interface: 64K, 262K, 16M colours, portrait and landscape
+   */
 
-	typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_16BIT,XmemAccessMode,NokiaN93_TypeA>,XmemAccessMode> NokiaN93_Portrait_64K;
-	typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_16BIT,XmemAccessMode,NokiaN93_TypeA>,XmemAccessMode> NokiaN93_Landscape_64K;
+  typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_16BIT,XmemAccessMode,NokiaN93_TypeA>,XmemAccessMode> NokiaN93_Portrait_64K;
+  typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_16BIT,XmemAccessMode,NokiaN93_TypeA>,XmemAccessMode> NokiaN93_Landscape_64K;
 
-	typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_18BIT,XmemAccessMode,NokiaN93_TypeA>,XmemAccessMode> NokiaN93_Portrait_262K;
-	typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_18BIT,XmemAccessMode,NokiaN93_TypeA>,XmemAccessMode> NokiaN93_Landscape_262K;
+  typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_18BIT,XmemAccessMode,NokiaN93_TypeA>,XmemAccessMode> NokiaN93_Portrait_262K;
+  typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_18BIT,XmemAccessMode,NokiaN93_TypeA>,XmemAccessMode> NokiaN93_Landscape_262K;
 
-	typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_24BIT,XmemAccessMode,NokiaN93_TypeA>,XmemAccessMode> NokiaN93_Portrait_16M;
-	typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_24BIT,XmemAccessMode,NokiaN93_TypeA>,XmemAccessMode> NokiaN93_Landscape_16M;
+  typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_24BIT,XmemAccessMode,NokiaN93_TypeA>,XmemAccessMode> NokiaN93_Portrait_16M;
+  typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_24BIT,XmemAccessMode,NokiaN93_TypeA>,XmemAccessMode> NokiaN93_Landscape_16M;
 
-	typedef TerminalPortraitImpl<NokiaN93_Portrait_64K> NokiaN93_Terminal_Portrait_64K;
-	typedef TerminalLandscapeImpl<NokiaN93_Landscape_64K> NokiaN93_Terminal_Landscape_64K;
+  typedef TerminalPortraitImpl<NokiaN93_Portrait_64K> NokiaN93_Terminal_Portrait_64K;
+  typedef TerminalLandscapeImpl<NokiaN93_Landscape_64K> NokiaN93_Terminal_Landscape_64K;
 
-	typedef TerminalPortraitImpl<NokiaN93_Portrait_262K> NokiaN93_Terminal_Portrait_262K;
-	typedef TerminalLandscapeImpl<NokiaN93_Landscape_262K> NokiaN93_Terminal_Landscape_262K;
+  typedef TerminalPortraitImpl<NokiaN93_Portrait_262K> NokiaN93_Terminal_Portrait_262K;
+  typedef TerminalLandscapeImpl<NokiaN93_Landscape_262K> NokiaN93_Terminal_Landscape_262K;
 
-	typedef TerminalPortraitImpl<NokiaN93_Portrait_16M> NokiaN93_Terminal_Portrait_16M;
-	typedef TerminalLandscapeImpl<NokiaN93_Landscape_16M> NokiaN93_Terminal_Landscape_16M;
+  typedef TerminalPortraitImpl<NokiaN93_Portrait_16M> NokiaN93_Terminal_Portrait_16M;
+  typedef TerminalLandscapeImpl<NokiaN93_Landscape_16M> NokiaN93_Terminal_Landscape_16M;
 
-	/*
-	 * The default for most people is a PWM output on pin #2
-	 */
+  /*
+   * The default for most people is a PWM output on pin #2
+   */
 
-	typedef Backlight<2> DefaultBacklight;
+  typedef Backlight<2> DefaultBacklight;
 
-	#else			// !mega1280 && !mega2560
+  #else     // !mega1280 && !mega2560
 
-	/*
-	 * Pins 0..9 are used on the 328P for IO so we'll default the backlight to PWM pin #10
-	 */
+  /*
+   * Pins 0..9 are used on the 328P for IO so we'll default the backlight to PWM pin #10
+   */
 
-	typedef Backlight<10> DefaultBacklight;
+  typedef Backlight<10> DefaultBacklight;
 
-	#endif		// mega1280/mega2560
+  #endif    // mega1280/mega2560
 
-	/*
-	 * Nokia N93 GPIO type A interface: 64K, 262K, 16M colours, portrait and landscape
-	 */
+  /*
+   * Nokia N93 GPIO type A interface: 64K, 262K, 16M colours, portrait and landscape
+   */
 
-	typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_16BIT,GpioAccessMode,NokiaN93_TypeA>,GpioAccessMode> NokiaN93_Portrait_64K_Gpio;
-	typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_16BIT,GpioAccessMode,NokiaN93_TypeA>,GpioAccessMode> NokiaN93_Landscape_64K_Gpio;
+  typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_16BIT,GpioAccessMode,NokiaN93_TypeA>,GpioAccessMode> NokiaN93_Portrait_64K_Gpio;
+  typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_16BIT,GpioAccessMode,NokiaN93_TypeA>,GpioAccessMode> NokiaN93_Landscape_64K_Gpio;
 
-	typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_18BIT,GpioAccessMode,NokiaN93_TypeA>,GpioAccessMode> NokiaN93_Portrait_262K_Gpio;
-	typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_18BIT,GpioAccessMode,NokiaN93_TypeA>,GpioAccessMode> NokiaN93_Landscape_262K_Gpio;
+  typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_18BIT,GpioAccessMode,NokiaN93_TypeA>,GpioAccessMode> NokiaN93_Portrait_262K_Gpio;
+  typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_18BIT,GpioAccessMode,NokiaN93_TypeA>,GpioAccessMode> NokiaN93_Landscape_262K_Gpio;
 
-	typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_24BIT,GpioAccessMode,NokiaN93_TypeA>,GpioAccessMode> NokiaN93_Portrait_16M_Gpio;
-	typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_24BIT,GpioAccessMode,NokiaN93_TypeA>,GpioAccessMode> NokiaN93_Landscape_16M_Gpio;
+  typedef GraphicsLibrary<MC2PA8201<PORTRAIT,COLOURS_24BIT,GpioAccessMode,NokiaN93_TypeA>,GpioAccessMode> NokiaN93_Portrait_16M_Gpio;
+  typedef GraphicsLibrary<MC2PA8201<LANDSCAPE,COLOURS_24BIT,GpioAccessMode,NokiaN93_TypeA>,GpioAccessMode> NokiaN93_Landscape_16M_Gpio;
 
-	typedef TerminalPortraitImpl<NokiaN93_Portrait_64K_Gpio> NokiaN93_Terminal_Portrait_64K_Gpio;
-	typedef TerminalLandscapeImpl<NokiaN93_Landscape_64K_Gpio> NokiaN93_Terminal_Landscape_64K_Gpio;
+  typedef TerminalPortraitImpl<NokiaN93_Portrait_64K_Gpio> NokiaN93_Terminal_Portrait_64K_Gpio;
+  typedef TerminalLandscapeImpl<NokiaN93_Landscape_64K_Gpio> NokiaN93_Terminal_Landscape_64K_Gpio;
 
-	typedef TerminalPortraitImpl<NokiaN93_Portrait_262K_Gpio> NokiaN93_Terminal_Portrait_262K_Gpio;
-	typedef TerminalLandscapeImpl<NokiaN93_Landscape_262K_Gpio> NokiaN93_Terminal_Landscape_262K_Gpio;
+  typedef TerminalPortraitImpl<NokiaN93_Portrait_262K_Gpio> NokiaN93_Terminal_Portrait_262K_Gpio;
+  typedef TerminalLandscapeImpl<NokiaN93_Landscape_262K_Gpio> NokiaN93_Terminal_Landscape_262K_Gpio;
 
-	typedef TerminalPortraitImpl<NokiaN93_Portrait_16M_Gpio> NokiaN93_Terminal_Portrait_16M_Gpio;
-	typedef TerminalLandscapeImpl<NokiaN93_Landscape_16M_Gpio> NokiaN93_Terminal_Landscape_16M_Gpio;
+  typedef TerminalPortraitImpl<NokiaN93_Portrait_16M_Gpio> NokiaN93_Terminal_Portrait_16M_Gpio;
+  typedef TerminalLandscapeImpl<NokiaN93_Landscape_16M_Gpio> NokiaN93_Terminal_Landscape_16M_Gpio;
 }
 
 

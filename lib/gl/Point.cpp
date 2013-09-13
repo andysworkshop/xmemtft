@@ -31,9 +31,9 @@
 
 namespace lcd {
 
-	/**
-	 * @brief initialise the static member
-	 */
+  /**
+   * @brief initialise the static member
+   */
 
-	const Point Point::Origin=Point(0,0);
+  const Point Point::Origin=Point(0,0);
 }

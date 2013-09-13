@@ -30,59 +30,59 @@
 
 namespace lcd {
 
-	/**
-	 * @brief (x,y) co-ordinate structure
-	 * @ingroup GraphicsLibrary
-	 */
+  /**
+   * @brief (x,y) co-ordinate structure
+   * @ingroup GraphicsLibrary
+   */
 
-	struct Point {
+  struct Point {
 
-		/**
-		 * @brief X and Y co-ordinates as signed values
-		 *
-		 * The actual permitted display values are unsigned. We keep them as signed to allow
-		 * intermediate calculations using points to go negative.
-		 */
+    /**
+     * @brief X and Y co-ordinates as signed values
+     *
+     * The actual permitted display values are unsigned. We keep them as signed to allow
+     * intermediate calculations using points to go negative.
+     */
 
-		int16_t X,Y;
-
-
-		/**
-		 * Return a (0,0) point.
-		 */
-
-		static const Point Origin;
+    int16_t X,Y;
 
 
-		/**
-		 * Default constructor
-		 */
+    /**
+     * Return a (0,0) point.
+     */
 
-		Point()
-		 : X(), Y() {
-		}
+    static const Point Origin;
 
 
-		/**
-		 * Constructor with parameters
-		 * @param x X-coord
-		 * @param y Y-coord
-		 */
+    /**
+     * Default constructor
+     */
 
-		Point(int16_t x,int16_t y) {
-			X=x;
-			Y=y;
-		}
+    Point()
+     : X(), Y() {
+    }
 
 
-		/**
-		 * Copy constructor
-		 * @param p The point to copy from
-		 */
+    /**
+     * Constructor with parameters
+     * @param x X-coord
+     * @param y Y-coord
+     */
 
-		Point(const Point& p) {
-			X=p.X;
-			Y=p.Y;
-		}
-	};
+    Point(int16_t x,int16_t y) {
+      X=x;
+      Y=y;
+    }
+
+
+    /**
+     * Copy constructor
+     * @param p The point to copy from
+     */
+
+    Point(const Point& p) {
+      X=p.X;
+      Y=p.Y;
+    }
+  };
 }
