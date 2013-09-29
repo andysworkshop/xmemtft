@@ -25,6 +25,8 @@ The main documentation for this library can be found at my website in a number o
 [Reverse engineering the Nokia E73 QVGA LCD](http://andybrown.me.uk/wk/2013/05/29/nokia-e73-qvga-lcd/)
 <br/>
 [A generic 16-bit LCD adaptor for the Arduino](http://andybrown.me.uk/wk/2013/06/08/a-generic-16-bit-lcd-adaptor-for-the-arduino)
+<br/>
+[Reverse engineering the LG KF700 480x240 widescreen LCD](http://andybrown.me.uk/wk/2013/08/03/lg-kf700)
 
 # Installation #
 
@@ -39,6 +41,7 @@ The following are supported using the external memory (XMEM) access mode:
 * Nokia N95 8Gb
 * Nokia N93
 * Nokia E73
+* LG KF700
 
 The following are supported using my [generic 16-bit LCD adaptor](http://andybrown.me.uk/wk/2013/06/08/a-generic-16-bit-lcd-adaptor-for-the-arduino) running the highly optimised GPIO driver. Additionally, the Adafruit ILI9325 shield is supported via a driver contributed by [Colin Irwin](http://www.lagrangianpoint.net).
 
@@ -46,6 +49,7 @@ The following are supported using my [generic 16-bit LCD adaptor](http://andybro
 * ILI9327
 * ILI9481
 * HX8347A
+* HX8352A
 
 # Contributing
 
