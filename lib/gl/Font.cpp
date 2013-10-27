@@ -33,27 +33,6 @@
 namespace lcd {
 
   /**
-   * Constructor
-   * @param type FONT_BITMAP or FONT_LZG.
-   * @param firstChar The first character in this font, usually an ASCII code.
-   * @param characterCount The number of consecutive characters in this font.
-   * @param height The font height in pixels.
-   * @param spacing The spacing between characters in pixels.
-   * @param characters A pointer to an array of FontChar structures that define each sequential character
-   */
-
-  FontBase::FontBase(FontType type,uint8_t firstChar,uint8_t characterCount,uint8_t height,uint8_t spacing,const struct FontChar *characters) {
-
-    _fontType=type;
-    _characterCount=characterCount;
-    _firstCharacter=firstChar;
-    _height=height;
-    _characterSpacing=spacing;
-    _characters=characters;
-  }
-
-
-  /**
    * Get the font character definition in progmem space
    * @param character The character code.
    * @param fc The strucutre to fill in.
@@ -68,18 +47,21 @@ namespace lcd {
     // the bulk of the characters are in sequential order, see if we can
     // index directly into the character array to find it
 
-    if(character-_firstCharacter<_characterCount) {
+    if(character>=_firstCharacter && character<_lastCharacter) {
 
-      // don't try this at home kids...
+      // the character is in range and indexable, is it in sequential place?
 
-      ptr=&_characters[character-_firstCharacter];
-      c=pgm_read_byte(reinterpret_cast<const uint8_t *>(ptr)+offsetof(FontChar,Code));
+      if(character-_firstCharacter<_characterCount && _characters[character-_firstCharacter].Code==character) {
 
-      // ...ok you can start looking again
+        ptr=&_characters[character-_firstCharacter];
+        c=pgm_read_byte(reinterpret_cast<const uint8_t *>(ptr)+offsetof(FontChar,Code));
 
-      if(c==character) {
-        memcpy_P(&fc,ptr,sizeof(FontChar));
-        return;
+        // ...ok you can start looking again
+
+        if(c==character) {
+          memcpy_P(&fc,ptr,sizeof(FontChar));
+          return;
+        }
       }
     }
 
@@ -103,35 +85,5 @@ namespace lcd {
 
     ptr=&_characters[1];    // default to first char if not found
     memcpy_P(&fc,ptr,sizeof(fc));
-  }
-
-
-  /**
-   * Get the font height in pixels.
-   * @return The height.
-   */
-
-  uint8_t FontBase::getHeight() const {
-    return _height;
-  }
-
-
-  /**
-   * Get the inter-character spacing
-   * @return The additional space between characters.
-   */
-
-  uint8_t FontBase::getCharacterSpacing() const {
-    return _characterSpacing;
-  }
-
-
-  /**
-   * Get the font type
-   * @return FONT_BITMAP or FONT_LZG
-   */
-
-  FontBase::FontType FontBase::getType() const {
-    return _fontType;
   }
 }
