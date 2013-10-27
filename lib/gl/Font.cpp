@@ -27,7 +27,7 @@
 #include <avr/pgmspace.h>
 #include <stdlib.h>
 #include <stddef.h>
-#include "Font.h"
+#include "gl/Font.h"
 
 
 namespace lcd {

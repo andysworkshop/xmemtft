@@ -40,7 +40,7 @@
 #include "drv/accessModes/Gpio16AccessMode.h"
 #include "drv/ILI9325/ILI9325.h"
 #include "GetFarAddress.h"
-#include "Font.h"
+#include "gl/Font.h"
 #include "decoders/PicoJpeg.h"
 #include "decoders/LzgFlashDecoder.h"
 #include "gl/GraphicsLibrary.h"

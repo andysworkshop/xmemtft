@@ -25,7 +25,7 @@ namespace lcd {
 	 * @ingroup ILI9481
 	 */
 
-	struct HX8352AGamma : DisplayDeviceGamma {
+	struct HX8352AGamma : DisplayDeviceGamma<R61523Gamma,uint8_t> {
 
 	/**
 	 * Constructor. The HX8352A takes 12 gamma values. The constructor must be supplied with those values.
@@ -50,5 +50,14 @@ namespace lcd {
 			_gamma[10]=g11;
 			_gamma[11]=g12;
 		}
-	};
+
+		/**
+     * Get the maximum value for an index
+     * @return the index maximum
+     */
+
+    static uint16_t getMaximumValue(uint16_t index) {
+      return 0xffff;
+    }
+};
 }

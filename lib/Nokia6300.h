@@ -43,7 +43,7 @@
 #include "drv/mc2pa8201/panelTraits/Nokia6300_TypeC.h"
 #include "drv/mc2pa8201/MC2PA8201.h"
 #include "GetFarAddress.h"
-#include "Font.h"
+#include "gl/Font.h"
 #include "decoders/PicoJpeg.h"
 #include "decoders/LzgFlashDecoder.h"
 #include "gl/GraphicsLibrary.h"

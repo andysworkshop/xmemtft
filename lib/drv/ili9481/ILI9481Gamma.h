@@ -25,7 +25,7 @@ namespace lcd {
    * @ingroup ILI9481
    */
 
-  struct ILI9481Gamma : DisplayDeviceGamma {
+  struct ILI9481Gamma : DisplayDeviceGamma<ILI9481Gamma,uint16_t> {
 
     /**
      * Constructor. The ILI9481 takes 12 gamma values. The constructor must be supplied with

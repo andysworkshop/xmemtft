@@ -41,7 +41,7 @@
 #include "drv/ili9327/ILI9327.h"
 #include "drv/ili9327/panelTraits/ILI9327400x240PanelTraits.h"
 #include "GetFarAddress.h"
-#include "Font.h"
+#include "gl/Font.h"
 #include "decoders/PicoJpeg.h"
 #include "decoders/LzgFlashDecoder.h"
 #include "gl/GraphicsLibrary.h"

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Font.h"
+#include "gl/Font.h"
 
 namespace lcd {
 
