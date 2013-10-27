@@ -705,12 +705,17 @@
             "ili9481 64",
             "ili9481 262",
             "hx8347a 64",
+            "hx8352a 64",
+            "hx8352a 262",
             "mc2pa8201 64",
             "mc2pa8201 262",
             "mc2pa8201 16",
             "lds285 64",
             "lds285 262",
-            "lds285 16"});
+            "lds285 16",
+            "r61523 64",
+            "r61523 262",
+            "r61523 16"});
       this._editCompressionOptions.Location = new System.Drawing.Point(350, 18);
       this._editCompressionOptions.MaxDropDownItems = 50;
       this._editCompressionOptions.Name = "_editCompressionOptions";
