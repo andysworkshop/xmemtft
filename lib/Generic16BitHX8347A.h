@@ -35,7 +35,7 @@
 #include "gl/Bitmap.h"
 #include "gl/DoublePrecision.h"
 #include "gl/ColourNames.h"
-#include "gl/Font.h"
+#include "Font.h"
 #include "drv/accessModes/Xmem16AccessMode.h"
 #include "drv/accessModes/Gpio16LatchAccessMode.h"
 #include "drv/accessModes/Gpio16AccessMode.h"

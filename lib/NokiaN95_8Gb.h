@@ -42,7 +42,7 @@
 #include "drv/lds285/LDS285.h"
 #include "drv/lds285/LDS285Backlight.h"
 #include "GetFarAddress.h"
-#include "gl/Font.h"
+#include "Font.h"
 #include "decoders/PicoJpeg.h"
 #include "decoders/LzgFlashDecoder.h"
 #include "gl/GraphicsLibrary.h"

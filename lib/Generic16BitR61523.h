@@ -41,7 +41,7 @@
 #include "drv/R61523/R61523.h"
 #include "drv/R61523/R61523PwmBacklight.h"
 #include "GetFarAddress.h"
-#include "gl/Font.h"
+#include "Font.h"
 #include "decoders/PicoJpeg.h"
 #include "decoders/LzgFlashDecoder.h"
 #include "gl/GraphicsLibrary.h"

@@ -19,7 +19,7 @@
 */
 
 #include "Generic16BitR61523.h"
-#include "gl/fonts/Font_volter_goldfish_9.h"
+#include "Font_dos_16.h"
 #include "Lzg_font_happysans.h"
 #include "Lzg_font_applegaramond.h"
 
@@ -61,7 +61,14 @@ void setup() {
   // to black before switching the display on)
 
   tft=new TftPanel;
-  font=new Font_VOLTER__28GOLDFISH_299;
+  font=new Font_PERFECT_DOS_VGA_437_WIN16;
+
+  // apply the gamma curve. Note that gammas are panel specific. This curve is appropriate
+  // to a replacement (non-original) panel obtained from ebay.
+
+  uint8_t levels[13]={ 0xe,0,1,1,0,0,0,0,0,0,3,4,0 };
+  R61523Gamma gamma(levels);
+  tft->applyGamma(gamma);
 
   // create the two TrueType fonts
 
@@ -294,7 +301,7 @@ void trueTypeTest() {
 
   // write a TrueType font string below the logo
   
-  tft->writeString(Point(160,145),*happyFont,"presents...");
+  tft->writeString(Point(160,175),*happyFont,"presents...");
   delay(3000);
 
   fontHeight=garamondFont->getHeight();
@@ -482,12 +489,12 @@ void ellipseTest() {
 
 
 /*
- * Pick a random 24-bit colour
+ * Pick a random 24-bit colour that's not too dark
  */
 
 uint32_t randomColour() {
 
-  return ((uint32_t)rand() << 16 | rand()) & 0xffffff;
+  return (((uint32_t)rand() << 16 | rand()) & 0xffffff) | 0x808080;
 }
 
 

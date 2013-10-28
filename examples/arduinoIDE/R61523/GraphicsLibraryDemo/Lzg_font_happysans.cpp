@@ -1,5 +1,5 @@
 #include <avr/pgmspace.h>
-#include "gl/Font.h"
+#include "Font.h"
 
 namespace lcd {
 

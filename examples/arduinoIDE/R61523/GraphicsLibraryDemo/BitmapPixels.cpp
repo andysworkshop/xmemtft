@@ -16,12 +16,6 @@ void _asmStub() {
     ".global CloudPixels       \n\t"
     ".global CloudPixelsSize   \n\t"
 
-    ".global FlagPixels        \n\t"
-    ".global FlagPixelsSize    \n\t"
-
-    ".global DocPixels         \n\t"
-    ".global DocPixelsSize     \n\t"
-
     ".global GlobePixels       \n\t"
     ".global GlobePixelsSize   \n\t"
 
@@ -29,19 +23,19 @@ void _asmStub() {
     ".global LogoPixelsSize    \n\t"
  
     "CloudPixels:              \n\t"
-    ".incbin \"libraries/xmemtft/examples/HX8347A/GraphicsLibraryDemo/cloud100x100.bin\" \n\t"
+    ".incbin \"libraries/xmemtft/examples/R61523/GraphicsLibraryDemo/cloud100x100.bin\" \n\t"
     "CloudPixelsSize=.-CloudPixels  \n\t"
     
     ".balign 2 \n\t"
 
     "LogoPixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/HX8347A/TrueType/logo.lzg\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/R61523/TrueType/logo.lzg\"\n\t"
     "LogoPixelsSize=.-LogoPixels\n\t"
 
     ".balign 2 \n\t"
 
     "GlobePixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/HX8347A/GraphicsLibraryDemo/globe.lzg\" \n\t"
+    ".incbin \"libraries/xmemtft/examples/R61523/GraphicsLibraryDemo/globe.lzg\" \n\t"
     "GlobePixelsSize=.-GlobePixels \n\t"
  );
 }

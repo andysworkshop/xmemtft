@@ -18,7 +18,7 @@
   This notice may not be removed or altered from any source distribution.
 */
 
-#include "Generic16BitHX8352A.h"
+#include "Generic16BitR61523.h"
 
 using namespace lcd;
 
@@ -30,35 +30,39 @@ extern const uint32_t Test2Pixels,Test2PixelsSize;
 extern const uint32_t Test3Pixels,Test3PixelsSize;
 extern const uint32_t Test4Pixels,Test4PixelsSize;
 
-// We'll be working in portrait mode, 64K
+/*
+ * Declare types and variables for the panel and the backlight. We will
+ * use the built-in PWM generation feature of the R61523 to dim the backlight.
+ */
 
-typedef LG_KF700_Portrait_64K_Gpio16Latch LcdAccess;
-LcdAccess *tft;
-DefaultBacklight *backlight;
+typedef R61523_Landscape_64K_Gpio16Latch TftPanel;
+typedef R61523PwmBacklight<DefaultMegaGpio16LatchAccessMode> TftBacklight;
+
+TftPanel *tft;
+TftBacklight *backlight;
 
 
 void setup() {
 
-  // create a backlight manager and switch off the backlight
-  // so the user doesn't see the random data that can appear
-  // during initialisation
+  // create a backlight manager. the default level is zero.
 
-  backlight=new DefaultBacklight;
-  backlight->setPercentage(0);
+  backlight=new TftBacklight;
 
-  // create and initialise the panel
+  // create and initialise the panel - the driver clears to black before switching the display on
 
-  tft=new LcdAccess;
+  tft=new TftPanel;
 
-  // clear to white
+  // apply the gamma curve. Note that gammas are panel specific. This curve is appropriate
+  // to a replacement (non-original) panel obtained from ebay.
 
-  tft->setBackground(ColourNames::WHITE);
-  tft->clearScreen();
+  uint8_t levels[13]={ 0xe,0,1,1,0,0,0,0,0,0,3,4,0 };
+  R61523Gamma gamma(levels);
+  tft->applyGamma(gamma);
 
-  // fade up the backlight to 100% in 4ms steps (400ms total)
-  // now that we are in a known good state
+  // fade up the backlight to 100% - the fading is done automatically by
+  // the R61523 hardware
 
-  backlight->fadeTo(100,4);
+  backlight->setPercentage(100);
 }
 
 

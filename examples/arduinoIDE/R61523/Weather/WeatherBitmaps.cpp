@@ -63,97 +63,97 @@ void _asmStub() {
 
 
     "RainPixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/HX8347A/Weather/rain.lzg\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/R61523/Weather/rain.lzg\"\n\t"
     "RainPixelsSize=.-RainPixels\n\t"
 
     ".balign 2\n\t"
 
     "SunPixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/HX8347A/Weather/sun.lzg\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/R61523/Weather/sun.lzg\"\n\t"
     "SunPixelsSize=.-SunPixels\n\t"
 
     ".balign 2\n\t"
 
     "PartlyCloudyPixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/HX8347A/Weather/partlyCloudy.lzg\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/R61523/Weather/partlyCloudy.lzg\"\n\t"
     "PartlyCloudyPixelsSize=.-PartlyCloudyPixels\n\t"
 
     ".balign 2\n\t"
 
     "SnowPixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/HX8347A/Weather/snow.lzg\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/R61523/Weather/snow.lzg\"\n\t"
     "SnowPixelsSize=.-SnowPixels\n\t"
 
     ".balign 2\n\t"
 
     "DegreePixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/HX8347A/Weather/degree.lzg\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/R61523/Weather/degree.lzg\"\n\t"
     "DegreePixelsSize=.-DegreePixels\n\t"
 
     ".balign 2\n\t"
 
     "PointPixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/HX8347A/Weather/point.lzg\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/R61523/Weather/point.lzg\"\n\t"
     "PointPixelsSize=.-PointPixels\n\t"
 
     ".balign 2\n\t"
 
     "ZeroPixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/HX8347A/Weather/0.lzg\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/R61523/Weather/0.lzg\"\n\t"
     "ZeroPixelsSize=.-ZeroPixels\n\t"
 
     ".balign 2\n\t"
 
     "OnePixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/HX8347A/Weather/1.lzg\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/R61523/Weather/1.lzg\"\n\t"
     "OnePixelsSize=.-OnePixels\n\t"
 
     ".balign 2\n\t"
 
     "TwoPixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/HX8347A/Weather/2.lzg\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/R61523/Weather/2.lzg\"\n\t"
     "TwoPixelsSize=.-TwoPixels\n\t"
 
     ".balign 2\n\t"
 
     "ThreePixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/HX8347A/Weather/3.lzg\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/R61523/Weather/3.lzg\"\n\t"
     "ThreePixelsSize=.-ThreePixels\n\t"
 
     ".balign 2\n\t"
 
     "FourPixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/HX8347A/Weather/4.lzg\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/R61523/Weather/4.lzg\"\n\t"
     "FourPixelsSize=.-FourPixels\n\t"
 
     ".balign 2\n\t"
 
     "FivePixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/HX8347A/Weather/5.lzg\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/R61523/Weather/5.lzg\"\n\t"
     "FivePixelsSize=.-FivePixels\n\t"
 
     ".balign 2\n\t"
 
     "SixPixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/HX8347A/Weather/6.lzg\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/R61523/Weather/6.lzg\"\n\t"
     "SixPixelsSize=.-SixPixels\n\t"
 
     ".balign 2\n\t"
 
     "SevenPixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/HX8347A/Weather/7.lzg\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/R61523/Weather/7.lzg\"\n\t"
     "SevenPixelsSize=.-SevenPixels\n\t"
 
     ".balign 2\n\t"
 
     "EightPixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/HX8347A/Weather/8.lzg\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/R61523/Weather/8.lzg\"\n\t"
     "EightPixelsSize=.-EightPixels\n\t"
 
     ".balign 2\n\t"
 
     "NinePixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/HX8347A/Weather/9.lzg\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/R61523/Weather/9.lzg\"\n\t"
     "NinePixelsSize=.-NinePixels\n\t"
 
     ".balign 2\n\t"

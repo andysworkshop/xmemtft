@@ -39,7 +39,7 @@
 #include "drv/accessModes/AdafruitAccessMode.h"
 #include "drv/ili9325/ILI9325.h"
 #include "GetFarAddress.h"
-#include "gl/Font.h"
+#include "Font.h"
 #include "decoders/PicoJpeg.h"
 #include "decoders/LzgFlashDecoder.h"
 #include "gl/GraphicsLibrary.h"

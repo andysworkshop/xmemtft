@@ -31,31 +31,31 @@ void _asmStub() {
 
 
     "Test0Pixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/HX8347A/JpegFlash/test0.jpg\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/R61523/JpegFlash/test0.jpg\"\n\t"
     "Test0PixelsSize=.-Test0Pixels\n\t"
 
     ".balign 2\n\t"
 
     "Test1Pixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/HX8347A/JpegFlash/test1.jpg\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/R61523/JpegFlash/test1.jpg\"\n\t"
     "Test1PixelsSize=.-Test1Pixels\n\t"
 
     ".balign 2\n\t"
 
     "Test2Pixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/HX8347A/JpegFlash/test2.jpg\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/R61523/JpegFlash/test2.jpg\"\n\t"
     "Test2PixelsSize=.-Test2Pixels\n\t"
 
     ".balign 2\n\t"
 
     "Test3Pixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/HX8347A/JpegFlash/test3.jpg\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/R61523/JpegFlash/test3.jpg\"\n\t"
     "Test3PixelsSize=.-Test3Pixels\n\t"
 
     ".balign 2\n\t"
 
     "Test4Pixels:\n\t"
-    ".incbin \"libraries/xmemtft/examples/HX8347A/JpegFlash/test4.jpg\"\n\t"
+    ".incbin \"libraries/xmemtft/examples/R61523/JpegFlash/test4.jpg\"\n\t"
     "Test4PixelsSize=.-Test4Pixels\n\t"
 
     ".balign 2\n\t"

@@ -18,7 +18,7 @@
   This notice may not be removed or altered from any source distribution.
 */
 
-#include "Generic16BitHX8352A.h"
+#include "Generic16BitR61523.h"
 #include "Lzg_font_happysans.h"
 #include "Lzg_font_applegaramond.h"
 
@@ -28,13 +28,16 @@ extern const uint32_t LogoPixels;
 extern const uint32_t LogoPixelsSize;
 
 /*
- * The orientation and colour depth that we will use
+ * Declare types and variables for the panel and the backlight. We will
+ * use the built-in PWM generation feature of the R61523 to dim the backlight.
  */
 
-typedef LG_KF700_Landscape_64K_Gpio16Latch LcdAccess;
+typedef R61523_Landscape_64K_Gpio16Latch TftPanel;
+typedef R61523PwmBacklight<DefaultMegaGpio16LatchAccessMode> TftBacklight;
 
-DefaultBacklight *backlight;
-LcdAccess *tft;
+TftPanel *tft;
+TftBacklight *backlight;
+
 LzgFont *happyFont;
 LzgFont *garamondFont;
 
@@ -47,12 +50,19 @@ void setup() {
   // create a backlight controller and use it
   // to switch the backlight off
 
-  backlight=new DefaultBacklight;
+  backlight=new TftBacklight;
   backlight->setPercentage(0);
 
   // reset and initialise the panel
 
-  tft=new LcdAccess;
+  tft=new TftPanel;
+
+  // apply the gamma curve. Note that gammas are panel specific. This curve is appropriate
+  // to a replacement (non-original) panel obtained from ebay.
+
+  uint8_t levels[13]={ 0xe,0,1,1,0,0,0,0,0,0,3,4,0 };
+  R61523Gamma gamma(levels);
+  tft->applyGamma(gamma);
 
   // clear the screen to black
 
@@ -64,9 +74,10 @@ void setup() {
   happyFont=new Font_HAPPY_SANS_32;
   garamondFont=new Font_APPLE_GARAMOND_28;
 
-  // fade up the backlight to 100% in 4ms steps (400ms total)
+  // fade up the backlight to 100% - the fading is done automatically by
+  // the R61523 hardware
 
-  backlight->fadeTo(100,4);
+  backlight->setPercentage(100);
 }
 
 /*
@@ -91,7 +102,7 @@ void intro() {
 
   // write a TrueType font string below the logo
   
-  tft->writeString(Point(160,145),*happyFont,"presents...");
+  tft->writeString(Point(160,175),*happyFont,"presents...");
   delay(3000);
 }
 
