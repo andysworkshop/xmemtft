@@ -23,7 +23,7 @@ namespace lcd {
      */
 
     R61523Gamma(uint8_t *levels)
-     : DisplayDeviceGamma(13) {
+     : DisplayDeviceGamma<R61523Gamma,uint8_t>(13) {
       memcpy(&_gamma[0],levels,13);
     }
 

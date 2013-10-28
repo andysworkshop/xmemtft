@@ -35,7 +35,7 @@ namespace lcd {
       ILI9481Gamma(
           uint16_t g1,uint16_t g2,uint16_t g3,uint16_t g4,uint16_t g5,uint16_t g6,
           uint16_t g7,uint16_t g8,uint16_t g9,uint16_t g10,uint16_t g11,uint16_t g12)
-       : DisplayDeviceGamma(12) {
+       : DisplayDeviceGamma<ILI9481Gamma,uint16_t>(12) {
 
         _gamma[0]=g1;
         _gamma[1]=g2;
