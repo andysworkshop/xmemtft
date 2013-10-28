@@ -139,5 +139,9 @@ namespace lcd {
     TAccessMode::writeData(dutyCycle);                 // BDCV=duty cycle
     TAccessMode::writeData(TFrequency);                // 13.7kHz
     TAccessMode::writeData(0x18 | dim | polarity);     // PWMWM=1, LEDPWME=1
+
+    // remember current setting
+
+    _currentPercentage=newPercentage;
   }
 }

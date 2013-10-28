@@ -92,8 +92,8 @@ void intro() {
 
   bm.DataSize=GET_FAR_ADDRESS(LogoPixelsSize);
   bm.Pixels=GET_FAR_ADDRESS(LogoPixels);
-  bm.Dimensions.Width=200;
-  bm.Dimensions.Height=56;
+  bm.Dimensions.Width=400;
+  bm.Dimensions.Height=112;
 
   // draw the bitmap on screen
   
@@ -102,7 +102,7 @@ void intro() {
 
   // write a TrueType font string below the logo
   
-  tft->writeString(Point(160,175),*happyFont,"presents...");
+  tft->writeString(Point(120,240),*happyFont,"presents...");
   delay(3000);
 }
 

@@ -291,8 +291,8 @@ void trueTypeTest() {
 
   bm.DataSize=GET_FAR_ADDRESS(LogoPixelsSize);
   bm.Pixels=GET_FAR_ADDRESS(LogoPixels);
-  bm.Dimensions.Width=200;
-  bm.Dimensions.Height=56;
+  bm.Dimensions.Width=400;
+  bm.Dimensions.Height=112;
 
   // draw the intro bitmap on screen
   
@@ -301,7 +301,7 @@ void trueTypeTest() {
 
   // write a TrueType font string below the logo
   
-  tft->writeString(Point(160,175),*happyFont,"presents...");
+  tft->writeString(Point(120,240),*happyFont,"presents...");
   delay(3000);
 
   fontHeight=garamondFont->getHeight();
@@ -494,7 +494,7 @@ void ellipseTest() {
 
 uint32_t randomColour() {
 
-  return (((uint32_t)rand() << 16 | rand()) & 0xffffff) | 0x808080;
+  return (((uint32_t)rand() << 16 | rand()) & 0xffffff) | 0x404040;
 }
 
 

@@ -270,16 +270,23 @@ namespace lcd {
   template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
   inline void R61523<TOrientation,TColourDepth,TAccessMode>::rawFlashTransfer(uint32_t data,uint32_t numBytes) const {
 
-    // handle data in the lower and upper segments with possible overlap
+    uint32_t numPixels;
 
-    while(data<65536 && numBytes>0) {
-      TAccessMode::writeData(pgm_read_byte_near(data++));
-      numBytes--;
+    numPixels=numBytes/2;
+
+    // handle data in the lower and upper segments with possible overlap
+    // a single 16-bit pixel should not overlap the segments
+
+    while(data<65536 && numPixels>0) {
+      TAccessMode::writeData(pgm_read_byte_near(data),pgm_read_byte_near(data+1));
+      data+=2;
+      numPixels--;
     }
 
-    while(numBytes>0) {
-      TAccessMode::writeData(pgm_read_byte_far(data++));
-      numBytes--;
+    while(numPixels>0) {
+      TAccessMode::writeData(pgm_read_byte_far(data),pgm_read_byte_far(data+1));
+      data+=2;
+      numPixels--;
     }
   }
 
@@ -315,7 +322,13 @@ namespace lcd {
   template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
   inline void R61523<TOrientation,TColourDepth,TAccessMode>::rawSramTransfer(uint8_t *data,uint32_t numBytes) const {
 
-    while(numBytes--)
-      TAccessMode::writeData(*data++);
+    uint32_t numPixels;
+
+    numPixels=numBytes/2;
+
+    while(numPixels--) {
+      TAccessMode::writeData(data[0],data[1]);
+      data+=2;
+    }
   }
 }
