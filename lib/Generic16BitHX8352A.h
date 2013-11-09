@@ -38,6 +38,7 @@
 #include "Font.h"
 #include "drv/accessModes/Xmem16AccessMode.h"
 #include "drv/accessModes/Gpio16LatchAccessMode.h"
+#include "drv/accessModes/Gpio16AccessMode.h"
 #include "drv/hx8352a/HX8352A.h"
 #include "drv/hx8352a/panelTraits/LG_KF700PanelTraits.h"
 #include "GetFarAddress.h"
@@ -72,6 +73,16 @@ namespace lcd {
 
 	typedef TerminalPortraitImpl<LG_KF700_Portrait_64K_Gpio16Latch> LG_KF700_Terminal_Portrait_64K_Gpio16Latch;
 	typedef TerminalLandscapeImpl<LG_KF700_Landscape_64K_Gpio16Latch> LG_KF700_Terminal_Landscape_64K_Gpio16Latch;
+
+  /*
+   * Generic HX8352A GPIO16 interface: 64K colours, portrait and landscape
+   */
+
+  typedef GraphicsLibrary<HX8352A<PORTRAIT,COLOURS_16BIT,DefaultMegaGpio16AccessMode,LG_KF700PanelTraits>,DefaultMegaGpio16AccessMode> LG_KF700_Portrait_64K_Gpio16;
+  typedef GraphicsLibrary<HX8352A<LANDSCAPE,COLOURS_16BIT,DefaultMegaGpio16AccessMode,LG_KF700PanelTraits>,DefaultMegaGpio16AccessMode> LG_KF700_Landscape_64K_Gpio16;
+
+  typedef TerminalPortraitImpl<LG_KF700_Portrait_64K_Gpio16> LG_KF700_Terminal_Portrait_64K_Gpio16;
+  typedef TerminalLandscapeImpl<LG_KF700_Landscape_64K_Gpio16> LG_KF700_Terminal_Landscape_64K_Gpio16;
 
 	/*
 	 * The default for most people is a PWM output on pin #2
