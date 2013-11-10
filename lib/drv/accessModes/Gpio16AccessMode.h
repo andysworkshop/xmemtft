@@ -78,9 +78,9 @@ namespace lcd {
    *  | 32      | PC5  | D13      |
    *  | 31      | PC6  | D14      |
    *  | 30      | PC7  | D15      |
-   *  | 39      | PG2  | /RESET   |
+   *  | 41      | PG2  | /RESET   |//Had to swtich this with this **
    *  | 40      | PG1  | RS       |
-   *  | 41      | PG0  | /WR      |
+   *  | 39      | PG0  | /WR      |//**
    *  +---------+------+----------+
    *  @ingroup AccessModes
    */
