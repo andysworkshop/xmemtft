@@ -54,34 +54,64 @@ namespace lcd {
 #if defined(__AVR_ATmega1280__) || defined(__AVR_ATmega2560__)
 
   /*
-   * Generic R61523 XMEM16 interface: 64K colours, portrait and landscape
+   * Generic R61523 XMEM16 interface: 64K colours, portrait and landscape, panel type A
    */
 
-  typedef GraphicsLibrary<R61523<PORTRAIT,COLOURS_16BIT,Xmem16AccessMode>,Xmem16AccessMode> R61523_Portrait_64K_Xmem16;
-  typedef GraphicsLibrary<R61523<LANDSCAPE,COLOURS_16BIT,Xmem16AccessMode>,Xmem16AccessMode> R61523_Landscape_64K_Xmem16;
+  typedef GraphicsLibrary<R61523<PORTRAIT,COLOURS_16BIT,Xmem16AccessMode,SonyU5Vivaz_TypeA>,Xmem16AccessMode> R61523_Portrait_64K_Xmem16;
+  typedef GraphicsLibrary<R61523<LANDSCAPE,COLOURS_16BIT,Xmem16AccessMode,SonyU5Vivaz_TypeA>,Xmem16AccessMode> R61523_Landscape_64K_Xmem16;
 
   typedef TerminalPortraitImpl<R61523_Portrait_64K_Xmem16> R61523_Terminal_Portrait_64K_Xmem16;
   typedef TerminalLandscapeImpl<R61523_Landscape_64K_Xmem16> R61523_Terminal_Landscape_64K_Xmem16;
 
   /*
-   * Generic R61523 GPIO16 latched interface: 64K colours, portrait and landscape
+   * Generic R61523 XMEM16 interface: 64K colours, portrait and landscape, panel type B
    */
 
-  typedef GraphicsLibrary<R61523<PORTRAIT,COLOURS_16BIT,DefaultMegaGpio16LatchAccessMode>,DefaultMegaGpio16LatchAccessMode> R61523_Portrait_64K_Gpio16Latch;
-  typedef GraphicsLibrary<R61523<LANDSCAPE,COLOURS_16BIT,DefaultMegaGpio16LatchAccessMode>,DefaultMegaGpio16LatchAccessMode> R61523_Landscape_64K_Gpio16Latch;
+  typedef GraphicsLibrary<R61523<PORTRAIT,COLOURS_16BIT,Xmem16AccessMode,SonyU5Vivaz_TypeB>,Xmem16AccessMode> R61523_Portrait_64K_Xmem16_TypeB;
+  typedef GraphicsLibrary<R61523<LANDSCAPE,COLOURS_16BIT,Xmem16AccessMode,SonyU5Vivaz_TypeB>,Xmem16AccessMode> R61523_Landscape_64K_Xmem16_TypeB;
+
+  typedef TerminalPortraitImpl<R61523_Portrait_64K_Xmem16_TypeB> R61523_Terminal_Portrait_64K_Xmem16_TypeB;
+  typedef TerminalLandscapeImpl<R61523_Landscape_64K_Xmem16_TypeB> R61523_Terminal_Landscape_64K_Xmem16_TypeB;
+
+  /*
+   * Generic R61523 GPIO16 latched interface: 64K colours, portrait and landscape, panel type A
+   */
+
+  typedef GraphicsLibrary<R61523<PORTRAIT,COLOURS_16BIT,DefaultMegaGpio16LatchAccessMode,SonyU5Vivaz_TypeA>,DefaultMegaGpio16LatchAccessMode> R61523_Portrait_64K_Gpio16Latch;
+  typedef GraphicsLibrary<R61523<LANDSCAPE,COLOURS_16BIT,DefaultMegaGpio16LatchAccessMode,SonyU5Vivaz_TypeA>,DefaultMegaGpio16LatchAccessMode> R61523_Landscape_64K_Gpio16Latch;
 
   typedef TerminalPortraitImpl<R61523_Portrait_64K_Gpio16Latch> R61523_Terminal_Portrait_64K_Gpio16Latch;
   typedef TerminalLandscapeImpl<R61523_Landscape_64K_Gpio16Latch> R61523_Terminal_Landscape_64K_Gpio16Latch;
 
   /*
-   * Generic R61523 GPIO16 interface: 64K colours, portrait and landscape
+   * Generic R61523 GPIO16 latched interface: 64K colours, portrait and landscape, panel type B
    */
 
-  typedef GraphicsLibrary<R61523<PORTRAIT,COLOURS_16BIT,DefaultMegaGpio16AccessMode>,DefaultMegaGpio16AccessMode> R61523_Portrait_64K_Gpio16;
-  typedef GraphicsLibrary<R61523<LANDSCAPE,COLOURS_16BIT,DefaultMegaGpio16AccessMode>,DefaultMegaGpio16AccessMode> R61523_Landscape_64K_Gpio16;
+  typedef GraphicsLibrary<R61523<PORTRAIT,COLOURS_16BIT,DefaultMegaGpio16LatchAccessMode,SonyU5Vivaz_TypeB>,DefaultMegaGpio16LatchAccessMode> R61523_Portrait_64K_Gpio16Latch_TypeB;
+  typedef GraphicsLibrary<R61523<LANDSCAPE,COLOURS_16BIT,DefaultMegaGpio16LatchAccessMode,SonyU5Vivaz_TypeB>,DefaultMegaGpio16LatchAccessMode> R61523_Landscape_64K_Gpio16Latch_TypeB;
+
+  typedef TerminalPortraitImpl<R61523_Portrait_64K_Gpio16Latch_TypeB> R61523_Terminal_Portrait_64K_Gpio16Latch_TypeB;
+  typedef TerminalLandscapeImpl<R61523_Landscape_64K_Gpio16Latch_TypeB> R61523_Terminal_Landscape_64K_Gpio16Latch_TypeB;
+
+  /*
+   * Generic R61523 GPIO16 interface: 64K colours, portrait and landscape, panel type A
+   */
+
+  typedef GraphicsLibrary<R61523<PORTRAIT,COLOURS_16BIT,DefaultMegaGpio16AccessMode,SonyU5Vivaz_TypeA>,DefaultMegaGpio16AccessMode> R61523_Portrait_64K_Gpio16;
+  typedef GraphicsLibrary<R61523<LANDSCAPE,COLOURS_16BIT,DefaultMegaGpio16AccessMode,SonyU5Vivaz_TypeA>,DefaultMegaGpio16AccessMode> R61523_Landscape_64K_Gpio16;
 
   typedef TerminalPortraitImpl<R61523_Portrait_64K_Gpio16> R61523_Terminal_Portrait_64K_Gpio16;
   typedef TerminalLandscapeImpl<R61523_Landscape_64K_Gpio16> R61523_Terminal_Landscape_64K_Gpio16;
+
+  /*
+   * Generic R61523 GPIO16 interface: 64K colours, portrait and landscape, panel type B
+   */
+
+  typedef GraphicsLibrary<R61523<PORTRAIT,COLOURS_16BIT,DefaultMegaGpio16AccessMode,SonyU5Vivaz_TypeB>,DefaultMegaGpio16AccessMode> R61523_Portrait_64K_Gpio16_TypeB;
+  typedef GraphicsLibrary<R61523<LANDSCAPE,COLOURS_16BIT,DefaultMegaGpio16AccessMode,SonyU5Vivaz_TypeB>,DefaultMegaGpio16AccessMode> R61523_Landscape_64K_Gpio16_TypeB;
+
+  typedef TerminalPortraitImpl<R61523_Portrait_64K_Gpio16_TypeB> R61523_Terminal_Portrait_64K_Gpio16_TypeB;
+  typedef TerminalLandscapeImpl<R61523_Landscape_64K_Gpio16_TypeB> R61523_Terminal_Landscape_64K_Gpio16_TypeB;
 
   /*
    * The default for most people is a PWM output on pin #2. You should not have to use this because

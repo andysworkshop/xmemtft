@@ -61,9 +61,11 @@ namespace lcd {
       BACKLIGHT_CONTROL_2     = 0xb9,
       BACKLIGHT_CONTROL_3     = 0xba,
       DEVICE_CODE_READ        = 0xbf,
+      PANEL_DRIVING_SETTING   = 0xc0,
       GAMMA_SET_A             = 0xc8,
       GAMMA_SET_B             = 0xc9,
       GAMMA_SET_C             = 0xca,
+      POWER_SETTING_COMMON    = 0xd0
     };
   }
 }

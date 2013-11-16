@@ -36,6 +36,8 @@
 #include "R61523Colour.h"
 #include "R61523Orientation.h"
 #include "R61523Gamma.h"
+#include "panelTraits/SonyU5Vivaz_TypeA.h"
+#include "panelTraits/SonyU5Vivaz_TypeB.h"
 
 
 namespace lcd {
@@ -50,7 +52,7 @@ namespace lcd {
    * @tparam TPanelTraits Panel-specific traits.
    */
 
-  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
+  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
   class R61523 : public R61523Colour<TColourDepth,TAccessMode>,
                  public R61523Orientation<TOrientation,TAccessMode> {
 
@@ -100,8 +102,8 @@ namespace lcd {
    * @param enablePwmPin true if the PWM backlight out pin is to be enabled
    */
 
-  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
-  inline R61523<TOrientation,TColourDepth,TAccessMode>::R61523(bool enablePwmPin)
+  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
+  inline R61523<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::R61523(bool enablePwmPin)
     : _enablePwmPin(enablePwmPin) {
 
     initialise();
@@ -112,8 +114,8 @@ namespace lcd {
    * Initialise the LCD. Do the reset sequence.
    */
 
-  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
-  inline void R61523<TOrientation,TColourDepth,TAccessMode>::initialise() const {
+  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
+  inline void R61523<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::initialise() const {
 
     typename R61523Colour<TColourDepth,TAccessMode>::UnpackedColour uc;
 
@@ -146,6 +148,10 @@ namespace lcd {
     TAccessMode::writeCommand(r61523::SLEEP_OUT);
     delay(120);
 
+    // do any panel-specific initialisation
+
+    TPanelTraits::template initialise<TAccessMode>();
+
     // set the orientation and colour depth
 
     this->setOrientation();
@@ -167,8 +173,8 @@ namespace lcd {
    * @param gamma The collection of gamma values
    */
 
-  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
-  inline void R61523<TOrientation,TColourDepth,TAccessMode>::applyGamma(const R61523Gamma& gamma) const {
+  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
+  inline void R61523<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::applyGamma(const R61523Gamma& gamma) const {
 
     applyGamma(r61523::GAMMA_SET_A,gamma);
     applyGamma(r61523::GAMMA_SET_B,gamma);
@@ -176,8 +182,8 @@ namespace lcd {
   }
 
 
-  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
-  inline void R61523<TOrientation,TColourDepth,TAccessMode>::applyGamma(uint16_t command,const R61523Gamma& gamma) const {
+  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
+  inline void R61523<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::applyGamma(uint16_t command,const R61523Gamma& gamma) const {
 
     uint8_t i;
 
@@ -203,8 +209,8 @@ namespace lcd {
    * Send the panel to sleep
    */
 
-  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
-  inline void R61523<TOrientation,TColourDepth,TAccessMode>::sleep() const {
+  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
+  inline void R61523<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::sleep() const {
 
     TAccessMode::writeCommand(r61523::DISPLAY_OFF);
     TAccessMode::writeCommand(r61523::SLEEP_IN);
@@ -216,8 +222,8 @@ namespace lcd {
    * Wake the panel up
    */
 
-  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
-  inline void R61523<TOrientation,TColourDepth,TAccessMode>::wake() const {
+  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
+  inline void R61523<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::wake() const {
 
     TAccessMode::writeCommand(r61523::SLEEP_OUT);
     delay(120);
@@ -230,8 +236,8 @@ namespace lcd {
    * Issue the command that allows graphics ram writing to commence
    */
 
-  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
-  inline void R61523<TOrientation,TColourDepth,TAccessMode>::beginWriting() const {
+  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
+  inline void R61523<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::beginWriting() const {
     TAccessMode::writeCommand(r61523::MEMORY_WRITE);
   }
 
@@ -242,8 +248,8 @@ namespace lcd {
    * @return The device ID code. It should match DEVICE_CODE.
    */
 
-  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
-  inline uint32_t R61523<TOrientation,TColourDepth,TAccessMode>::readDeviceCode() const {
+  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
+  inline uint32_t R61523<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::readDeviceCode() const {
 
     uint32_t deviceCode;
 
@@ -267,8 +273,8 @@ namespace lcd {
    * @param numBytes The number of bytes to transfer
    */
 
-  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
-  inline void R61523<TOrientation,TColourDepth,TAccessMode>::rawFlashTransfer(uint32_t data,uint32_t numBytes) const {
+  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
+  inline void R61523<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::rawFlashTransfer(uint32_t data,uint32_t numBytes) const {
 
     uint32_t numPixels;
 
@@ -295,8 +301,8 @@ namespace lcd {
    * Enable the tearing effect signal
    */
 
-  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
-  void R61523<TOrientation,TColourDepth,TAccessMode>::enableTearingEffect(TearingEffectMode teMode) const {
+  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
+  void R61523<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::enableTearingEffect(TearingEffectMode teMode) const {
 
     TAccessMode::writeCommand(r61523::SET_TEAR_ON);
     TAccessMode::writeData(teMode==TE_VBLANK ? 0 : 1);
@@ -307,8 +313,8 @@ namespace lcd {
    * Disable the tearing effect signal
    */
 
-  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
-  void R61523<TOrientation,TColourDepth,TAccessMode>::disableTearingEffect() const {
+  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
+  void R61523<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::disableTearingEffect() const {
     TAccessMode::writeCommand(r61523::SET_TEAR_OFF);
   }
 
@@ -319,8 +325,8 @@ namespace lcd {
    * @param numBytes number of bytes to write.
    */
 
-  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode>
-  inline void R61523<TOrientation,TColourDepth,TAccessMode>::rawSramTransfer(uint8_t *data,uint32_t numBytes) const {
+  template<Orientation TOrientation,ColourDepth TColourDepth,class TAccessMode,class TPanelTraits>
+  inline void R61523<TOrientation,TColourDepth,TAccessMode,TPanelTraits>::rawSramTransfer(uint8_t *data,uint32_t numBytes) const {
 
     uint32_t numPixels;
 
