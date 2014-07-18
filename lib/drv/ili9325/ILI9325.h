@@ -38,7 +38,7 @@
 #pragma once
 
 #include "Arduino.h"
-#include "commands/Allcommands.h"
+#include "commands/AllCommands.h"
 #include "ILI9325Colour.h"
 #include "ILI9325Orientation.h"
 

@@ -31,7 +31,7 @@
 
 #pragma once
 
-#include "commands/Allcommands.h"
+#include "commands/AllCommands.h"
 #include "HX8352AColour.h"
 #include "HX8352AOrientation.h"
 #include "HX8352AGamma.h"

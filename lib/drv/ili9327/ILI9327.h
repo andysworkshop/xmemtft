@@ -32,7 +32,7 @@
 
 #pragma once
 
-#include "commands/Allcommands.h"
+#include "commands/AllCommands.h"
 #include "ILI9327Colour.h"
 #include "ILI9327Orientation.h"
 

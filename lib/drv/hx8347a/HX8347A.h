@@ -32,7 +32,7 @@
 
 #pragma once
 
-#include "commands/Allcommands.h"
+#include "commands/AllCommands.h"
 #include "HX8347AColour.h"
 #include "HX8347AOrientation.h"
 

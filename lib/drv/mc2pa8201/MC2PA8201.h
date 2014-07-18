@@ -33,7 +33,7 @@
 
 #pragma once
 
-#include "commands/Allcommands.h"
+#include "commands/AllCommands.h"
 #include "MC2PA8201Colour.h"
 #include "MC2PA8201Orientation.h"
 

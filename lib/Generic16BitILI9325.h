@@ -38,7 +38,7 @@
 #include "drv/accessModes/Xmem16AccessMode.h"
 #include "drv/accessModes/Gpio16LatchAccessMode.h"
 #include "drv/accessModes/Gpio16AccessMode.h"
-#include "drv/ILI9325/ILI9325.h"
+#include "drv/ili9325/ILI9325.h"
 #include "GetFarAddress.h"
 #include "Font.h"
 #include "decoders/PicoJpeg.h"
