@@ -32,7 +32,7 @@
 
 #pragma once
 
-#include "commands/Allcommands.h"
+#include "commands/AllCommands.h"
 #include "R61523Colour.h"
 #include "R61523Orientation.h"
 #include "R61523Gamma.h"
