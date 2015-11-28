@@ -32,7 +32,7 @@
 
 #pragma once
 
-#include "commands/Allcommands.h"
+#include "commands/AllCommands.h"
 #include "LDS285Colour.h"
 #include "LDS285Orientation.h"
 
