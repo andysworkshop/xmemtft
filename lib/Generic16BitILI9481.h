@@ -39,7 +39,7 @@
 #include "drv/accessModes/Xmem16AccessMode.h"
 #include "drv/accessModes/Gpio16LatchAccessMode.h"
 #include "drv/accessModes/Gpio16AccessMode.h"
-#include "drv/ILI9481/ILI9481.h"
+#include "drv/ili9481/ILI9481.h"
 #include "GetFarAddress.h"
 #include "Font.h"
 #include "decoders/PicoJpeg.h"
